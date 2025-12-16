@@ -18,6 +18,24 @@ public class University{
     public void setName(String name){
         this.name=name;
     }
+     public string getAccreditationLevel(){
+        return accreditation;
+    }
+    public void setAccreditationLevel(String accreditation){
+        this.accreditation=accreditation;
+    }
+     public string getCountry(){
+        return country;
+    }
+    public void setCountry(String country){
+        this.country=country;
+    }
+     public Boolean getActive(){
+        return active;
+    }
+    public void setActive(String active){
+        this.active=active;
+    }
 
     
 }
