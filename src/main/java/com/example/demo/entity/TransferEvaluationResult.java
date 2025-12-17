@@ -16,34 +16,34 @@ public class TransferEvaluationResult{
     private Timestamp evaluatedAt;
     private String notes;
 
-    public Long getId(){
+    public Long getid(){
         return id;
     }
-    public void setId(Long id){
+    public void setid(Long id){
         this.id=id;
     }
-    public Course getSourceCourse(){
+    public Course getsourceCourse(){
         return sourceCourse;
     }
-    public void setSourceCourse(Course sourceCourse){
+    public void setsourceCourse(Course sourceCourse){
         this.sourceCourse=sourceCourse;
     }
-     public Course getTargetCourse(){
+     public Course gettargetCourse(){
         return targetCourse;
     }
-    public void setTargetCourse(Course targetCourse){
+    public void settargetCourse(Course targetCourse){
         this.targetCourse=targetCourse;
     }
-    public Double getOverlapPercentage(){
+    public Double getoverlapPercentage(){
         return overlapPercentage;
     }
-    public void setOverlapPercentage(Double overlapPercentage){
+    public void setoverlapPercentage(Double overlapPercentage){
         this.overlapPercentage=overlapPercentage;
     }
-    public Integer getCreditHourDifference(){
+    public Integer getcreditHourDifference(){
         return creditHourDifference;
     }
-    public void setCreditHourDifference(Integer creditHourDifference){
+    public void setcreditHourDifference(Integer creditHourDifference){
         this.creditHourDifference=creditHourDifference;
     }
      public Boolean getIsEligibleForTransfer(){

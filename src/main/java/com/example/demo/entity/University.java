@@ -16,34 +16,34 @@ public class University{
     private String country;
     private Boolean active;
 
-    public Long getId(){
+    public Long getid(){
         return id;
     }
-    public void setId(Long id){
+    public void setid(Long id){
         this.id=id;
     }
-    public string getName(){
+    public string getname(){
         return name;
     }
-    public void setName(String name){
+    public void setname(String name){
         this.name=name;
     }
-     public string getAccreditationLevel(){
+     public string getaccreditationLevel(){
         return accreditation;
     }
-    public void setAccreditationLevel(String accreditation){
+    public void setaccreditationLevel(String accreditation){
         this.accreditation=accreditation;
     }
-     public string getCountry(){
+     public string getcountry(){
         return country;
     }
-    public void setCountry(String country){
+    public void setcountry(String country){
         this.country=country;
     }
-     public Boolean getActive(){
+     public Boolean getactive(){
         return active;
     }
-    public void setActive(String active){
+    public void setactive(String active){
         this.active=active;
     }
     public University(Long id,String name,String accreditationLevel,String country,Boolean active){

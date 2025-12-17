@@ -15,34 +15,34 @@ public class User{
     private String roles;
     private LocalDateTime createdAt;
 
-     public Long getId(){
+     public Long getid(){
         return id;
     }
-    public void setId(Long id){
+    public void setid(Long id){
         this.id=id;
     }
-     public String getEmail(){
+     public String getemail(){
         return email;
     }
-    public void setEmail(String email){
+    public void setemail(String email){
         this.email=email;
     }
-     public String getIPassword(){
+     public String getpassword(){
         return password;
     }
-    public void setPassword(String password){
+    public void setpassword(String password){
         this.password=password;
     }
-     public String getRoles(){
+     public String getroles(){
         return roles;
     }
-    public void setRoles(String roles){
+    public void setroles(String roles){
         this.roles=roles;
     }
-     public LocalDateTime getCreatedAt(){
+     public LocalDateTime getcreatedAt(){
         return createdAt;
     }
-    public void setCreatedAt(LocalDateTime createdAt){
+    public void setcreatedAt(LocalDateTime createdAt){
         this.createdAt=createdAt;
     }
     public User(Long id,String email,String password,String roles,LocalDateTime createdAt){

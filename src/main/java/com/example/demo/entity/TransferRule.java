@@ -14,41 +14,41 @@ public class TransferRule{
     private Integer creditHourTolerance;
     private Boolean active;
     
-    public Long getId(){
+    public Long getid(){
         return id;
     }
-    public void setId(Long id){
+    public void setid(Long id){
         this.id=id;
     }
-     public University getSourceUniversity(){
+     public University getsourceUniversity(){
         return sourceUniversity;
     }
-    public void setSourceUniversity(University sourceUniversity){
+    public void setsourceUniversity(University sourceUniversity){
         this.sourceUniversity=sourceUniversity;
     }
-    public University getTargetUniversity(){
+    public University gettargetUniversity(){
         return targetUniversity;
     }
-    public void setTargetUniversity(University targetUniversity){
+    public void settargetUniversity(University targetUniversity){
         this.targetUniversity=targetUniversity;
     }
     
-    public Double getMinimumOverlapPercentage(){
+    public Double getminimumOverlapPercentage(){
         return minimumOverlapPercentage;
     }
-    public void setMinimumOverlapPercentage(Double minimumOverlapPercentage){
+    public void setminimumOverlapPercentage(Double minimumOverlapPercentage){
         this.minimumOverlapPercentage=minimumOverlapPercentage;
     }
-    public Integer getCreditHourTolerance(){
+    public Integer getcreditHourTolerance(){
         return creditHourTolerance;
     }
-    public void setCreditHourTolerance(Integer creditHourTolerance){
+    public void setcreditHourTolerance(Integer creditHourTolerance){
         this.creditHourTolerance=creditHourTolerance;
     }
-     public Boolean getActive(){
+     public Boolean getactive(){
         return id;
     }
-    public void setActive(Boolean active){
+    public void setactive(Boolean active){
         this.active=active;
     }
     public TransferRule(Long id,University sourceUniversity,University targetUniversity,Double minimumOverlapPercentage,Integer creditHourTolerance,Boolean active){
