@@ -29,7 +29,7 @@ public class University{
         this.name=name;
     }
      public String getaccreditationLevel(){
-        return accreditation;
+        return accreditationLevel;
     }
     public void setaccreditationLevel(String accreditation){
         this.accreditation=accreditation;
