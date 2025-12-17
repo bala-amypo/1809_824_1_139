@@ -68,8 +68,21 @@ public class course{
         this.active=active;
     }
     public Course(Long id,University university,String courseCode,String courseName,Integer creditHours,String description,String department,Boolean active){
-        
+        this.id=id;
+        this.university=university;
+        this.courseCode=courseCode;
+        this.courseName=courseName;
+        this.creditHours=creditHours;
+        this.description=description;
+        this.department=department;
+        this.active=active;
+
     }
+    
+public Course(){
+    
+}
+
 
 
     
