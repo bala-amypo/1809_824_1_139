@@ -32,7 +32,7 @@ public class University{
         return accreditationLevel;
     }
     public void setaccreditationLevel(String accreditation){
-        this.accreditation=accreditation;
+        this.accreditationLevel=accreditationLevel;
     }
      public String getcountry(){
         return country;
@@ -43,7 +43,7 @@ public class University{
      public Boolean getactive(){
         return active;
     }
-    public void setactive(String active){
+    public void setactive(Boolean active){
         this.active=active;
     }
     public University(Long id,String name,String accreditationLevel,String country,Boolean active){

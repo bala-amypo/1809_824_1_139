@@ -46,7 +46,7 @@ public class TransferRule{
         this.creditHourTolerance=creditHourTolerance;
     }
      public Boolean getactive(){
-        return id;
+        return active;
     }
     public void setactive(Boolean active){
         this.active=active;
