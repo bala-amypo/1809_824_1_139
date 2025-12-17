@@ -9,6 +9,7 @@ public class University{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    
     private String name;
     private String accreditationLevel;
     private String country;
@@ -52,7 +53,7 @@ public class University{
         this.active=active;
     }
     public University(){
-        
+
     }
 
     
