@@ -16,21 +16,33 @@ public class TransferRule{
      public University getSourceUniversity(){
         return sourceUniversity;
     }
-    public void setSourceUniversity(University SourceUniversity){
+    public void setSourceUniversity(University sourceUniversity){
         this.sourceUniversity=sourceUniversity;
     }
     public University getTargetUniversity(){
         return targetUniversity;
     }
-    public void setTargetUniversity(University TargetUniversity){
+    public void setTargetUniversity(University targetUniversity){
         this.targetUniversity=targetUniversity;
     }
     
     public Double getMinimumOverlapPercentage(){
         return minimumOverlapPercentage;
     }
-    public void setMinimumOverlapPercentage(Double MinimumOverlapPercentage){
-        this.id=id;
+    public void setMinimumOverlapPercentage(Double minimumOverlapPercentage){
+        this.minimumOverlapPercentage=minimumOverlapPercentage;
+    }
+    public Integer getCreditHourTolerance(){
+        return creditHourTolerance;
+    }
+    public void setCreditHourTolerance(Integer creditHourTolerance){
+        this.creditHourTolerance=creditHourTolerance;
+    }
+     public Boolean getActive(){
+        return id;
+    }
+    public void setActive(Boolean active){
+        this.active=active;
     }
 
 
