@@ -13,5 +13,19 @@ public class TransferRule{
     public void setId(Long id){
         this.id=id;
     }
+     public University getSourceUniversity(){
+        return sourceUniversity;
+    }
+    public void setSourceUniversity(University SourceUniversity){
+        this.sourceUniversity=sourceUniversity;
+    }
+    public University getTargetUniversity(){
+        return id;
+    }
+    public void setId(Long id){
+        this.id=id;
+    }
+
+
     
 }
