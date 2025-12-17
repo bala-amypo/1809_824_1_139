@@ -67,7 +67,9 @@ public class course{
     public Boolean setActive(String active){
         this.active=active;
     }
-    public Course(Long id,University university,String courseCode,String courseName,Integer )
+    public Course(Long id,University university,String courseCode,String courseName,Integer creditHours,String description,String department,Boolean active){
+        
+    }
 
 
     
