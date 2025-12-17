@@ -55,7 +55,12 @@ public class TransferRule{
         this.id=id;
         this.sourceUniversity=sourceUniversity;
         this.targetUniversity=targetUniversity;
-        this.minimumOverlapPercentage=minimum
+        this.minimumOverlapPercentage=minimumOverlapPercentage;
+        this.creditHourTolerance=creditHourTolerance;
+        this.active=active;
+    }
+    public TransferRule(){
+        
     }
 
 
