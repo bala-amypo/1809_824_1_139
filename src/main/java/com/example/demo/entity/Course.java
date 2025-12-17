@@ -45,11 +45,11 @@ public class course{
     public void setDepartment(String department){
         this.department=department;
     }
-    public Boolean getId(){
-        return id;
+    public Boolean getActive(){
+        return active;
     }
-    public void setId(Long id){
-        this.id=id;
+    public Boolean setActive(String active){
+        this.active=active;
     }
 
 
