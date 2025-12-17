@@ -1,4 +1,10 @@
+
 package com.example.demo.entity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
 public class course{
     private Long id;
     private University university;
@@ -8,6 +14,8 @@ public class course{
     private String description;
     private String department;
     private Boolean active;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 
     public Long getId(){
         return id;
