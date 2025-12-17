@@ -51,7 +51,12 @@ public class TransferRule{
     public void setActive(Boolean active){
         this.active=active;
     }
-    public TransferRule(Long id,University sourceUniversity,University targetUniversity,Double minimumOverlapPercentage,Integer creditHourTolerance,Boolean active)
+    public TransferRule(Long id,University sourceUniversity,University targetUniversity,Double minimumOverlapPercentage,Integer creditHourTolerance,Boolean active){
+        this.id=id;
+        this.sourceUniversity=sourceUniversity;
+        this.targetUniversity=targetUniversity;
+        this.minimumOverlapPercentage=minimum
+    }
 
 
 
