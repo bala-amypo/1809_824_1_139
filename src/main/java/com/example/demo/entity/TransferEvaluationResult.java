@@ -1,4 +1,9 @@
 package com.example.demo.entity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+@Entity
 public class TransferEvaluationResult{
     private Long id;
     private Course sourceCourse;
@@ -60,9 +65,16 @@ public class TransferEvaluationResult{
     }
     public TransferEvaluationResult(Long id,Course sourceCource,Course targetCourse,Double overlapPercentage,Integer creditHourDifference,Boolean isEligibleTransfer,Timestamp evaluatedAt,String notes){
         this.id=id;
-        this.sourceCource=sourceCource;
+        this.sourceCourse=sourceCourse;
         this.targetCourse=targetCourse;
         this.overlapPercentage=overlapPercentage;
+        this.creditHourDifference=creditHourDifference;
+        this.isEligibleForTransfer=isEligibleForTransfer;
+        this.evaluatedAt=evaluatedAt;
+        this.notes=notes;
+    }
+    public TransferEvaluationResult(){
+
     }
     
 }
