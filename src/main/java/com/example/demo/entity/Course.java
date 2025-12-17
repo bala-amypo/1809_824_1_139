@@ -16,7 +16,37 @@ public class course{
         this.id=id;
     }
     public String getCourseCode(){
-        return cours;
+        return courseCode;
+    }
+    public void setCourseCode(String courseCode){
+        this.courseCode=courseCode;
+    }
+    public String getCourseName(){
+        return courseName;
+    }
+    public void setCourseName(String courseName){
+        this.courseName=courseName;
+    }
+    public Integer getCreditHours(){
+        return creditHours;
+    }
+    public void setCreditHours(Integer creditHours){
+        this.creditHours=creditHours;
+    }
+    public String getDescription(){
+        return description;
+    }
+    public void setDescription(String description){
+        this.description=description;
+    }
+    public String getDepartment(){
+        return department;
+    }
+    public void setDepartment(String department){
+        this.department=department;
+    }
+    public Boolean getId(){
+        return id;
     }
     public void setId(Long id){
         this.id=id;
