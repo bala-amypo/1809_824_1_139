@@ -4,8 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-
+@Entity
 public class course{
+     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private University university;
     private String courseCode;
@@ -14,8 +16,7 @@ public class course{
     private String description;
     private String department;
     private Boolean active;
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+   
 
     public Long getId(){
         return id;
@@ -66,6 +67,7 @@ public class course{
     public Boolean setActive(String active){
         this.active=active;
     }
+    public Course(Long id,University university,String courseCode,String courseName,Integer )
 
 
     
