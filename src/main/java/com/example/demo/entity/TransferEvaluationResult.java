@@ -42,8 +42,21 @@ public class TransferEvaluationResult{
      public Boolean getIsEligibleForTransfer(){
         return isEligibleForTransfer;
     }
-    public void setIsEligibleForTransfer(Long id){
-        this.id=id;
+    public void setIsEligibleForTransfer(Boolean isEligibleForTransfer){
+        this.isEligibleForTransfer=isEligibleForTransfer;
+    }
+     public Timestamp getEvaluatedAt(){
+        return evaluatedAt;
+    }
+    public void setEvaluatedAt(Timestamp evaluatedAt){
+        this.evaluatedAt=evaluatedAt;
+    }
+
+     public String getNotes(){
+        return id;
+    }
+    public void setNotes(String notes){
+        this.notes=notes;
     }
     
 }
