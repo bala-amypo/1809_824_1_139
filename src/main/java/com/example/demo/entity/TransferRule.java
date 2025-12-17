@@ -1,5 +1,12 @@
 package com.example.demo.entity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+@Entity
 public class TransferRule{
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private University sourceUniversity;
     private University targetUniversity;
@@ -44,6 +51,7 @@ public class TransferRule{
     public void setActive(Boolean active){
         this.active=active;
     }
+    public TransferRule(Long id,University sourceUniversity,University targetUniversity,Double minimumOverlapPercentage,Integer creditHourTolerance,Boolean active)
 
 
 
