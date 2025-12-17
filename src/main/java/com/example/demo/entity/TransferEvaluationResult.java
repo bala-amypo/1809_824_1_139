@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 @Entity
 public class TransferEvaluationResult{
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private Course sourceCourse;
     private Course targetCourse;
@@ -63,7 +65,7 @@ public class TransferEvaluationResult{
     public void setNotes(String notes){
         this.notes=notes;
     }
-    public TransferEvaluationResult(Long id,Course sourceCource,Course targetCourse,Double overlapPercentage,Integer creditHourDifference,Boolean isEligibleTransfer,Timestamp evaluatedAt,String notes){
+    public TransferEvaluationResult(Long id,Course sourceCourse,Course targetCourse,Double overlapPercentage,Integer creditHourDifference,Boolean isEligibleTransfer,Timestamp evaluatedAt,String notes){
         this.id=id;
         this.sourceCourse=sourceCourse;
         this.targetCourse=targetCourse;
