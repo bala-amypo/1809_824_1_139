@@ -3,7 +3,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import java.sql.Timestamp;
+
 @Entity
 public class TransferEvaluationResult{
     @Id
@@ -61,7 +61,7 @@ public class TransferEvaluationResult{
     }
 
      public String getnotes(){
-        return id;
+        return notes;
     }
     public void setnotes(String notes){
         this.notes=notes;

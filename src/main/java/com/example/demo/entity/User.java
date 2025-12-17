@@ -4,7 +4,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
-import  java.time.LocalDateTime;
+import java.time.LocalDateTime;
 @Entity
 public class User{
     @Id
