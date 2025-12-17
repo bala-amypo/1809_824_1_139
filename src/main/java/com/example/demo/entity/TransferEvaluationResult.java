@@ -46,23 +46,23 @@ public class TransferEvaluationResult{
     public void setcreditHourDifference(Integer creditHourDifference){
         this.creditHourDifference=creditHourDifference;
     }
-     public Boolean getIsEligibleForTransfer(){
+     public Boolean getisEligibleForTransfer(){
         return isEligibleForTransfer;
     }
-    public void setIsEligibleForTransfer(Boolean isEligibleForTransfer){
+    public void setisEligibleForTransfer(Boolean isEligibleForTransfer){
         this.isEligibleForTransfer=isEligibleForTransfer;
     }
-     public Timestamp getEvaluatedAt(){
+     public Timestamp getevaluatedAt(){
         return evaluatedAt;
     }
-    public void setEvaluatedAt(Timestamp evaluatedAt){
+    public void setevaluatedAt(Timestamp evaluatedAt){
         this.evaluatedAt=evaluatedAt;
     }
 
-     public String getNotes(){
+     public String getnotes(){
         return id;
     }
-    public void setNotes(String notes){
+    public void setnotes(String notes){
         this.notes=notes;
     }
     public TransferEvaluationResult(Long id,Course sourceCourse,Course targetCourse,Double overlapPercentage,Integer creditHourDifference,Boolean isEligibleTransfer,Timestamp evaluatedAt,String notes){
