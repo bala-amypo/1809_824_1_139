@@ -22,19 +22,19 @@ public class University{
     public void setid(Long id){
         this.id=id;
     }
-    public string getname(){
+    public String getname(){
         return name;
     }
     public void setname(String name){
         this.name=name;
     }
-     public string getaccreditationLevel(){
+     public String getaccreditationLevel(){
         return accreditation;
     }
     public void setaccreditationLevel(String accreditation){
         this.accreditation=accreditation;
     }
-     public string getcountry(){
+     public String getcountry(){
         return country;
     }
     public void setcountry(String country){

@@ -52,10 +52,10 @@ public class TransferEvaluationResult{
     public void setisEligibleForTransfer(Boolean isEligibleForTransfer){
         this.isEligibleForTransfer=isEligibleForTransfer;
     }
-     public Timestamp getevaluatedAt(){
-        return evaluatedAt;
+     public Timestamp getEvaluatedAt(){
+        return EvaluatedAt;
     }
-    public void setevaluatedAt(Timestamp evaluatedAt){
+    public void setEvaluatedAt(Timestamp evaluatedAt){
         this.evaluatedAt=evaluatedAt;
     }
 
