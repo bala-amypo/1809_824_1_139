@@ -1,4 +1,9 @@
 package com.example.demo.entity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Unique;
 @Entity
 public class User{
     @Id
@@ -39,6 +44,16 @@ public class User{
     }
     public void setCreatedAt(LocalDateTime createdAt){
         this.createdAt=createdAt;
+    }
+    public User(Long id,String email,String password,String roles,LocalDateTime createdAt){
+        this.id=id;
+        this.email=email;
+        this.password=password;
+        this.roles=roles;
+        this.createdAt=createdAt;
+    }
+    public User(){
+        
     }
 
 
