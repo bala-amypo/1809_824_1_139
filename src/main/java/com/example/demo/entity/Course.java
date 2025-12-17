@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 @Entity
-public class course{
+public class Course{
      @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;

@@ -10,7 +10,7 @@ public class University{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    @column(unique=true)
+    @Column(unique=true)
     private String name;
     private String accreditationLevel;
     private String country;
