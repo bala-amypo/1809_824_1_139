@@ -18,53 +18,53 @@ public class course{
     private Boolean active;
    
 
-    public Long getId(){
+    public Long getid(){
         return id;
     }
-    public void setId(Long id){
+    public void setid(Long id){
         this.id=id;
     }
-     public University getUniversity(){
+     public University getuniversity(){
         return university;
     }
-    public void setUniversity(University university){
+    public void setuniversity(University university){
         this.university=university;
     }
 
-    public String getCourseCode(){
+    public String getcourseCode(){
         return courseCode;
     }
-    public void setCourseCode(String courseCode){
+    public void setcourseCode(String courseCode){
         this.courseCode=courseCode;
     }
-    public String getCourseName(){
+    public String getcourseName(){
         return courseName;
     }
-    public void setCourseName(String courseName){
+    public void setcourseName(String courseName){
         this.courseName=courseName;
     }
-    public Integer getCreditHours(){
+    public Integer getcreditHours(){
         return creditHours;
     }
-    public void setCreditHours(Integer creditHours){
+    public void setcreditHours(Integer creditHours){
         this.creditHours=creditHours;
     }
-    public String getDescription(){
+    public String getdescription(){
         return description;
     }
-    public void setDescription(String description){
+    public void setdescription(String description){
         this.description=description;
     }
-    public String getDepartment(){
+    public String getdepartment(){
         return department;
     }
-    public void setDepartment(String department){
+    public void setdepartment(String department){
         this.department=department;
     }
-    public Boolean getActive(){
+    public Boolean getactive(){
         return active;
     }
-    public Boolean setActive(String active){
+    public Boolean setactive(String active){
         this.active=active;
     }
     public Course(Long id,University university,String courseCode,String courseName,Integer creditHours,String description,String department,Boolean active){
