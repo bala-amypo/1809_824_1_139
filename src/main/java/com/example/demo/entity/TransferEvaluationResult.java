@@ -24,7 +24,25 @@ public class TransferEvaluationResult{
      public Course getTargetCourse(){
         return targetCourse;
     }
-    public void setTarget(Long id){
+    public void setTargetCourse(Course targetCourse){
+        this.targetCourse=targetCourse;
+    }
+    public Double getOverlapPercentage(){
+        return overlapPercentage;
+    }
+    public void setOverlapPercentage(Double overlapPercentage){
+        this.overlapPercentage=overlapPercentage;
+    }
+    public Integer getCreditHourDifference(){
+        return creditHourDifference;
+    }
+    public void setCreditHourDifference(Integer creditHourDifference){
+        this.creditHourDifference=creditHourDifference;
+    }
+     public Boolean getIsEligibleForTransfer(){
+        return isEligibleForTransfer;
+    }
+    public void setIsEligibleForTransfer(Long id){
         this.id=id;
     }
     
