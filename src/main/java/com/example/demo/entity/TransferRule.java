@@ -20,11 +20,19 @@ public class TransferRule{
         this.sourceUniversity=sourceUniversity;
     }
     public University getTargetUniversity(){
-        return id;
+        return targetUniversity;
     }
-    public void setId(Long id){
+    public void setTargetUniversity(University TargetUniversity){
+        this.targetUniversity=targetUniversity;
+    }
+    
+    public Double getMinimumOverlapPercentage(){
+        return minimumOverlapPercentage;
+    }
+    public void setMinimumOverlapPercentage(Double MinimumOverlapPercentage){
         this.id=id;
     }
+
 
 
     
