@@ -44,6 +44,16 @@ public class University{
     public void setActive(String active){
         this.active=active;
     }
+    public University(Long id,String name,String accreditationLevel,String country,Boolean active){
+        this.id=id;
+        this.name=name;
+        this.accreditationLevel=accreditationLevel;
+        this.country=country;
+        this.active=active;
+    }
+    public University(){
+        
+    }
 
     
 }
