@@ -58,5 +58,11 @@ public class TransferEvaluationResult{
     public void setNotes(String notes){
         this.notes=notes;
     }
+    public TransferEvaluationResult(Long id,Course sourceCource,Course targetCourse,Double overlapPercentage,Integer creditHourDifference,Boolean isEligibleTransfer,Timestamp evaluatedAt,String notes){
+        this.id=id;
+        this.sourceCource=sourceCource;
+        this.targetCourse=targetCourse;
+        this.overlapPercentage=overlapPercentage;
+    }
     
 }
