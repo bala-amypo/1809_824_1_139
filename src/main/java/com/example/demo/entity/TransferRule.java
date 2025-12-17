@@ -7,4 +7,11 @@ public class TransferRule{
     private Integer creditHourTolerance;
     private Boolean active;
     
+    public Long getId(){
+        return id;
+    }
+    public void setId(Long id){
+        this.id=id;
+    }
+    
 }
