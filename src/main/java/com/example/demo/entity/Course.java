@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 public class course{
     private Long id;
-    private 
+    private University university;
     private String courseCode;
     private String courseName;
     private Integer creditHours;
@@ -15,6 +15,13 @@ public class course{
     public void setId(Long id){
         this.id=id;
     }
+     public University getUniversity(){
+        return university;
+    }
+    public void setUniversity(University university){
+        this.university=university;
+    }
+
     public String getCourseCode(){
         return courseCode;
     }

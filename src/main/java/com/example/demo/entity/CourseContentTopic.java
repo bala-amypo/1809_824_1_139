@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 public class CourseContentTopic{
     private Long id;
+    private Course course;
     private String topicName;
     private Double weightPercentage;
 
@@ -9,6 +10,12 @@ public class CourseContentTopic{
     }
     public void setId(Long id){
         this.id=id;
+    }
+     public Course getCourse(){
+        return course;
+    }
+    public void setCourse(Course course){
+        this.course=course;
     }
     public String getTopicName(){
         return topicName;
