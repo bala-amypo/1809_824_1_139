@@ -1,62 +1,74 @@
 package com.example.demo.entity;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import java.time.LocalDateTime;
+
 @Entity
-public class User{
+public class User {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true)
+
+    @Column(unique = true)
     private String email;
+
     private String password;
     private String roles;
     private LocalDateTime createdAt;
 
-     public Long getid(){
+    public User() {
+    }
+
+    public User(String email, String password, String roles, LocalDateTime createdAt) {
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.createdAt = createdAt;
+    }
+
+    public Long getId() {
         return id;
     }
-    public void setid(Long id){
-        this.id=id;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-     public String getemail(){
+
+    public String getEmail() {
         return email;
     }
-    public void setemail(String email){
-        this.email=email;
+
+    public void setEmail(String email) {
+        this.email = email;
     }
-     public String getpassword(){
+
+    public String getPassword() {
         return password;
     }
-    public void setpassword(String password){
-        this.password=password;
+
+    public void setPassword(String password) {
+        this.password = password;
     }
-     public String getroles(){
+
+    public String getRoles() {
         return roles;
     }
-    public void setroles(String roles){
-        this.roles=roles;
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
-     public LocalDateTime getcreatedAt(){
+
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-    public void setcreatedAt(LocalDateTime createdAt){
-        this.createdAt=createdAt;
-    }
-    public User(Long id,String email,String password,String roles,LocalDateTime createdAt){
-        this.id=id;
-        this.email=email;
-        this.password=password;
-        this.roles=roles;
-        this.createdAt=createdAt;
-    }
-    public User(){
-        
-    }
-    }
 
-
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
     
+}

@@ -6,72 +6,90 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 @Entity
-public class Course{
+public class Course {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String courseCode;
     private String courseName;
     private Integer creditHours;
     private String description;
     private String department;
     private Boolean active;
+
+    
+    public Course() {
+    }
+
+   
+    public Course(String courseCode, String courseName, Integer creditHours,
+                  String description, String department, Boolean active) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.creditHours = creditHours;
+        this.description = description;
+        this.department = department;
+        this.active = active;
+    }
+
    
 
-    public Long getid(){
+    public Long getId() {
         return id;
     }
-    public void setid(Long id){
-        this.id=id;
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getcourseCode(){
+    public String getCourseCode() {
         return courseCode;
     }
-    public void setcourseCode(String courseCode){
-        this.courseCode=courseCode;
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
-    public String getcourseName(){
+
+    public String getCourseName() {
         return courseName;
     }
-    public void setcourseName(String courseName){
-        this.courseName=courseName;
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
-    public Integer getcreditHours(){
+
+    public Integer getCreditHours() {
         return creditHours;
     }
-    public void setcreditHours(Integer creditHours){
-        this.creditHours=creditHours;
+
+    public void setCreditHours(Integer creditHours) {
+        this.creditHours = creditHours;
     }
-    public String getdescription(){
+
+    public String getDescription() {
         return description;
     }
-    public void setdescription(String description){
-        this.description=description;
+
+    public void setDescription(String description) {
+        this.description = description;
     }
-    public String getdepartment(){
+
+    public String getDepartment() {
         return department;
     }
-    public void setdepartment(String department){
-        this.department=department;
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
-    public Boolean getactive(){
+
+    public Boolean isActive() {
         return active;
     }
-    public void setactive(Boolean active){
-        this.active=active;
-    }
-    public Course(Long id,String courseCode,String courseName,Integer creditHours,String description,String department,Boolean active){
-        this.id=id;
-        this.courseCode=courseCode;
-        this.courseName=courseName;
-        this.creditHours=creditHours;
-        this.description=description;
-        this.department=department;
-        this.active=active;
 
+    public void setActive(Boolean active) {
+        this.active = active;
     }
-    public Course(){
-    }
-    }
-
+   
+}
