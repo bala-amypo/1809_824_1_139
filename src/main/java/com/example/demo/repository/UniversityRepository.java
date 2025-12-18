@@ -4,5 +4,5 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.entity.University;
 import java.util.Long;
 @Repository
-public interface TransferEvaluationResultRepository extends JpaRepository<TransferEvaluation, Long> {
+public interface UniversityRepository extends JpaRepository<University, Long> {
     }
