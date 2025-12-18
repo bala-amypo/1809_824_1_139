@@ -14,8 +14,8 @@ public class UniversityController {
     UniversityService atrs;
 
     @PostMapping("/")
-    public University addUniversity(@RequestBody University atrs){
-        return atrs.createUniversity(atr);
+    public University addUniversity( @Valid @RequestBody University atrs){
+        return atrs.createUniversity(University);
     }
     @PutMapping("/{id}")
     public University updateUniversity(@PathVariable Long id,@Valid @RequestBody University university){
@@ -26,8 +26,8 @@ public class UniversityController {
         return atrs.getViewByID(id);
     }
     @GetMapping("/")
-    public University getUniversity(){
-        return atrs.getUniversity(atr);
+    public University getUniversity(Long University){
+        return atrs.getUniversity();
     }
     @PutMapping("/{id}")
     public University updateUniversity(@PathVariable Long id,@Valid @RequestBody University university){
