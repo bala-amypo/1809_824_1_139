@@ -15,16 +15,10 @@ public class UniversityController {
 
     @PostMapping("/University")
     public University addUniversity(@RequestBody University atr){
-        return atrs.logEvent(atr);
+        return atrs.createUniversity(atr);
     }
+    @PutMapping("/{id}")
+    
 
-    @GetMapping("/")
-    public int first(Long credentialId){
-        return atrs.getLogs();
-    }
-
-    @GetMapping
-    public List<AuditTrailRecord> second(){
-        return atrs.getAllLogs();
-    }
+   
 }
