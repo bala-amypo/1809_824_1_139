@@ -22,7 +22,14 @@ public class UniversityController {
         return atrs.updateuniversity(id,university);
     }
     @GetMapping("/{id}")
-    
+    public University getUniversity(@PathVariable Long id){
+        return atrs.getViewByID(id);
+    }
+    @GetMapping("/University")
+    public University addUniversity(@RequestBody University atr){
+        return atrs.createUniversity(atr);
+    }
+
 
    
 }
