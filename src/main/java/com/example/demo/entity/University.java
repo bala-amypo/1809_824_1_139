@@ -6,7 +6,7 @@
 // import jakarta.persistence.Column;
 
 // @Entity
-// public class University{
+// public class University
 //     @Id
 //     @GeneratedValue(strategy=GenerationType.IDENTITY)
 //     private Long id;
