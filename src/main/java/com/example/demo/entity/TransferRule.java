@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 @Entity
 public class TransferRule{
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY){
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
     private Double minimumOverlapPercentage;
@@ -22,9 +22,7 @@ public class TransferRule{
     }
     
     
-    public void settargetUniversity(University targetUniversity){
-        this.targetUniversity=targetUniversity;
-    }
+    
     
     public Double getminimumOverlapPercentage(){
         return minimumOverlapPercentage;
@@ -55,6 +53,8 @@ public class TransferRule{
         
     }
     }
+    
+    
 
 
 
