@@ -23,11 +23,11 @@ public class UniversityController{
     }
     @GetMapping("/{id}")
     public University getuniversity(@PathVariable Long id){
-    return uni.getViewByID(id);
+    return uni.getUniversityByID(id);
     }
     @GetMapping("/")
-    public University getuniversity(@PathVariable Long id){
-    return uni.getViewByID();
+    public List<University>getAllUniversities(){
+    
     }
 
 }
