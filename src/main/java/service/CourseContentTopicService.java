@@ -6,8 +6,4 @@ public interface CourseContentTopicService{
     getTopicById(Long id);
     updateTopic(Long id,CourseContentTopic topic);
 }
-    createTopic(CourseContentTopic topic);
-    getTopicsForCourse(Long courseId);
-    getTopicById(Long id);
-    updateTopic(Long id,CourseContentTopic topic);
-}
+   
