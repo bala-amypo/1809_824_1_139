@@ -18,6 +18,10 @@ public class UniversityController {
         return atrs.createUniversity(atr);
     }
     @PutMapping("/{id}")
+    public University updateUniversity(@PathVariable Long id,@Valid @RequestBody University university){
+        return atrs.updateuniversity(id,university);
+    }
+    @GetMapping("/{id}")
     
 
    
