@@ -71,12 +71,6 @@ public class Course{
         this.active=active;
 
     }
-    
-public Course(){
-    
+public Course(){   
 }
-
-
-
-    
 }
