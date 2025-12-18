@@ -29,7 +29,7 @@ public class UniversityController {
 
     @GetMapping("/{id}")
     public University getUniversity(@PathVariable Long id) {
-        return atrs.getUniversityById(id);
+        return atrs.getViewById(id);
     }
 
     @GetMapping
