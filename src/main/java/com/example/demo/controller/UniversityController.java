@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.Valid;
-
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import com.example.demo.entity.University;
 import com.example.demo.service.UniversityService;
+import java.util.List;
 @RestController
 public class UniversityController{
     @Autowired
@@ -27,7 +29,7 @@ public class UniversityController{
     }
     @GetMapping("/")
     public List<University>getAllUniversities(){
-    
+    return uni.getAllUniversities();
     }
 
 }
