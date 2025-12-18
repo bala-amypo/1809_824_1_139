@@ -1,22 +1,15 @@
-package com.example.demo.controller;
-
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.example.demo.entity.University;
-import com.example.demo.service.UniversityService;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/universities")
+@RequestMapping("/api/universities")
 public class UniversityController {
 
     @Autowired
     private UniversityService atrs;
 
-    @PostMapping
+    @PostMapping("/")
     public University addUniversity(@Valid @RequestBody University university) {
         return atrs.createUniversity(university);
     }
@@ -32,7 +25,7 @@ public class UniversityController {
         return atrs.getViewById(id);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public List<University> getUniversities() {
         return atrs.getAllUniversities();
     }
