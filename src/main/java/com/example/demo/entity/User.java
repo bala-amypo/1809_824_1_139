@@ -21,8 +21,7 @@ public class User {
     private String roles;
     private LocalDateTime createdAt;
 
-    public User() {
-    }
+    
 
     public User(String email, String password, String roles, LocalDateTime createdAt) {
         this.email = email;
@@ -69,6 +68,8 @@ public class User {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+    public User() {
     }
     
 }

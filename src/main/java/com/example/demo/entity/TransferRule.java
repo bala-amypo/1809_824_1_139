@@ -16,8 +16,7 @@ public class TransferRule {
     private Integer creditHourTolerance;
     private Boolean active;
 
-    public TransferRule() {
-    }
+   
 
     public TransferRule(Double minimumOverlapPercentage, Integer creditHourTolerance, Boolean active) {
         this.minimumOverlapPercentage = minimumOverlapPercentage;
@@ -55,6 +54,8 @@ public class TransferRule {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+     public TransferRule() {
     }
     
 }

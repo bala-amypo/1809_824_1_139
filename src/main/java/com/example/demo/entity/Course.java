@@ -20,8 +20,7 @@ public class Course {
     private Boolean active;
 
     
-    public Course() {
-    }
+    
 
    
     public Course(String courseCode, String courseName, Integer creditHours,
@@ -90,6 +89,8 @@ public class Course {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+    public Course() {
     }
    
 }

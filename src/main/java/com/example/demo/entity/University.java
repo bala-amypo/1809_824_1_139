@@ -20,8 +20,7 @@ public class University {
     private String country;
     private Boolean active;
 
-    public University() {
-    }
+    
 
     public University(String name, String accreditationLevel, String country, Boolean active) {
         this.name = name;
@@ -68,6 +67,8 @@ public class University {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+    public University() {
     }
 
     
