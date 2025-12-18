@@ -12,8 +12,8 @@ public class UniversityController{
     @Autowired
     University uni;
     @PostMapping("/")
-    public University addUniversity(@RequestBody University uni){
-    return uni.
+    public University addUniversity(@RequestBody University university){
+    return uni.createUniversity(university);
     }
 
 }
