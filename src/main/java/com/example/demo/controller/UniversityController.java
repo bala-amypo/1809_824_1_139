@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.Valid;
 
 import com.example.demo.entity.University;
 import com.example.demo.service.UniversityService;
@@ -16,6 +18,8 @@ public class UniversityController{
     return uni.createUniversity(university);
     }
     @PutMapping("/{id}")
-    public University update
+    public University updateuniversity(@PathVariable Long id,@Valid @RequestBody University university){
+        return uni.updateuniversity(id,university)
+    }
 
 }
