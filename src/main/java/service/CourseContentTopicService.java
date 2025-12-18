@@ -1,9 +1,10 @@
 package com.example.demo.service;
 import com.example.demo.entity.CourseContentTopic;
 public interface CourseContentTopicService{
-    Course createTopic(CourseContentTopic topic);
+    CourseContentTopic createTopic(CourseContentTopic topic);
+    List<CourseContentTopic>getTopicsForCourse(Long courseId);
     Course getTopicsForCourse(Long courseId);
     List<CourseContentTopic>getCoursesByUniversity(Long universityId);
-    updateTopic(Long id,CourseContentTopic topic);
+    void updateTopic(Long id,CourseContentTopic topic);
 }
    
