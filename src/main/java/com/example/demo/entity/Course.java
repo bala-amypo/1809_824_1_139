@@ -9,7 +9,6 @@ public class Course{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private University university;
     private String courseCode;
     private String courseName;
     private Integer creditHours;
@@ -23,12 +22,6 @@ public class Course{
     }
     public void setid(Long id){
         this.id=id;
-    }
-     public University getuniversity(){
-        return university;
-    }
-    public void setuniversity(University university){
-        this.university=university;
     }
 
     public String getcourseCode(){
@@ -67,9 +60,8 @@ public class Course{
     public void setactive(Boolean active){
         this.active=active;
     }
-    public Course(Long id,University university,String courseCode,String courseName,Integer creditHours,String description,String department,Boolean active){
+    public Course(Long id,String courseCode,String courseName,Integer creditHours,String description,String department,Boolean active){
         this.id=id;
-        this.university=university;
         this.courseCode=courseCode;
         this.courseName=courseName;
         this.creditHours=creditHours;

@@ -4,7 +4,7 @@
 // import jakarta.persistence.GeneratedValue;
 // import jakarta.persistence.GenerationType;
 // @Entity
-// public class CourseContentTopic{
+// public class CourseContentTopic
 //     @Id
 //     @GeneratedValue(strategy=GenerationType.IDENTITY)
 //     private Long id;
@@ -37,4 +37,4 @@
 //         this.weightPercentage=weightPercentage;
 //     }
     
-// }
+// 

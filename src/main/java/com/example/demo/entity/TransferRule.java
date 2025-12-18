@@ -4,7 +4,7 @@
 // import jakarta.persistence.GeneratedValue;
 // import jakarta.persistence.GenerationType;
 // @Entity
-// public class TransferRule{
+// public class TransferRule
 //     @Id
 //     @GeneratedValue(strategy=GenerationType.IDENTITY)
 //     private Long id;

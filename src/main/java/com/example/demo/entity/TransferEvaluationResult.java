@@ -5,7 +5,7 @@
 // import jakarta.persistence.GenerationType;
 // import java.sql.Timestamp;
 // @Entity
-// public class TransferEvaluationResult{
+// public class TransferEvaluationResult
 //     @Id
 //     @GeneratedValue(strategy=GenerationType.IDENTITY)
 //     private Long id;
@@ -80,4 +80,4 @@
 
 //     }
     
-// }
+// 
