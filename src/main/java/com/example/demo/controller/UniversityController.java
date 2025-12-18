@@ -7,3 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.University;
 import com.example.demo.service.UniversityService;
+@RestController
+public class UniversityController{
+    @Autowired
+    University uni;
+    @PostMapping("/")
+    public University addUniversity(@)
+}
