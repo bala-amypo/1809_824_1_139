@@ -13,8 +13,8 @@ public class UniversityController {
     @Autowired
     UniversityService atrs;
 
-    @PostMapping("/{}")
-    public University addUniversity(){
+    @PostMapping("/")
+    public University addUniversity(@RequestBody University atrs){
         return atrs.createUniversity(atr);
     }
     @PutMapping("/{id}")
