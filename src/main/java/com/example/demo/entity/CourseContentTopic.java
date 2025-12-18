@@ -8,7 +8,6 @@ public class CourseContentTopic{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    
     private String topicName;
     private Double weightPercentage;
 
@@ -37,7 +36,7 @@ public class CourseContentTopic{
         this.weightPercentage=weightPercentage;
     }
     public CourseContentTopic(){
-        
+
     }
 
     
