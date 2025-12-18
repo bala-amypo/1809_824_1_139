@@ -27,7 +27,7 @@ public class UniversityController {
     }
     @GetMapping("/University")
     public University addUniversity(@RequestBody University atr){
-        return atrs.createUniversity(atr);
+        return atrs.getUniversity(atr);
     }
 
 
