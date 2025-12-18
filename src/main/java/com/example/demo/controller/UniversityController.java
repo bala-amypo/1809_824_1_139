@@ -14,7 +14,7 @@ public class UniversityController {
     UniversityService atrs;
 
     @PostMapping("/University")
-    public University addUniversity(@RequestBody AuditTrailRecord atr){
+    public University addUniversity(@RequestBody University atr){
         return atrs.logEvent(atr);
     }
 
