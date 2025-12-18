@@ -1,7 +1,7 @@
 package com.example.demo.service;
 import com.example.demo.entity.TranferEvaluation;
 public interface TransferEvaluationService{
-    evaluate Transfer(Long sourceCourseId,Long targetCourseId);
-    getEvaluationById(Long id);
-    getEvaluationForCourse(Long courseId);
+    TransferEvaluation evaluate Transfer(Long sourceCourseId,Long targetCourseId);
+    TransferEvaluation getEvaluationById(Long id);
+    List<TransferEvaluation>getEvaluationForCourse(Long courseId);
 }
