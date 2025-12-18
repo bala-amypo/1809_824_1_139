@@ -31,7 +31,7 @@ public class University{
      public String getaccreditationLevel(){
         return accreditationLevel;
     }
-    public void setaccreditationLevel(String accreditation){
+    public void setaccreditationLevel(String accreditationLevel){
         this.accreditationLevel=accreditationLevel;
     }
      public String getcountry(){
