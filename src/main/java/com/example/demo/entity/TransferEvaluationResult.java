@@ -11,6 +11,7 @@ public class TransferEvaluationResult{
     private Long id;
     private Double overlapPercentage;
     private Integer creditHourDifference;
+    private Boolean isEligibleForTransfer;
     private String notes;
 
     public Long getid(){
@@ -49,8 +50,8 @@ public class TransferEvaluationResult{
     public void setnotes(String notes){
         this.notes=notes;
     }
-    
-    public TransferEvaluationResult(Long id,Double overlapPercentage,Integer creditHourDifference,Boolean isEligibleTransfer,String notes){
+
+    public TransferEvaluationResult(Long id,Double overlapPercentage,Integer creditHourDifference,Boolean isEligibleForTransfer,String notes){
         this.id=id;
         
         this.overlapPercentage=overlapPercentage;
