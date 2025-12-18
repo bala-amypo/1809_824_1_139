@@ -3,13 +3,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+
 @Entity
 public class TransferRule{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY){
     private Long id;
-    private University sourceUniversity;
-    private University targetUniversity;
+    
     private Double minimumOverlapPercentage;
     private Integer creditHourTolerance;
     private Boolean active;
@@ -20,15 +20,8 @@ public class TransferRule{
     public void setid(Long id){
         this.id=id;
     }
-     public University getsourceUniversity(){
-        return sourceUniversity;
-    }
-    public void setsourceUniversity(University sourceUniversity){
-        this.sourceUniversity=sourceUniversity;
-    }
-    public University gettargetUniversity(){
-        return targetUniversity;
-    }
+    
+    
     public void settargetUniversity(University targetUniversity){
         this.targetUniversity=targetUniversity;
     }
@@ -51,10 +44,9 @@ public class TransferRule{
     public void setactive(Boolean active){
         this.active=active;
     }
-    public TransferRule(Long id,University sourceUniversity,University targetUniversity,Double minimumOverlapPercentage,Integer creditHourTolerance,Boolean active){
+    public TransferRule(Long id,Double minimumOverlapPercentage,Integer creditHourTolerance,Boolean active){
         this.id=id;
-        this.sourceUniversity=sourceUniversity;
-        this.targetUniversity=targetUniversity;
+        
         this.minimumOverlapPercentage=minimumOverlapPercentage;
         this.creditHourTolerance=creditHourTolerance;
         this.active=active;
