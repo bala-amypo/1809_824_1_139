@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.entity.University;
 import com.example.demo.service.UniversityService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/universities")
 public class UniversityController {
@@ -14,33 +16,29 @@ public class UniversityController {
     @Autowired
     private UniversityService atrs;
 
-   
     @PostMapping
     public University addUniversity(@Valid @RequestBody University university) {
         return atrs.createUniversity(university);
     }
 
-    
     @PutMapping("/{id}")
     public University updateUniversity(@PathVariable Long id,
                                        @Valid @RequestBody University university) {
         return atrs.updateUniversity(id, university);
     }
 
-    
     @GetMapping("/{id}")
     public University getUniversity(@PathVariable Long id) {
-        return atrs.getViewByID(id);
+        return atrs.getUniversityById(id);
     }
 
-    
     @GetMapping
     public List<University> getUniversities() {
-        return atrs.getUniversity();
+        return atrs.getAllUniversities();
     }
 
     @PutMapping("/{id}/deactivate")
-    public University deactivateUniversity(@PathVariable Long id) {
-        return atrs.deactivateUniversity(id);
+    public void deactivateUniversity(@PathVariable Long id) {
+        atrs.deactivateUniversity(id);
     }
 }
