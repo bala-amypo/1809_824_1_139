@@ -21,5 +21,13 @@ public class UniversityController{
     public University updateuniversity(@PathVariable Long id,@Valid @RequestBody University university){
         return uni.updateUniversity(id,university)
     }
+    @GetMapping("/{id}")
+    public University getuniversity(@PathVariable Long id){
+    return uni.getViewByID(id);
+    }
+    @GetMapping("/")
+    public University getuniversity(@PathVariable Long id){
+    return uni.getViewByID();
+    }
 
 }
