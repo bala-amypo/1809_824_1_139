@@ -15,5 +15,7 @@ public class UniversityController{
     public University addUniversity(@RequestBody University university){
     return uni.createUniversity(university);
     }
+    @PutMapping("/{id}")
+    public University update
 
 }
