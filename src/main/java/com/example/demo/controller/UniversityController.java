@@ -18,7 +18,7 @@ import java.util.List;
 public class UniversityController {
 
     @Autowired
-    UniversityService uni;   // ✅ changed from University to UniversityService
+    UniversityService uni;   
 
     @PostMapping("/")
     public University addUniversity(@RequestBody University university) {
@@ -28,12 +28,12 @@ public class UniversityController {
     @PutMapping("/{id}")
     public University updateuniversity(@PathVariable Long id,
                                        @Valid @RequestBody University university) {
-        return uni.updateUniversity(id, university); // ✅ added semicolon
+        return uni.updateUniversity(id, university); 
     }
 
     @GetMapping("/{id}")
     public University getuniversity(@PathVariable Long id) {
-        return uni.getUniversityById(id); // ✅ corrected method name
+        return uni.getUniversityById(id); 
     }
 
     @GetMapping("/")
