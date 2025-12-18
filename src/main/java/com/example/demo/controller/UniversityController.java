@@ -14,15 +14,15 @@ public class UniversityController {
     UniversityService atrs;
 
     @PostMapping("/")
-    public University addUniversity( @Valid @RequestBody University atrs){
-        return atrs.createUniversity(University);
+    public University addUniversity( @Valid @RequestBody University university){
+        return atrs.createUniversity(university);
     }
     @PutMapping("/{id}")
     public University updateUniversity(@PathVariable Long id,@Valid @RequestBody University university){
-        return atrs.updateuniversity(id,university);
+        return atrs.updateUniversity(id,university);
     }
     @GetMapping("/{id}")
-    public University getUniversity(@PathVariable Long id){
+    public University getUniversity(@PathVariable Long id,@Valid @RequestBody University university){
         return atrs.getViewByID(id);
     }
     @GetMapping("/")
