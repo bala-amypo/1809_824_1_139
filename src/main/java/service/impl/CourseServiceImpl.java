@@ -41,4 +41,5 @@ public Course updateCourse(Long id, Course course) {
     public List<Course> getCoursesByUniversity(Long universityId){
         return atrr.findByUniversityId( universityId);
     }
+    
 }
