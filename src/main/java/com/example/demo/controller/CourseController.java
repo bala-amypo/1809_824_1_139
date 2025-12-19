@@ -42,5 +42,7 @@ public class CourseController {
         return uni.getAllUniversities();
     }
     @GetMapping("/university/{universityId}")
-    publ
+    public List<Course>getCourseByUniversityId(@PathVariable Long universityId){
+        return uni.getCourseByUniversityId(universityId);
+    }
 }
