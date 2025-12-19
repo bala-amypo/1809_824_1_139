@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-public class CourseImpl implements CourseService {
+public interface CourseImpl implements CourseService {
 
     @Autowired
     private CourseRepository atrr;
