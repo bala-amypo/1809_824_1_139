@@ -1,47 +1,44 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Course;
-import com.example.demo.service.CourseService;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
+import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.example.demo.entity.University;
+import com.example.demo.service.UniversityService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/courses")
-public class CourseController {
+public class UniversityController {
 
     @Autowired
-    private CourseService courseService;
+    UniversityService uni;   
 
-    @PostMapping
-    public Course createCourse(@RequestBody Course course) {
-        return courseService.createCourse(course);
+    @PostMapping("/")
+    public University addUniversity(@RequestBody University university) {
+        return uni.createUniversity(university);
     }
 
-    
     @PutMapping("/{id}")
-    public Course updateCourse(
-            @PathVariable Long id,
-            @RequestBody Course course) {
-        return courseService.updateCourse(id, course);
+    public University updateuniversity(@PathVariable Long id,
+                                       @Valid @RequestBody University university) {
+        return uni.updateUniversity(id, university); 
     }
 
-   
     @GetMapping("/{id}")
-    public Course getCourseById(@PathVariable Long id) {
-        return courseService.getCourseById(id);
+    public University getuniversity(@PathVariable Long id) {
+        return uni.getUniversityById(id); 
     }
 
-    @GetMapping
-    public List<Course> getAllCourses() {
-        return courseService.getAllCourses();
-    }
-
-    /
-    @PutMapping("/{id}/deactivate")
-    public void deactivateCourse(@PathVariable Long id) {
-        courseService.deactivateCourse(id);
+    @GetMapping("/")
+    public List<University> getAllUniversities() {
+        return uni.getAllUniversities();
     }
 }
