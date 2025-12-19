@@ -38,7 +38,7 @@ public class CourseController {
     }
     @GetMapping("/university/{universityId}")
     public Course getcourse(@PathVAriable Long universityId){
-        
+        return uni.get
     }
 
    
