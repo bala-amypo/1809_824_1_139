@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 
 @Entity
 public class Course {
@@ -12,7 +13,9 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
+    @JoinColumn(name = "university_id", nullable = false)
     private University university;
 
     private String courseCode;
@@ -22,14 +25,14 @@ public class Course {
     private String department;
     private Boolean active;
 
-    
-    
+    public Course() {
+    }
 
-   
-    public Course(Long Id,String courseCode,University university, String courseName, Integer creditHours,
-                  String description, String department, Boolean active) {
-        this.id=id;
-        this.university=university;            
+    // ✅ Parameterized constructor
+    public Course(Long id, University university, String courseCode, String courseName,
+                  Integer creditHours, String description, String department, Boolean active) {
+        this.id = id;
+        this.university = university;
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.creditHours = creditHours;
@@ -38,8 +41,7 @@ public class Course {
         this.active = active;
     }
 
-   
-
+    // Getters & Setters
     public Long getId() {
         return id;
     }
@@ -47,6 +49,7 @@ public class Course {
     public void setId(Long id) {
         this.id = id;
     }
+
     public University getUniversity() {
         return university;
     }
@@ -54,7 +57,6 @@ public class Course {
     public void setUniversity(University university) {
         this.university = university;
     }
-    
 
     public String getCourseCode() {
         return courseCode;
@@ -96,14 +98,11 @@ public class Course {
         this.department = department;
     }
 
-    public Boolean isActive() {
+    public Boolean getActive() {
         return active;
     }
 
     public void setActive(Boolean active) {
         this.active = active;
     }
-    public Course() {
-    }
-   
 }
