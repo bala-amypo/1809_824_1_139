@@ -5,6 +5,6 @@ public interface CourseService{
     Course createCourse(Course course);
     Course updateCourse(Long id,Course course);
     Course getCourseById(Long id);
-    List<Course>getCoursesByUniversity(Long universityId);
+    List<Course>getCourseByUniversityId(Long universityId);
     Course deactivateCourse(Long id);
 }
