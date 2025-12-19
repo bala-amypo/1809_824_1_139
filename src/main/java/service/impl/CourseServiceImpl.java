@@ -1,45 +1,30 @@
-package com.example.demo.service.impl;
+package com.example.demo.service.impls;
 
-import org.springframework.stereotype.Service;
 import com.example.demo.service.CourseService;
-import com.example.demo.entity.Course;
 import com.example.demo.repository.CourseRepository;
-
+import com.example.demo.entity.Course;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-public interface CourseServiceImpl implements CourseService {
-
-    private final CourseRepository repo;
-
-    public CourseServiceImpl(CourseRepository repo) {
-        this.repo = repo;
-    }
-
-    @Override
-    public Course createCourse(Course course) {
-        return repo.save(course);
-    }
-
-    @Override
-    public Course updateCourse(Long id, Course course) {
-        course.setId(id);
-        return repo.save(course);
-    }
-
-    @Override
-    public Course getCourseById(Long id) {
-        return repo.findById(id).orElse(null);
-    }
-    @Override
-    public Course getCourseByUniversity(Long universityId){
-        return repo.findByUniversityId(id).orElse(null);
-    }
-
+public class CourseImpls implements CourseService{
     
+    @Autowired
+    private CourseRepository atrr;
 
     @Override
-    public Course deactivateCourse(Long id) {
-        repo.deleteById(id);   
+    public Course logEvent(AuditTrailRecord record){
+        return atrr.save(record);
+    }
+
+    @Override
+    public List<AuditTrailRecord> getLogsByCredential(Long credentialId){
+        return atrr.findByCredentialId(credentialId);
+    }
+
+    @Override
+    public List<AuditTrailRecord> getAllLogs(){
+        return atrr.findAll();
     }
 }
