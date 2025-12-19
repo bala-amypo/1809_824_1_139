@@ -42,5 +42,5 @@ public class CourseController {
         return uni.getAllUniversities();
     }
     @GetMapping("/university/{universityId}")
-    
+    publ
 }
