@@ -5,10 +5,11 @@ import com.example.demo.repository.CourseRepository;
 import com.example.demo.entity.Course;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 @Service
-public class CourseImpls implements CourseService{
+public class CourseServiceImpl implements CourseService{
     
     @Autowired
     private CourseRepository atrr;
@@ -44,11 +45,11 @@ public Course updateCourse(Long id, Course course) {
     @Override
 public Course deactivateCourse(Long id) {
 
-    Course course = courseRepository.findById(id)
+    Course course =atrr.findById(id)
             .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
 
     course.setActive(false);
 
-    return courseRepository.save(course);
+    return atrr.save(course);
 }
 }
