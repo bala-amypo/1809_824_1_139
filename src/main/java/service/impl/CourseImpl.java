@@ -28,9 +28,9 @@ public class CourseImpl implements CourseService {
         Course existingCourse = courseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
 
-        existingCourse.setName(course.getName());
+        existingCourse.courseName(course.getName());
         existingCourse.setDescription(course.getDescription());
-        existingCourse.setUniversityId(course.getUniversityId());
+        existingCourse.setUniversity(course.getUniversityId());
         existingCourse.setActive(course.isActive());
 
         return courseRepository.save(existingCourse);
