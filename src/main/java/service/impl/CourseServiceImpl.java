@@ -39,6 +39,6 @@ public Course updateCourse(Long id, Course course) {
 
     @Override
     public List<Course> getCoursesByUniversity(Long universityId){
-        return atrr.findAll(Long universityId);
+        return atrr.findByUniversityId( universityId);
     }
 }
