@@ -20,22 +20,22 @@ public class CourseController {
     CourseService uni;   
 
     @PostMapping("/")
-    public Course addCourse(@RequestBody Course course) {
+    public Course addCourse(@Valid @RequestBody Course course) {
         return uni.createCourse(course);
     }
 
     @PutMapping("/{id}")
-    public Course updatecourse(@PathVariable Long id,
+    public Course updateCourse(@PathVariable Long id,
                                        @Valid @RequestBody Course course) {
         return uni.updateCourse(id,course); 
     }
 
     @GetMapping("/{id}")
-    public Course getcourse(@PathVariable Long id) {
+    public Course getCourse(@PathVariable Long id) {
         return uni.getCourseById(id); 
     }
     @GetMapping("/university/{universityId}")
-    public  List<Course>getCourseUniversityId(@PathVariable Long universityId){
+    public  List<Course>getCourseByUniversityId(@PathVariable Long universityId){
     return uni.getCourseByUniversityId(universityId);
 
     }
