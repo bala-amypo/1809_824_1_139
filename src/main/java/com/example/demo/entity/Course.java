@@ -28,7 +28,8 @@ public class Course {
    
     public Course(Long Id,String courseCode,University university, String courseName, Integer creditHours,
                   String description, String department, Boolean active) {
-        this.id=id;            
+        this.id=id;
+        this.university=university;            
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.creditHours = creditHours;
@@ -46,6 +47,14 @@ public class Course {
     public void setId(Long id) {
         this.id = id;
     }
+    public University getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(University university) {
+        this.university = university;
+    }
+    
 
     public String getCourseCode() {
         return courseCode;
