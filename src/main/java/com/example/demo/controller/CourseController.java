@@ -13,7 +13,7 @@ import com.example.demo.entity.Course;
 import com.example.demo.service.CourseService;
 
 import java.util.List;
-
+import java.lang.Long;
 @RestController
 public class CourseController {
     @Autowired
