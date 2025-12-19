@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Course;
+import com.example.demo.entity.University;
 import com.example.demo.repository.CourseRepository;
+import com.example.demo.repository.UniversityRepository;
 import com.example.demo.service.CourseService;
 
 import java.util.List;
@@ -15,23 +17,38 @@ public class CourseImpl implements CourseService {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private UniversityRepository universityRepository;
+
     // POST /
     @Override
     public Course createCourse(Course course) {
-        course.setActive(true);   // default active
+        course.setActive(true);
         return courseRepository.save(course);
     }
 
     // PUT /{id}
     @Override
     public Course updateCourse(Long id, Course course) {
+
         Course existingCourse = courseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
 
-        existingCourse.courseName(course.getName());
+        existingCourse.setCourseName(course.getCourseName());
+        existingCourse.setCourseCode(course.getCourseCode());
+        existingCourse.setCreditHours(course.getCreditHours());
         existingCourse.setDescription(course.getDescription());
-        existingCourse.setUniversity(course.getUniversityId());
-        existingCourse.setActive(course.isActive());
+        existingCourse.setDepartment(course.getDepartment());
+        existingCourse.setActive(course.getActive());
+
+        // update university if provided
+        if (course.getUniversity() != null) {
+            University university = universityRepository.findById(
+                    course.getUniversity().getId()
+            ).orElseThrow(() -> new RuntimeException("University not found"));
+
+            existingCourse.setUniversity(university);
+        }
 
         return courseRepository.save(existingCourse);
     }
@@ -46,12 +63,13 @@ public class CourseImpl implements CourseService {
     // GET /university/{universityId}
     @Override
     public List<Course> getCoursesByUniversityId(Long universityId) {
-        return courseRepository.findByUniversityId(universityId);
+        return courseRepository.findByUniversity_Id(universityId);
     }
 
     // PUT /{id}/deactivate
     @Override
     public Course deactivateCourse(Long id) {
+
         Course course = courseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
 
