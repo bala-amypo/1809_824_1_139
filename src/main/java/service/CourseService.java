@@ -4,7 +4,7 @@
 // public interface CourseService{
 //     Course createCourse(Course course);
 //     Course updateCourse(Long id,Course course);
-//     Course getCourseById(Long id);
-//     List<Course>getCoursesByUniversityId(Long universityId);
-//     Course deactivateCourse(Long id);
-// }
+//    Course getCourseById(Long id);
+//    List<Course>getCoursesByUniversityId(Long universityId);
+//    Course deactivateCourse(Long id);
+//}
