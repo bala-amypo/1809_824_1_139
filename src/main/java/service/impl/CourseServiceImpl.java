@@ -17,18 +17,28 @@ public class CourseImpls implements CourseService{
     public Course createCourse(Course course){
         return atrr.save(course);
     }
-
     @Override
-    public Course updateCourse(Long id,Course course){
-        return atrr.findById(id);
-    }
+public Course updateCourse(Long id, Course course) {
+
+    Course existingCourse = courseRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
+
+    existingCourse.setName(course.getName());
+    existingCourse.setUniversityId(course.getUniversityId());
+    existingCourse.setActive(course.isActive());
+   
+
+    return courseRepository.save(existingCourse);
+}
+
+   
     @Override
     public Course getCourseById(Long id){
         return atrr.findById(id);
     }
 
     @Override
-    public List<Coure> getCoursesByUniversity(Long universityId){
+    public List<Course> getCoursesByUniversity(Long universityId){
         return atrr.findAll(Long universityId);
     }
 }
