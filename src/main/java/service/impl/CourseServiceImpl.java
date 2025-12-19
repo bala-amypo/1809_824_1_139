@@ -19,7 +19,7 @@ public class CourseImpls implements CourseService{
     }
 
     @Override
-    public Course getCourse(Long id,Course course){
+    public Course updateCourse(Long id,Course course){
         return atrr.findById(id);
     }
     @Override
