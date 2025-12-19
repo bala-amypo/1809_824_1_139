@@ -14,12 +14,12 @@ public class CourseImpls implements CourseService{
     private CourseRepository atrr;
 
     @Override
-    public Course logEvent(AuditTrailRecord record){
-        return atrr.save(record);
+    public Course createCourse(Course course){
+        return atrr.save(course);
     }
 
     @Override
-    public List<AuditTrailRecord> getLogsByCredential(Long credentialId){
+    public Course getCourse(Long id,Course course){
         return atrr.findByCredentialId(credentialId);
     }
 
