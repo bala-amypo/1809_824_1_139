@@ -22,9 +22,13 @@ public class CourseImpls implements CourseService{
     public Course getCourse(Long id,Course course){
         return atrr.findById(id);
     }
+    @Override
+    public Course getCourseById(Long id){
+        return atrr.findById(id);
+    }
 
     @Override
-    public List<Coure> getCourse(){
-        return atrr.findAll();
+    public List<Coure> getCoursesByUniversity(Long universityId){
+        return atrr.findAll(Long universityId);
     }
 }

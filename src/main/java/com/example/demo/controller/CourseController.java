@@ -35,8 +35,8 @@ public class CourseController {
         return uni.getCourseById(id); 
     }
     @GetMapping("/university/{universityId}")
-    public  List<Course>getCourseByUniversityId(@PathVariable Long universityId){
-    return uni.getCourseByUniversityId(universityId);
+    public  List<Course>getCoursesByUniversityId(@PathVariable Long universityId){
+    return uni.getCoursesByUniversityId(universityId);
 
     }
     @PutMapping("/{id}/deactivate")
