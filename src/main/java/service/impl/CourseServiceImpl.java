@@ -20,11 +20,11 @@ public class CourseImpls implements CourseService{
 
     @Override
     public Course getCourse(Long id,Course course){
-        return atrr.findByCredentialId(credentialId);
+        return atrr.findById(id);
     }
 
     @Override
-    public List<AuditTrailRecord> getAllLogs(){
+    public List<Coure> getCourse(){
         return atrr.findAll();
     }
 }
