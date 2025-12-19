@@ -27,26 +27,28 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    public Course updatecourse(@PathVariable Long id,
-                                       @Valid @RequestBody Course course) {
+    public Course updatecourse(
+            @PathVariable Long id,
+            @Valid @RequestBody Course course) {
         return uni.updateCourse(id, course); 
     }
 
     @GetMapping("/{id}")
-    public COurse getcourse(@PathVariable Long id) {
+    public Course getcourse(@PathVariable Long id) {
         return uni.getCourseById(id); 
     }
 
-    @GetMapping("/")
-    public List<University> getAllUniversities() {
-        return uni.getAllUniversities();
-    }
+   
+
     @GetMapping("/university/{universityId}")
-    public List<Course>getCourseByUniversityId(@PathVariable Long universityId){
+    public List<Course> getCourseByUniversityId(
+            @PathVariable Long universityId) {
         return uni.getCourseByUniversityId(universityId);
     }
+
     @PutMapping("/{id}/deactivate")
-public void deactivateCourse(@PathVariable Long id) {
-    courseService.deactivateCourse(id);
+    public void deactivateCourse(@PathVariable Long id) {
+        uni.deactivateCourse(id);
+    }
 }
-}
+
