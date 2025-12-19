@@ -22,23 +22,20 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public University updateUniversity(Long id, University university) {
-        university.setId(id);
-        return repo.save(university);
+    public Course updateCourse(Long id, Course course) {
+        course.setId(id);
+        return repo.save(course);
     }
 
     @Override
-    public University getUniversityById(Long id) {
+    public Course getCourseById(Long id) {
         return repo.findById(id).orElse(null);
     }
 
-    @Override
-    public List<University> getAllUniversities() {
-        return repo.findAll();
-    }
+    
 
     @Override
-    public void deactivateUniversity(Long id) {
+    public void deactivateCourse(Long id) {
         repo.deleteById(id);   
     }
 }
