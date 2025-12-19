@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Course {
@@ -26,8 +26,9 @@ public class Course {
     
 
    
-    public Course(String courseCode, String courseName, Integer creditHours,
+    public Course(Long Id,String courseCode,University university, String courseName, Integer creditHours,
                   String description, String department, Boolean active) {
+        this.id=id;            
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.creditHours = creditHours;
