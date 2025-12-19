@@ -9,8 +9,8 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.demo.entity.University;
-import com.example.demo.service.UniversityService;
+import com.example.demo.entity.Course;
+import com.example.demo.service.CourseService;
 
 import java.util.List;
 
