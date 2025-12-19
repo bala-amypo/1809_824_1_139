@@ -33,7 +33,7 @@ public class CourseServiceImpl implements CourseService {
     }
     @Override
     public Course getCourseByUniversity(Long universityId){
-        return repo.findByUniversityId
+        return repo.findByUniversityId(id).orElse(null);
     }
 
     

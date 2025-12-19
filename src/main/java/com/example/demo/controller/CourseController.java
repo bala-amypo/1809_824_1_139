@@ -17,7 +17,6 @@ import java.util.List;
 
 @RestController
 public class CourseController {
-
     @Autowired
     CourseService uni;   
 
@@ -29,7 +28,7 @@ public class CourseController {
     @PutMapping("/{id}")
     public Course updatecourse(@PathVariable Long id,
                                        @Valid @RequestBody Course course) {
-        return uni.updateCourse(id, course); 
+        return uni.updateCourse(id,course); 
     }
 
     @GetMapping("/{id}")
