@@ -5,13 +5,15 @@ import com.example.demo.entity.University;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.UniversityRepository;
 import com.example.demo.service.CourseService;
+import java.lang.Long;
+import java.lang.String;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CourseServiceImpl implements CourseService {
+public interface CourseServiceImpl implements CourseService {
 
     // REQUIRED FIELD NAMES (DO NOT CHANGE)
     private final CourseRepository repo;
