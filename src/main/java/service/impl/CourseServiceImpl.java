@@ -1,4 +1,4 @@
-package com.example.demo.service.impls;
+package com.example.demo.service.impl;
 
 import com.example.demo.service.CourseService;
 import com.example.demo.repository.CourseRepository;
@@ -9,47 +9,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-public class CourseServiceImpl implements CourseService{
-    
+public class CourseImpl implements CourseService {
+
     @Autowired
     private CourseRepository atrr;
 
     @Override
-    public Course createCourse(Course course){
+    public Course createCourse(Course course) {
+        course.setActive(true);
         return atrr.save(course);
     }
+
     @Override
-public Course updateCourse(Long id, Course course) {
+    public Course updateCourse(Long id, Course course) {
 
-    Course existingCourse = courseRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
+        Course existingCourse = atrr.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
 
-    existingCourse.setName(course.getName());
-    existingCourse.setUniversityId(course.getUniversityId());
-    existingCourse.setActive(course.isActive());
-   
+        existingCourse.setName(course.getName());
+        existingCourse.setUniversityId(course.getUniversityId());
+        existingCourse.setActive(course.isActive());
 
-    return atrr.save(existingCourse);
-}
-
-   
-    @Override
-    public Course getCourseById(Long id){
-        return atrr.findById(id);
+        return atrr.save(existingCourse);
     }
 
     @Override
-    public List<Course> getCoursesByUniversity(Long universityId){
-        return atrr.findByUniversityId( universityId);
+    public Course getCourseById(Long id) {
+        return atrr.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
     }
+
     @Override
-public Course deactivateCourse(Long id) {
+    public List<Course> getCourseByUniversityId(Long universityId) {
+        return atrr.findByUniversityId(universityId);
+    }
 
-    Course course =atrr.findById(id)
-            .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
+    @Override
+    public Course deactivateCourse(Long id) {
 
-    course.setActive(false);
+        Course course = atrr.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
 
-    return atrr.save(course);
-}
+        course.setActive(false);
+        return atrr.save(course);
+    }
 }
