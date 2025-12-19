@@ -4,8 +4,6 @@ import com.example.demo.entity.Course;
 import com.example.demo.entity.University;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.UniversityRepository;
-import java.lang.Long;
-import java.lang.String;
 import com.example.demo.service.CourseService;
 
 import org.springframework.stereotype.Service;
@@ -13,9 +11,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface CourseServiceImpl implements CourseService {
+public class CourseServiceImpl implements CourseService {
 
-    // ⚠️ REQUIRED FIELD NAMES (DO NOT CHANGE)
+    // REQUIRED FIELD NAMES (DO NOT CHANGE)
     private final CourseRepository repo;
     private final UniversityRepository univRepo;
 
@@ -37,7 +35,6 @@ public interface CourseServiceImpl implements CourseService {
         University university = univRepo.findById(universityId)
                 .orElseThrow(() -> new RuntimeException("not found"));
 
-        // ⚠️ EXACT repository method name required by tests
         repo.findByUniversityldAndCourseCode(
                 universityId,
                 course.getCourseCode()
@@ -77,13 +74,12 @@ public interface CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getCoursesByUniversity(Long universityId) {
+    public List<Course> getCoursesByUniversity(Long universityld) {
 
-        univRepo.findById(universityId)
+        univRepo.findById(universityld)
                 .orElseThrow(() -> new RuntimeException("not found"));
 
-        // ⚠️ EXACT method name required by tests
-        return repo.findByUniversityldAndActiveTrue(universityId);
+        return repo.findByUniversityldAndActiveTrue(universityld);
     }
 
     @Override
