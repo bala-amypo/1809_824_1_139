@@ -43,7 +43,7 @@ public class UniversityController {
     }
     @PutMapping("/{id}/deactivate")
     public void deactivateUniversity(@PathVariable Long id) {
-        service.deactivateUniversity(id);
+        uni.deactivateUniversity(id);
     }
    
     
