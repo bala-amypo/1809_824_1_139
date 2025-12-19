@@ -28,7 +28,6 @@ public class Course {
     public Course() {
     }
 
-    // ✅ Parameterized constructor
     public Course(Long id, University university, String courseCode, String courseName,
                   Integer creditHours, String description, String department, Boolean active) {
         this.id = id;
@@ -41,7 +40,6 @@ public class Course {
         this.active = active;
     }
 
-    // Getters & Setters
     public Long getId() {
         return id;
     }
