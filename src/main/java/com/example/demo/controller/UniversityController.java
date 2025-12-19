@@ -41,9 +41,6 @@ public class UniversityController {
     public List<University> getAllUniversities() {
         return uni.getAllUniversities();
     }
-    @PutMapping("/{id}/deactivate")
-public void deactivateUniversity(@PathVariable Long id) {
-    universityService.deactivateUniversity(id);
-}
+   
     
 }
