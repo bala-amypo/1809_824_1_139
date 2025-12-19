@@ -28,19 +28,16 @@ public class CourseController {
 
     @PutMapping("/{id}")
     public Course updatecourse(@PathVariable Long id,
-                                       @Valid @RequestBody Course university) {
-        return uni.updateUniversity(id, university); 
+                                       @Valid @RequestBody Course course) {
+        return uni.updateCourse(id, course); 
     }
 
     @GetMapping("/{id}")
-    public University getuniversity(@PathVariable Long id) {
-        return uni.getUniversityById(id); 
+    public Course getcourse(@PathVariable Long id) {
+        return uni.getCourseById(id); 
     }
 
-    @GetMapping("/")
-    public List<University> getAllUniversities() {
-        return uni.getAllUniversities();
-    }
+   
    
     
 }
