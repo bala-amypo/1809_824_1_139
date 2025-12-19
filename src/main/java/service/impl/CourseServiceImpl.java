@@ -41,5 +41,14 @@ public Course updateCourse(Long id, Course course) {
     public List<Course> getCoursesByUniversity(Long universityId){
         return atrr.findByUniversityId( universityId);
     }
-    
+    @Override
+public Course deactivateCourse(Long id) {
+
+    Course course = courseRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Course not found with id: " + id));
+
+    course.setActive(false);
+
+    return courseRepository.save(course);
+}
 }
