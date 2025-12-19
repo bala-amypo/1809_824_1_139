@@ -28,7 +28,7 @@ public Course updateCourse(Long id, Course course) {
     existingCourse.setActive(course.isActive());
    
 
-    return courseRepository.save(existingCourse);
+    return atrr.save(existingCourse);
 }
 
    
