@@ -8,7 +8,7 @@ import com.example.demo.repository.CourseRepository;
 import java.util.List;
 
 @Service
-public class CourseServiceImpl implements CourseService {
+public interface CourseServiceImpl implements CourseService {
 
     private final CourseRepository repo;
 
