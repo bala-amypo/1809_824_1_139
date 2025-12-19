@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.service.CourseService;
 import com.example.demo.entity.Course;
 import com.example.demo.repository.CourseRepository;
+import java.lang.Long;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void deactivateCourse(Long id) {
+    public Course deactivateCourse(Long id) {
         repo.deleteById(id);   
     }
 }
