@@ -41,4 +41,6 @@ public class CourseController {
     public List<University> getAllUniversities() {
         return uni.getAllUniversities();
     }
+    @GetMapping("/university/{universityId}")
+    
 }
