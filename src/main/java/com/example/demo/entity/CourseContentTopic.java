@@ -18,10 +18,18 @@ public class CourseContentTopic {
     private Double weightPercentage;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", nullable = false)
+    @JoinColumn(name = "course_id")
     private Course course;
 
-    
+    public CourseContentTopic() {
+    }
+
+    public CourseContentTopic(Long id,String topicName, Double weightPercentage, Course course) {
+        this.id=id;
+        this.topicName = topicName;
+        this.weightPercentage = weightPercentage;
+        this.course = course;
+    }
 
     public Long getId() {
         return id;
@@ -53,17 +61,5 @@ public class CourseContentTopic {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    
-
-    public CourseContentTopic(Long id,String topicName, Double weightPercentage, Course course) {
-        this.id=id;
-        this.topicName = topicName;
-        this.weightPercentage = weightPercentage;
-        this.course = course;
-    }
-
-    public CourseContentTopic() {
     }
 }
