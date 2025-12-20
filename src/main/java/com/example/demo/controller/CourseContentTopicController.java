@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.example.demo.entity.CourseContentTopic;
 import com.example.demo.service.CourseContentTopicService;
 
+
 import java.lang.Long;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/topics")
-@Tag(name = "Course Content Topics")
+
 public class CourseContentTopicController {
 
     @Autowired
