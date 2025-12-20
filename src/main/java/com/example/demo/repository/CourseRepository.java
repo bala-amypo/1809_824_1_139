@@ -4,5 +4,6 @@ import org.springframework.stereotype.Repository;
  import com.example.demo.entity.Course;
  @Repository
  public interface CourseRepository extends JpaRepository<Course, Long> {
+    List<CourseContentTopic> findByCourseld(Long courseld);
 
      }
