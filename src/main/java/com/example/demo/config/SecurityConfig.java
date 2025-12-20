@@ -26,8 +26,8 @@ public class SecurityConfig {
 
         http
             .csrf(csrf -> csrf.disable())
-            .formLogin(form -> form.disable())   // 🚫 disable login page
-            .httpBasic(basic -> basic.disable()) // 🚫 disable basic auth
+            .formLogin(form -> form.disable())   // ❌ disable login page
+            .httpBasic(basic -> basic.disable()) // ❌ disable basic auth
             .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
