@@ -8,12 +8,12 @@ import com.example.demo.repository.CourseContentTopicRepository;
 import java.util.List;
 
 @Service
-public class CourseContentTopicServiceImpl implements CourseContentTopic {
+public class CourseContentTopicServiceImpl implements CourseContentTopicServive {
 
     private final CourseContentTopicRepository repo;
 
     public CourseContentTopicImpl(CourseContentTopicRepository repo) {
-        this.repo = repo;
+        return this.repo = repo;
     }
 
     @Override
@@ -22,9 +22,9 @@ public class CourseContentTopicServiceImpl implements CourseContentTopic {
     }
 
     @Override
-    public CourseContentTopic updateTopic(Long id, CourseContentTopic university) {
-        university.setId(id);
-        return repo.save(university);
+    public CourseContentTopic updateTopic(Long id, CourseContentTopic topic) {
+        topic.setId(id);
+        return repo.save(topic);
     }
 
     @Override
