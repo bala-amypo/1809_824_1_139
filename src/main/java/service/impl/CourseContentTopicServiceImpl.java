@@ -38,6 +38,6 @@ public class CourseContentTopicServiceImpl implements CourseContentTopicService 
     // ✅ method signature fixed (added courseId)
     @Override
     public List<CourseContentTopic> getTopicsForCourse(Long courseId) {
-        return repo.findByCourseId(courseId);
+        return repo.findAll(courseId);
     }
 }

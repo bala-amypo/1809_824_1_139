@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
  import java.util.List;
  @Repository
  public interface CourseContentTopicRepository extends JpaRepository<CourseContentTopic, Long> {
-     List<CourseContentTopic> findByCourseld(Long courseld);
+     
 
      }
