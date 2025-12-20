@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.example.demo.entity.CourseContentTopic;
 import com.example.demo.service.CourseContentTopicService;
 
+import java.lang.Long;
 import java.util.List;
 
 @RestController
@@ -22,14 +23,14 @@ public class CourseContentTopicController {
     CourseContentTopicService uni;   
 
     @PostMapping("/")
-    public CourseContentTopic addCourseContentTopic(@RequestBody CourseContentTopic topic) {
+    public CourseContentTopic createTopic(@RequestBody CourseContentTopic topic) {
         return uni.createTopic(topic);
     }
 
     @PutMapping("/{id}")
     public CourseContentTopic updatetopic(@PathVariable Long courseId,
                                        @Valid @RequestBody CourseContentTopic topic) {
-        return uni.updateTopic(courseId); 
+        return uni.updateTopic(id); 
     }
 
     @GetMapping("/{id}")
