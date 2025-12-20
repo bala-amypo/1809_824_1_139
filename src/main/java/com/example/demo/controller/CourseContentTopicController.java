@@ -29,22 +29,24 @@ public class CourseContentTopicController {
     @PutMapping("/{id}")
     public CourseContentTopic updatetopic(@PathVariable Long courseId,
                                        @Valid @RequestBody CourseContentTopic topic) {
-        return uni.updateCourseContentTopic(id, university); 
+        return uni.updateCourseContentTopic(id, topic); 
     }
 
     @GetMapping("/{id}")
-    public University getuniversity(@PathVariable Long id) {
-        return uni.getUniversityById(id); 
+    public CourseContentTopic gettopic(@PathVariable Long id) {
+        return uni.getTopicById(id); 
+    }
+    @GetMapping("/course/{courseId}")
+    public List<@GetMapping("/university/{universityId}")
+    public List<Course> getCoursesByUniversityId(
+            @PathVariable Long universityId) {
+        return courseService.getCoursesByUniversityId(universityId);
+    }> getCoursesByUniversityId(
+            @PathVariable Long universityId) {
+        return courseService.getCoursesByUniversityId(universityId);
     }
 
-    @GetMapping("/")
-    public List<University> getAllUniversities() {
-        return uni.getAllUniversities();
-    }
-    @PutMapping("/{id}/deactivate")
-    public void deactivateUniversity(@PathVariable Long id) {
-        uni.deactivateUniversity(id);
-    }
+    
    
     
 }
