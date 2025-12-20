@@ -57,7 +57,8 @@ public class CourseContentTopic {
 
     
 
-    public CourseContentTopic(String topicName, Double weightPercentage, Course course) {
+    public CourseContentTopic(Long id,String topicName, Double weightPercentage, Course course) {
+        this.id=id;
         this.topicName = topicName;
         this.weightPercentage = weightPercentage;
         this.course = course;
