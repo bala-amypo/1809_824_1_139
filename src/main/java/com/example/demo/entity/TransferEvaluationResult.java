@@ -35,7 +35,7 @@ public class TransferEvaluationResult {
     public TransferEvaluationResult() {
     }
 
-    public TransferEvaluationResult(Course sourceCourse, Course targetCourse,
+    public TransferEvaluationResult(Long id,Course sourceCourse, Course targetCourse,
                                     Double overlapPercentage, Integer creditHourDifference,
                                     Boolean isEligibleForTransfer, String notes) {
         this.sourceCourse = sourceCourse;
@@ -44,6 +44,8 @@ public class TransferEvaluationResult {
         this.creditHourDifference = creditHourDifference;
         this.isEligibleForTransfer = isEligibleForTransfer;
         this.notes = notes;
+        this.id=id;
+       
     }
 
     @PrePersist
