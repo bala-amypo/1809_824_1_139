@@ -1,10 +1,12 @@
+
+
 package com.example.demo.service.impl;
 
 import org.springframework.stereotype.Service;
 import com.example.demo.service.CourseContentTopicService;
 import com.example.demo.entity.CourseContentTopic;
 import com.example.demo.repository.CourseContentTopicRepository;
-import java.util.lang.Long;
+import com.example.demo.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -13,7 +15,6 @@ public class CourseContentTopicServiceImpl implements CourseContentTopicService 
 
     private final CourseContentTopicRepository repo;
 
-    
     public CourseContentTopicServiceImpl(CourseContentTopicRepository repo) {
         this.repo = repo;
     }
@@ -25,17 +26,19 @@ public class CourseContentTopicServiceImpl implements CourseContentTopicService 
 
     @Override
     public CourseContentTopic updateTopic(Long id, CourseContentTopic topic) {
-        topic.setId(id);
+        CourseContentTopic existing = repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Topic not found"));
+
+        topic.setId(existing.getId());
         return repo.save(topic);
     }
 
-   
     @Override
     public CourseContentTopic getTopicById(Long id) {
-        return repo.findById(id).orElse(null);
+        return repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Topic not found"));
     }
 
-    
     @Override
     public List<CourseContentTopic> getTopicsForCourse(Long courseId) {
         return repo.findByCourseId(courseId);
