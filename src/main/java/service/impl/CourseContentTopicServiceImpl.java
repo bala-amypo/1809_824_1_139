@@ -34,6 +34,6 @@ public class CourseContentTopicServiceImpl implements CourseContentTopicService 
 
     @Override
     public List<CourseContentTopic> getTopicsForCourse(Long courseId) {
-        return repo.findByCourseld(courseId);
+        return repo.findByCourseId(courseId);
     }
 }
