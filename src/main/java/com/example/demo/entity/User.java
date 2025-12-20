@@ -1,34 +1,45 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
-    private String roles;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+        name = "user_roles",
+        joinColumns = @JoinColumn(name = "user_id")
+    )
+    @Column(name = "role")
+    private Set<String> roles;
+
     private LocalDateTime createdAt;
 
-    
+    public User() {
+        this.createdAt = LocalDateTime.now();
+    }
 
-    public User(String email, String password, String roles, LocalDateTime createdAt) {
+    public User(String email, String password, Set<String> roles) {
         this.email = email;
         this.password = password;
         this.roles = roles;
-        this.createdAt = createdAt;
+        this.createdAt = LocalDateTime.now();
     }
+
+    // ---------- getters & setters ----------
 
     public Long getId() {
         return id;
@@ -54,11 +65,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRoles() {
+    public Set<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(String roles) {
+    public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
 
@@ -69,7 +80,4 @@ public class User {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-    public User() {
-    }
-    
 }
