@@ -17,28 +17,25 @@ public class CourseContentTopicServiceImpl implements CourseContentTopic {
     }
 
     @Override
-    public University createUniversity(University university) {
-        return repo.save(university);
+    public CourseContentTopic createTopic(CourseContentTopic topic) {
+        return repo.save(topic);
     }
 
     @Override
-    public University updateUniversity(Long id, University university) {
+    public CourseContentTopic updateTopic(Long id, CourseContentTopic university) {
         university.setId(id);
         return repo.save(university);
     }
 
     @Override
-    public University getUniversityById(Long id) {
+    public University getTopicById(Long id) {
         return repo.findById(id).orElse(null);
     }
 
     @Override
-    public List<University> getAllUniversities() {
+    public List<CourseContentTopic> getTopicsForCourse() {
         return repo.findAll();
     }
 
-    @Override
-    public void deactivateUniversity(Long id) {
-        repo.deleteById(id);   
-    }
+    
 }
