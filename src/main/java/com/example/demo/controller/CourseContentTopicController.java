@@ -20,29 +20,31 @@ import java.util.List;
 public class CourseContentTopicController {
 
     @Autowired
-    CourseContentTopicService uni;   
+    CourseContentTopicService service;   
 
-    @PostMapping("/")
-    public CourseContentTopic createTopic(@RequestBody CourseContentTopic topic) {
-        return uni.createTopic(topic);
+    
+      @PostMapping("/")
+    public CourseContentTopic createTopic(@Valid @RequestBody CourseContentTopic topic) {
+        return service.createTopic(topic);
     }
 
+   
     @PutMapping("/{id}")
-    public CourseContentTopic updatetopic(@PathVariable Long courseId,
-                                       @Valid @RequestBody CourseContentTopic topic) {
-        return uni.updateTopic(id); 
+    public CourseContentTopic updateTopic(
+            @PathVariable Long id,
+            @Valid @RequestBody CourseContentTopic topic) {
+        return service.updateTopic(id, topic);
     }
 
+  
     @GetMapping("/{id}")
-    public CourseContentTopic gettopic(@PathVariable Long id) {
-        return uni.getTopicById(id); 
+    public CourseContentTopic getTopicById(@PathVariable Long id) {
+        return service.getTopicById(id);
     }
+
+    
     @GetMapping("/course/{courseId}")
     public List<CourseContentTopic> getTopicsForCourse(@PathVariable Long courseId) {
-        return uni.getTopicsForCourse(courseId);
+        return service.getTopicsForCourse(courseId);
     }
-
-    
-   
-    
 }
