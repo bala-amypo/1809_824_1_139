@@ -37,13 +37,8 @@ public class CourseContentTopicController {
         return uni.getTopicById(id); 
     }
     @GetMapping("/course/{courseId}")
-    public List<@GetMapping("/university/{universityId}")
-    public List<Course> getCoursesByUniversityId(
-            @PathVariable Long universityId) {
-        return courseService.getCoursesByUniversityId(universityId);
-    }> getCoursesByUniversityId(
-            @PathVariable Long universityId) {
-        return courseService.getCoursesByUniversityId(universityId);
+    public List<CourseContentTopic> getTopicsForCourse(@PathVariable Long courseId) {
+        return uni.getTopicsForCourse(courseId);
     }
 
     
