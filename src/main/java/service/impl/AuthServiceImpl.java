@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.service.AuthService;
 import com.example.demo.dto.AuthRequest;
@@ -32,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse register(RegisterRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("User already exists");
+            throw new RuntimeException("exists");
         }
 
         User user = new User();
@@ -42,7 +42,7 @@ public class AuthServiceImpl implements AuthService {
 
         userRepository.save(user);
 
-        String token = jwtTokenProvider.generateToken(user.getEmail(), user.getRoles());
+        String token = jwtTokenProvider.generateToken(user.getEmail());
         return new AuthResponse(token);
     }
 
@@ -50,13 +50,13 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse login(AuthRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("not found"));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }
 
-        String token = jwtTokenProvider.generateToken(user.getEmail(), user.getRoles());
+        String token = jwtTokenProvider.generateToken(user.getEmail());
         return new AuthResponse(token);
     }
 }
