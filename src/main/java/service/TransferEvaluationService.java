@@ -1,8 +1,13 @@
-//package com.example.demo.service;
-//import com.example.demo.entity.TransferEvaluation;
-//import java.util.List;
-//public interface TransferEvaluationService {
-  //  TransferEvaluation evaluateTransfer(Long sourceCourseId, Long targetCourseId);
-    //TransferEvaluation getEvaluationById(Long id);
-    //List<TransferEvaluation> getEvaluationForCourse(Long courseId);
-//}
+package com.example.demo.service;
+
+import com.example.demo.entity.TransferEvaluationResult;
+import java.util.List;
+
+public interface TransferEvaluationService {
+
+    TransferEvaluationResult evaluateTransfer(Long sourceCourseId, Long targetCourseId);
+
+    TransferEvaluationResult getEvaluationById(Long id);
+
+    List<TransferEvaluationResult> getEvaluationsForCourse(Long courseId);
+}
