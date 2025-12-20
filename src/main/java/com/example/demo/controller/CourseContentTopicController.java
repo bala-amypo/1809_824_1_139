@@ -19,17 +19,17 @@ import java.util.List;
 public class CourseContentTopicController {
 
     @Autowired
-    COurseContentTopicService uni;   
+    CourseContentTopicService uni;   
 
     @PostMapping("/")
-    public University addUniversity(@RequestBody University university) {
-        return uni.createUniversity(university);
+    public CourseContentTopic addCourseContentTopic(@RequestBody CourseContentTopic topic) {
+        return uni.createCourseContentTopic(topic);
     }
 
     @PutMapping("/{id}")
-    public University updateuniversity(@PathVariable Long id,
-                                       @Valid @RequestBody University university) {
-        return uni.updateUniversity(id, university); 
+    public CourseContentTopic updatetopic(@PathVariable Long courseId,
+                                       @Valid @RequestBody CourseContentTopic topic) {
+        return uni.updateCourseContentTopic(id, university); 
     }
 
     @GetMapping("/{id}")
