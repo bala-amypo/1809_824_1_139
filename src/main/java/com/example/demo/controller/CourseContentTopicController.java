@@ -29,7 +29,7 @@ public class CourseContentTopicController {
     @PutMapping("/{id}")
     public CourseContentTopic updatetopic(@PathVariable Long courseId,
                                        @Valid @RequestBody CourseContentTopic topic) {
-        return uni.updateCourseContentTopic(id, topic); 
+        return uni.updateCourseContentTopic(courseId); 
     }
 
     @GetMapping("/{id}")
