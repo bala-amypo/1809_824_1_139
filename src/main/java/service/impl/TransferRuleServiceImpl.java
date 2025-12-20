@@ -1,19 +1,54 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.entity.TransferRule;
+import com.example.demo.repository.TransferRuleRepository;
+import com.example.demo.service.TransferRuleService;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-public interface TransferRuleService {
+@Service
+public class TransferRuleServiceImpl implements TransferRuleService {
 
-    TransferRule createRule(TransferRule rule);
+    private final TransferRuleRepository repo;
 
-    TransferRule updateRule(Long id, TransferRule rule);
+    public TransferRuleServiceImpl(TransferRuleRepository repo) {
+        this.repo = repo;
+    }
 
-    TransferRule getRuleById(Long id);
+    @Override
+    public TransferRule createRule(TransferRule rule) {
+        rule.setActive(true);
+        return repo.save(rule);
+    }
 
-    List<TransferRule> getAllRules();
+    @Override
+    public TransferRule updateRule(Long id, TransferRule rule) {
+        rule.setId(id);
+        return repo.save(rule);
+    }
 
-    List<TransferRule> getActiveRules();
+    @Override
+    public TransferRule getRuleById(Long id) {
+        return repo.findById(id).orElse(null);
+    }
 
-    void deleteRule(Long id);
+    @Override
+    public List<TransferRule> getRulesForUniversities(Long sourceId, Long targetId) {
+        return repo.findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(sourceId, targetId);
+    }
+
+    @Override
+    public List<TransferRule> getActiveRules() {
+        return repo.findByActiveTrue();
+    }
+
+    @Override
+    public void deactivateRule(Long id) {
+        TransferRule rule = repo.findById(id).orElse(null);
+        if (rule != null) {
+            rule.setActive(false);
+            repo.save(rule);
+        }
+    }
 }
