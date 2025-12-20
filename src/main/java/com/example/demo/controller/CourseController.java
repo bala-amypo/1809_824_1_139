@@ -19,8 +19,8 @@ import java.util.List;
 import java.lang.Long;
 
 @RestController
-@RequestMapping("/api/courses")   // ✅ REQUIRED
-@Tag(name = "Courses")            // ✅ REQUIRED
+@RequestMapping("/api/courses")   
+@Tag(name = "Courses")            
 public class CourseController {
 
     private final CourseService courseService;
