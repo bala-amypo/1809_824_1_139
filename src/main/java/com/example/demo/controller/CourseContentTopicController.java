@@ -23,13 +23,13 @@ public class CourseContentTopicController {
 
     @PostMapping("/")
     public CourseContentTopic addCourseContentTopic(@RequestBody CourseContentTopic topic) {
-        return uni.createCourseContentTopic(topic);
+        return uni.createTopic(topic);
     }
 
     @PutMapping("/{id}")
     public CourseContentTopic updatetopic(@PathVariable Long courseId,
                                        @Valid @RequestBody CourseContentTopic topic) {
-        return uni.updateCourseContentTopic(courseId); 
+        return uni.updateTopic(courseId); 
     }
 
     @GetMapping("/{id}")
