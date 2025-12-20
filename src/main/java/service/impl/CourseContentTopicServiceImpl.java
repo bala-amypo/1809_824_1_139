@@ -6,6 +6,7 @@ import com.example.demo.entity.CourseContentTopic;
 import com.example.demo.repository.CourseContentTopicRepository;
 
 import java.util.List;
+import java.lang.Long;
 
 @Service
 public class CourseContentTopicServiceImpl implements CourseContentTopicService {
