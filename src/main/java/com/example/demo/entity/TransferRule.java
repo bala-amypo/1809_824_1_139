@@ -1,34 +1,26 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 @Entity
-@Table(name = "transfer_rules")
 public class TransferRule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String sourceUniversity;
-
-    private String targetUniversity;
-
     private Double minimumOverlapPercentage;
     private Integer creditHourTolerance;
-
     private Boolean active;
 
-    public TransferRule() {
-    }
+   
 
-    public TransferRule(Long id,String sourceUniversity, String targetUniversity,
-                        Double minimumOverlapPercentage,Integer creditHourTolerance, Boolean active) {
-        this.id=id;
-        this.sourceUniversity = sourceUniversity;
-
-        this.targetUniversity = targetUniversity;
+    public TransferRule(Double minimumOverlapPercentage, Integer creditHourTolerance, Boolean active) {
         this.minimumOverlapPercentage = minimumOverlapPercentage;
+        this.creditHourTolerance = creditHourTolerance;
         this.active = active;
     }
 
@@ -40,36 +32,30 @@ public class TransferRule {
         this.id = id;
     }
 
-    public String getSourceUniversity() {
-        return sourceUniversity;
-    }
-
-    public void setSourceUniversity(String sourceUniversity) {
-        this.sourceUniversity = sourceUniversity;
-    }
-
-    public String getTargetUniversity() {
-        return targetUniversity;
-    }
-
-    public void setTargetUniversity(String targetUniversity) {
-        this.targetUniversity = targetUniversity;
-    }
-
     public Double getMinimumOverlapPercentage() {
         return minimumOverlapPercentage;
     }
 
-    public void setMinimumOverlapPercentage(Double minimumPercentage) {
-        this.minimumPercentage = minimumPercentage;
+    public void setMinimumOverlapPercentage(Double minimumOverlapPercentage) {
+        this.minimumOverlapPercentage = minimumOverlapPercentage;
     }
 
-    public Boolean getActive() {
+    public Integer getCreditHourTolerance() {
+        return creditHourTolerance;
+    }
+
+    public void setCreditHourTolerance(Integer creditHourTolerance) {
+        this.creditHourTolerance = creditHourTolerance;
+    }
+
+    public Boolean isActive() {
         return active;
     }
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+     public TransferRule() {
     }
     
 }
