@@ -4,6 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.PrePersist;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class TransferEvaluationResult {
@@ -12,18 +17,62 @@ public class TransferEvaluationResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "source_course_id", nullable = false)
+    private Course sourceCourse;
+
+    @ManyToOne
+    @JoinColumn(name = "target_course_id", nullable = false)
+    private Course targetCourse;
+
     private Double overlapPercentage;
     private Integer creditHourDifference;
     private Boolean isEligibleForTransfer;
     private String notes;
 
-   
+    private LocalDateTime evaluatedAt;
+
+    public TransferEvaluationResult() {
+    }
+
+    public TransferEvaluationResult(Course sourceCourse, Course targetCourse,
+                                    Double overlapPercentage, Integer creditHourDifference,
+                                    Boolean isEligibleForTransfer, String notes) {
+        this.sourceCourse = sourceCourse;
+        this.targetCourse = targetCourse;
+        this.overlapPercentage = overlapPercentage;
+        this.creditHourDifference = creditHourDifference;
+        this.isEligibleForTransfer = isEligibleForTransfer;
+        this.notes = notes;
+    }
+
+    @PrePersist
+    public void onCreate() {
+        this.evaluatedAt = LocalDateTime.now();
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Course getSourceCourse() {
+        return sourceCourse;
+    }
+
+    public void setSourceCourse(Course sourceCourse) {
+        this.sourceCourse = sourceCourse;
+    }
+
+    public Course getTargetCourse() {
+        return targetCourse;
+    }
+
+    public void setTargetCourse(Course targetCourse) {
+        this.targetCourse = targetCourse;
     }
 
     public Double getOverlapPercentage() {
@@ -58,20 +107,7 @@ public class TransferEvaluationResult {
         this.notes = notes;
     }
 
-    
-    public TransferEvaluationResult(
-            Double overlapPercentage,
-            Integer creditHourDifference,
-            Boolean isEligibleForTransfer,
-            String notes) {
-
-        this.overlapPercentage = overlapPercentage;
-        this.creditHourDifference = creditHourDifference;
-        this.isEligibleForTransfer = isEligibleForTransfer;
-        this.notes = notes;
-    }
-
-    
-    public TransferEvaluationResult() {
+    public LocalDateTime getEvaluatedAt() {
+        return evaluatedAt;
     }
 }
