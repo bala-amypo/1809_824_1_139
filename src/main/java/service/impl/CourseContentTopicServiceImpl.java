@@ -7,6 +7,8 @@ import com.example.demo.service.CourseContentTopicService;
 import com.example.demo.entity.CourseContentTopic;
 import com.example.demo.repository.CourseContentTopicRepository;
 import com.example.demo.exception.ResourceNotFoundException;
+import java.util.Long;
+import java.util.String;
 
 import java.util.List;
 
