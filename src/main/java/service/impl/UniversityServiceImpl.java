@@ -18,10 +18,8 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Override
     public University createUniversity(University university) {
-    university.setId(null);   // FORCE insert
-    return repo.save(university);
-}
-
+        return repo.save(university);
+    }
 
     @Override
     public University updateUniversity(Long id, University university) {
