@@ -22,8 +22,9 @@ public class University {
 
     
 
-    public University(String name, String accreditationLevel, String country, Boolean active) {
+    public University(Long id,String name, String accreditationLevel, String country, Boolean active) {
         this.name = name;
+        this.id=id;
         this.accreditationLevel = accreditationLevel;
         this.country = country;
         this.active = active;
