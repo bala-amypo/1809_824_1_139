@@ -103,4 +103,5 @@ public class Course {
     public void setActive(Boolean active) {
         this.active = active;
     }
+    
 }
