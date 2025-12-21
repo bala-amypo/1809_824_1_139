@@ -22,7 +22,7 @@ public class UniversityController {
     UniversityService uni;   
 
     @PostMapping("/")
-    public University addUniversity(@RequestBody University university) {
+    public University addUniversity( @RequestBody University university) {
         return uni.createUniversity(university);
     }
 
