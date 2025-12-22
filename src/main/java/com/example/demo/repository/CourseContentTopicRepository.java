@@ -7,6 +7,6 @@ import java.util.List;
 public interface CourseContentTopicRepository
         extends JpaRepository<CourseContentTopic, Long> {
 
-    // ✅ Correct Spring Data derived query
+   
     List<CourseContentTopic> findByCourseId(Long courseId);
 }
