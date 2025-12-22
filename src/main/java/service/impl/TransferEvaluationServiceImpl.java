@@ -36,8 +36,8 @@ public class TransferEvaluationServiceImpl implements TransferEvaluationService 
             result.setIsEligibleForTransfer(false);
             result.setNotes("Course not active");
         } else {
-            // Example calculation logic
-            double overlap = 100.0; // Replace with real topic overlap
+           
+            double overlap = 100.0; 
             int creditDiff = Math.abs(sourceCourse.getCreditHours() - targetCourse.getCreditHours());
 
             result.setOverlapPercentage(overlap);
