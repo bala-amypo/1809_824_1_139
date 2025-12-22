@@ -44,8 +44,8 @@ public class CourseServiceImpl implements CourseService {   // 🔹 changed: int
     public Course deactivateCourse(Long id) {
         Course course = repo.findById(id).orElse(null);
         if (course != null) {
-            repo.deleteById(id);   // keeping your original behavior
+            repo.deleteById(id);   
         }
-        return course;            // 🔹 return Course
+        return course;            
     }
 }
