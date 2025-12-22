@@ -18,7 +18,7 @@ public class TransferRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ✅ added relationships
+    
     @ManyToOne
     @JoinColumn(name = "source_university_id", nullable = false)
     private University sourceUniversity;
@@ -49,7 +49,7 @@ public class TransferRule {
         this.active = active;
     }
 
-    // ---------- lifecycle ----------
+    
     @PrePersist
     public void onCreate() {
         this.active = true;

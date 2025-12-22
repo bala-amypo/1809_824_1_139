@@ -34,7 +34,7 @@ public class CourseServiceImpl implements CourseService {   // 🔹 changed: int
         return repo.findById(id).orElse(null);
     }
 
-    // 🔹 method name aligned with CourseService
+   
     @Override
     public List<Course> getCoursesByUniversityId(Long universityId) {
         return repo.findAll();
