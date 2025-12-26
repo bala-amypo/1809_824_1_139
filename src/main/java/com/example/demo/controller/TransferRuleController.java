@@ -3,11 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.entity.TransferRule;
 import com.example.demo.service.TransferRuleService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/transfer-rules")
+@RequestMapping("/rules")
 public class TransferRuleController {
 
     private final TransferRuleService service;
@@ -17,32 +16,27 @@ public class TransferRuleController {
     }
 
     @PostMapping
-    public TransferRule createRule(@RequestBody TransferRule rule) {
-        return service.createRule(rule);
+    public TransferRule create(@RequestBody TransferRule r) {
+        return service.createRule(r);
     }
 
     @PutMapping("/{id}")
-    public TransferRule updateRule(@PathVariable Long id, @RequestBody TransferRule rule) {
-        return service.updateRule(id, rule);
+    public TransferRule update(@PathVariable Long id, @RequestBody TransferRule r) {
+        return service.updateRule(id, r);
     }
 
     @GetMapping("/{id}")
-    public TransferRule getRuleById(@PathVariable Long id) {
+    public TransferRule get(@PathVariable Long id) {
         return service.getRuleById(id);
     }
 
-    @GetMapping("/pair/{sourceId}/{targetId}")
-    public List<TransferRule> getRulesForPair(@PathVariable Long sourceId, @PathVariable Long targetId) {
-        return service.getRulesForUniversities(sourceId, targetId);
+    @GetMapping("/{src}/{tgt}")
+    public List<TransferRule> rules(@PathVariable Long src, @PathVariable Long tgt) {
+        return service.getRulesForUniversities(src, tgt);
     }
 
-    @GetMapping("/active")
-    public List<TransferRule> getActiveRules() {
-        return service.getActiveRules();
-    }
-
-    @PutMapping("/{id}/deactivate")
-    public void deactivateRule(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public void deactivate(@PathVariable Long id) {
         service.deactivateRule(id);
     }
 }
