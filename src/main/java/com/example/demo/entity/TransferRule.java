@@ -6,10 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-
-import java.time.LocalDateTime;
 
 @Entity
 public class TransferRule {
@@ -18,7 +14,6 @@ public class TransferRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    
     @ManyToOne
     @JoinColumn(name = "source_university_id", nullable = false)
     private University sourceUniversity;
@@ -27,42 +22,22 @@ public class TransferRule {
     @JoinColumn(name = "target_university_id", nullable = false)
     private University targetUniversity;
 
-    private Double minimumOverlapPercentage;
-    private Integer creditHourTolerance;
+    private String courseCode;
+    private Double creditTransferPercentage;
     private Boolean active;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    public TransferRule() {}
 
-    public TransferRule() {
-    }
-
-    public TransferRule(University sourceUniversity,
-                        University targetUniversity,
-                        Double minimumOverlapPercentage,
-                        Integer creditHourTolerance,
-                        Boolean active) {
+    public TransferRule(Long id, University sourceUniversity, University targetUniversity,
+                        String courseCode, Double creditTransferPercentage, Boolean active) {
+        this.id = id;
         this.sourceUniversity = sourceUniversity;
         this.targetUniversity = targetUniversity;
-        this.minimumOverlapPercentage = minimumOverlapPercentage;
-        this.creditHourTolerance = creditHourTolerance;
+        this.courseCode = courseCode;
+        this.creditTransferPercentage = creditTransferPercentage;
         this.active = active;
     }
 
-    
-    @PrePersist
-    public void onCreate() {
-        this.active = true;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    
     public Long getId() {
         return id;
     }
@@ -87,24 +62,20 @@ public class TransferRule {
         this.targetUniversity = targetUniversity;
     }
 
-    public Double getMinimumOverlapPercentage() {
-        return minimumOverlapPercentage;
+    public String getCourseCode() {
+        return courseCode;
     }
 
-    public void setMinimumOverlapPercentage(Double minimumOverlapPercentage) {
-        this.minimumOverlapPercentage = minimumOverlapPercentage;
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
-    public Integer getCreditHourTolerance() {
-        return creditHourTolerance;
+    public Double getCreditTransferPercentage() {
+        return creditTransferPercentage;
     }
 
-    public void setCreditHourTolerance(Integer creditHourTolerance) {
-        this.creditHourTolerance = creditHourTolerance;
-    }
-
-    public Boolean isActive() {
-        return active;
+    public void setCreditTransferPercentage(Double creditTransferPercentage) {
+        this.creditTransferPercentage = creditTransferPercentage;
     }
 
     public Boolean getActive() {
@@ -113,13 +84,5 @@ public class TransferRule {
 
     public void setActive(Boolean active) {
         this.active = active;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
     }
 }
