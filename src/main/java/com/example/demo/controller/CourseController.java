@@ -1,17 +1,17 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Course;
-import com.example.demo.service.CourseService;
-import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.springframework.web.bind.annotation.*;
+import com.example.demo.entity.Course;
+import com.example.demo.service.impl.CourseServiceImpl;
 
 @RestController
-@RequestMapping("/courses")
+@RequestMapping("/api/courses")
 public class CourseController {
 
-    private final CourseService service;
+    private final CourseServiceImpl service;
 
-    public CourseController(CourseService service) {
+    public CourseController(CourseServiceImpl service) {
         this.service = service;
     }
 
@@ -31,7 +31,7 @@ public class CourseController {
     }
 
     @GetMapping("/university/{uid}")
-    public List<Course> byUniversity(@PathVariable Long uid) {
+    public List<Course> getByUniversity(@PathVariable Long uid) {
         return service.getCoursesByUniversity(uid);
     }
 

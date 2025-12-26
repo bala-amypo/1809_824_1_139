@@ -1,17 +1,17 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.CourseContentTopic;
-import com.example.demo.service.CourseContentTopicService;
-import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.springframework.web.bind.annotation.*;
+import com.example.demo.entity.CourseContentTopic;
+import com.example.demo.service.impl.CourseContentTopicServiceImpl;
 
 @RestController
-@RequestMapping("/topics")
-public class TopicController {
+@RequestMapping("/api/topics")
+public class CourseContentTopicController {
 
-    private final CourseContentTopicService service;
+    private final CourseContentTopicServiceImpl service;
 
-    public TopicController(CourseContentTopicService service) {
+    public CourseContentTopicController(CourseContentTopicServiceImpl service) {
         this.service = service;
     }
 
@@ -30,8 +30,8 @@ public class TopicController {
         return service.getTopicById(id);
     }
 
-    @GetMapping("/course/{cid}")
-    public List<CourseContentTopic> byCourse(@PathVariable Long cid) {
-        return service.getTopicsForCourse(cid);
+    @GetMapping("/course/{courseId}")
+    public List<CourseContentTopic> getByCourse(@PathVariable Long courseId) {
+        return service.getTopicsForCourse(courseId);
     }
 }

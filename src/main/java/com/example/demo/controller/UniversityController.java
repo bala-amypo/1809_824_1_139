@@ -1,16 +1,16 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.University;
-import com.example.demo.service.UniversityService;
 import org.springframework.web.bind.annotation.*;
+import com.example.demo.entity.University;
+import com.example.demo.service.impl.UniversityServiceImpl;
 
 @RestController
-@RequestMapping("/universities")
+@RequestMapping("/api/universities")
 public class UniversityController {
 
-    private final UniversityService service;
+    private final UniversityServiceImpl service;
 
-    public UniversityController(UniversityService service) {
+    public UniversityController(UniversityServiceImpl service) {
         this.service = service;
     }
 
