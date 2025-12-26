@@ -1,98 +1,68 @@
-// package com.example.demo.service.impl;
-
-// import org.springframework.stereotype.Service;
-
-// import com.example.demo.service.CourseService;
-// import com.example.demo.entity.Course;
-// import com.example.demo.repository.CourseRepository;
-
-// import java.lang.Long;
-// import java.util.List;
-
-// @Service
-// public class CourseServiceImpl implements CourseService {   // 🔹 changed: interface → class
-
-//     private final CourseRepository repo;
-
-//     public CourseServiceImpl(CourseRepository repo) {
-//         this.repo = repo;
-//     }
-
-//     @Override
-//     public Course createCourse(Course course) {
- //         return repo.save(course);
-//     }
-
-//     @Override
-//     public Course updateCourse(Long id, Course course) {
-//         course.setId(id);
-//         return repo.save(course);
-//     }
-
-//     @Override
-//     public Course getCourseById(Long id) {
-//         return repo.findById(id).orElse(null);
-//     }
-
-   
-//     @Override
-//     public List<Course> getCoursesByUniversityId(Long universityId) {
-//         return repo.findAll();
-//     }
-
-//     @Override
-//     public Course deactivateCourse(Long id) {
-//         Course course = repo.findById(id).orElse(null);
-//         if (course != null) {
-//             repo.deleteById(id);   
-//         }
-//         return course;            
-//     }
- // }
- package com.example.demo.service.impl;
+package com.example.demo.service.impl;
 
 import com.example.demo.entity.*;
 import com.example.demo.repository.*;
-import java.util.*;
+import com.example.demo.service.CourseService;
+import org.springframework.stereotype.Service;
+import java.util.List;
 
-public class CourseServiceImpl {
+@Service
+public class CourseServiceImpl implements CourseService {
 
-    CourseRepository repo;
-    UniversityRepository univRepo;
+    private final CourseRepository repo;
+    private final UniversityRepository univRepo;
 
+    public CourseServiceImpl(CourseRepository repo, UniversityRepository univRepo) {
+        this.repo = repo;
+        this.univRepo = univRepo;
+    }
+
+    @Override
     public Course createCourse(Course c) {
-        if (c.getCreditHours() <= 0)
-            throw new IllegalArgumentException("> 0");
+        if (c.getCreditHours() == null || c.getCreditHours() <= 0)
+            throw new IllegalArgumentException("Credit hours must be > 0");
 
         University u = univRepo.findById(c.getUniversity().getId())
-                .orElseThrow(() -> new RuntimeException("not found"));
+                .orElseThrow(() -> new RuntimeException("University not found"));
 
         if (repo.findByUniversityIdAndCourseCode(u.getId(), c.getCourseCode()).isPresent())
-            throw new IllegalArgumentException("duplicate");
+            throw new IllegalArgumentException("Course already exists");
 
+        c.setUniversity(u);
+        c.setActive(true);
         return repo.save(c);
     }
 
+    @Override
     public Course updateCourse(Long id, Course c) {
         Course ex = repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+
+        ex.setCourseCode(c.getCourseCode());
+        ex.setCourseName(c.getCourseName());
+        ex.setCreditHours(c.getCreditHours());
+        ex.setDescription(c.getDescription());
+        ex.setDepartment(c.getDepartment());
+        ex.setActive(c.getActive());
         return repo.save(ex);
     }
 
+    @Override
     public Course getCourseById(Long id) {
         return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
+                .orElseThrow(() -> new RuntimeException("Course not found"));
     }
 
+    @Override
     public void deactivateCourse(Long id) {
         Course c = repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
+                .orElseThrow(() -> new RuntimeException("Course not found"));
         c.setActive(false);
         repo.save(c);
     }
 
-    public List<Course> getCoursesByUniversity(Long id) {
-        return repo.findByUniversityIdAndActiveTrue(id);
+    @Override
+    public List<Course> getCoursesByUniversity(Long universityId) {
+        return repo.findByUniversityIdAndActiveTrue(universityId);
     }
 }
-
