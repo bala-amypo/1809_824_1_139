@@ -1,41 +1,32 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
+
+@Entity
 public class TransferEvaluationResult {
 
-    private Course sourceCourse;
-    private Course targetCourse;
-    private double matchPercentage;
-    private boolean eligible;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public void setSourceCourse(Course sourceCourse) {
-        this.sourceCourse = sourceCourse;
-    }
+    private Boolean isEligibleForTransfer;
+    private Double overlapPercentage;
+    private String notes;
 
-    public void setTargetCourse(Course targetCourse) {
-        this.targetCourse = targetCourse;
-    }
+    private Long sourceCourseId;
 
-    public void setMatchPercentage(double matchPercentage) {
-        this.matchPercentage = matchPercentage;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setEligible(boolean eligible) {
-        this.eligible = eligible;
-    }
+    public Boolean getIsEligibleForTransfer() { return isEligibleForTransfer; }
+    public void setIsEligibleForTransfer(Boolean eligible) { this.isEligibleForTransfer = eligible; }
 
-    public Course getSourceCourse() {
-        return sourceCourse;
-    }
+    public Double getOverlapPercentage() { return overlapPercentage; }
+    public void setOverlapPercentage(Double overlapPercentage) { this.overlapPercentage = overlapPercentage; }
 
-    public Course getTargetCourse() {
-        return targetCourse;
-    }
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
 
-    public double getMatchPercentage() {
-        return matchPercentage;
-    }
-
-    public boolean isEligible() {
-        return eligible;
-    }
+    public Long getSourceCourseId() { return sourceCourseId; }
+    public void setSourceCourseId(Long sourceCourseId) { this.sourceCourseId = sourceCourseId; }
 }
