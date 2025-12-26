@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/transfer-evaluations")
+@RequestMapping("/evaluations")
 public class TransferEvaluationController {
 
     private final TransferEvaluationService service;
@@ -15,20 +15,18 @@ public class TransferEvaluationController {
         this.service = service;
     }
 
-    @PostMapping("/evaluate/{sourceCourseId}/{targetCourseId}")
-    public TransferEvaluationResult evaluateTransfer(
-            @PathVariable Long sourceCourseId,
-            @PathVariable Long targetCourseId) {
-        return service.evaluateTransfer(sourceCourseId, targetCourseId);
+    @PostMapping("/{src}/{tgt}")
+    public TransferEvaluationResult evaluate(@PathVariable Long src, @PathVariable Long tgt) {
+        return service.evaluateTransfer(src, tgt);
     }
 
     @GetMapping("/{id}")
-    public TransferEvaluationResult getEvaluationById(@PathVariable Long id) {
+    public TransferEvaluationResult get(@PathVariable Long id) {
         return service.getEvaluationById(id);
     }
 
-    @GetMapping("/course/{courseId}")
-    public List<TransferEvaluationResult> getEvaluationsForCourse(@PathVariable Long courseId) {
-        return service.getEvaluationsForCourse(courseId);
+    @GetMapping("/course/{cid}")
+    public List<TransferEvaluationResult> byCourse(@PathVariable Long cid) {
+        return service.getEvaluationsForCourse(cid);
     }
 }
