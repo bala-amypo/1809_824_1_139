@@ -3,15 +3,11 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "transfer_rules")
 public class TransferRule {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Double minimumOverlapPercentage;
-    private Integer creditHourTolerance = 0;
-    private boolean active = true;
 
     @ManyToOne
     private University sourceUniversity;
@@ -19,21 +15,22 @@ public class TransferRule {
     @ManyToOne
     private University targetUniversity;
 
+    @Column(nullable = false)
+    private String ruleDescription;
+
+    public TransferRule() {}
+    public TransferRule(University source, University target, String ruleDescription){
+        this.sourceUniversity = source;
+        this.targetUniversity = target;
+        this.ruleDescription = ruleDescription;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public Double getMinimumOverlapPercentage() { return minimumOverlapPercentage; }
-    public void setMinimumOverlapPercentage(Double minimumOverlapPercentage) { this.minimumOverlapPercentage = minimumOverlapPercentage; }
-
-    public Integer getCreditHourTolerance() { return creditHourTolerance; }
-    public void setCreditHourTolerance(Integer creditHourTolerance) { this.creditHourTolerance = creditHourTolerance; }
-
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
-
     public University getSourceUniversity() { return sourceUniversity; }
     public void setSourceUniversity(University sourceUniversity) { this.sourceUniversity = sourceUniversity; }
-
     public University getTargetUniversity() { return targetUniversity; }
     public void setTargetUniversity(University targetUniversity) { this.targetUniversity = targetUniversity; }
+    public String getRuleDescription() { return ruleDescription; }
+    public void setRuleDescription(String ruleDescription) { this.ruleDescription = ruleDescription; }
 }

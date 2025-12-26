@@ -3,25 +3,28 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "course_topics")
 public class CourseContentTopic {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title; // use 'title' instead of 'name'
+    @Column(nullable = false)
+    private String name;
 
     @ManyToOne
-    @JoinColumn(name = "course_id")
     private Course course;
 
-    // --- Getters & Setters ---
+    public CourseContentTopic() {}
+    public CourseContentTopic(String name, Course course) {
+        this.name = name;
+        this.course = course;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
-
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
     public Course getCourse() { return course; }
     public void setCourse(Course course) { this.course = course; }
 }

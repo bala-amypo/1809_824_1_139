@@ -3,35 +3,28 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "courses")
 public class Course {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String courseCode;
-    private String courseName;
-    private int creditHours;
-    private boolean active = true;
+    @Column(nullable = false)
+    private String name;
 
     @ManyToOne
     private University university;
 
+    public Course() {}
+    public Course(String name, University university) {
+        this.name = name;
+        this.university = university;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public String getCourseCode() { return courseCode; }
-    public void setCourseCode(String courseCode) { this.courseCode = courseCode; }
-
-    public String getCourseName() { return courseName; }
-    public void setCourseName(String courseName) { this.courseName = courseName; }
-
-    public int getCreditHours() { return creditHours; }
-    public void setCreditHours(int creditHours) { this.creditHours = creditHours; }
-
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
     public University getUniversity() { return university; }
     public void setUniversity(University university) { this.university = university; }
-
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
 }
