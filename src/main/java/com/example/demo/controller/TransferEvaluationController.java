@@ -1,22 +1,32 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.TransferRequestDTO;
-import com.example.demo.dto.TransferResponseDTO;
-import com.example.demo.service.TransferEvaluationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.dto.TransferEvaluationRequest;
+import com.example.demo.dto.TransferEvaluationResponse;
+import com.example.demo.service.TransferValidationService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/transfer")
+@RequestMapping("/api/transfers")
 public class TransferEvaluationController {
 
-    @Autowired
-    private TransferEvaluationService evaluationService;
+    private final TransferValidationService transferService;
+
+    public TransferEvaluationController(TransferValidationService transferService) {
+        this.transferService = transferService;
+    }
 
     @PostMapping("/evaluate")
-    public ResponseEntity<TransferResponseDTO> evaluateTransfer(@RequestBody TransferRequestDTO request) {
-        TransferResponseDTO response = evaluationService.evaluateTransfer(request);
+    @PreAuthorize("hasAnyRole('EVALUATOR', 'ADMIN')")
+    public ResponseEntity<TransferEvaluationResponse> evaluate(@RequestBody TransferEvaluationRequest request) {
+        TransferEvaluationResponse response = transferService.evaluateTransfer(request);
         return ResponseEntity.ok(response);
     }
+
+    // Optional: Endpoint for listing previous transfers
+    // @GetMapping("/history/{studentId}")
+    // public ResponseEntity<List<TransferEvaluationResponse>> history(@PathVariable String studentId) {
+    //     // Implement if required by test cases
+    // }
 }
