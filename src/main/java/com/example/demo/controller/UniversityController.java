@@ -1,50 +1,36 @@
 package com.example.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
-import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-
 import com.example.demo.entity.University;
 import com.example.demo.service.UniversityService;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/universities")
 public class UniversityController {
 
-    @Autowired
-    UniversityService uni;   
+    private final UniversityService service;
 
-    @PostMapping("/")
-    public University addUniversity( @RequestBody University university) {
-        return uni.createUniversity(university);
+    public UniversityController(UniversityService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public University create(@RequestBody University u) {
+        return service.createUniversity(u);
     }
 
     @PutMapping("/{id}")
-    public University updateuniversity(@PathVariable Long id,
-                                       @Valid @RequestBody University university) {
-        return uni.updateUniversity(id, university); 
+    public University update(@PathVariable Long id, @RequestBody University u) {
+        return service.updateUniversity(id, u);
     }
 
     @GetMapping("/{id}")
-    public University getuniversity(@PathVariable Long id) {
-        return uni.getUniversityById(id); 
+    public University get(@PathVariable Long id) {
+        return service.getUniversityById(id);
     }
 
-    @GetMapping("/")
-    public List<University> getAllUniversities() {
-        return uni.getAllUniversities();
+    @DeleteMapping("/{id}")
+    public void deactivate(@PathVariable Long id) {
+        service.deactivateUniversity(id);
     }
-    @PutMapping("/{id}/deactivate")
-    public void deactivateUniversity(@PathVariable Long id) {
-        uni.deactivateUniversity(id);
-    }
-   
-    
 }

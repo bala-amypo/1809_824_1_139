@@ -2,58 +2,41 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Course;
 import com.example.demo.service.CourseService;
-
-import io.swagger.v3.oas.annotations.tags.Tag;
-
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import jakarta.validation.Valid;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.lang.Long;
 
 @RestController
-@RequestMapping("/api/courses")   
-@Tag(name = "Courses")            
+@RequestMapping("/courses")
 public class CourseController {
 
-    private final CourseService courseService;
+    private final CourseService service;
 
-    public CourseController(CourseService courseService) {
-        this.courseService = courseService;
+    public CourseController(CourseService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public Course addCourse(@Valid @RequestBody Course course) {
-        return courseService.createCourse(course);
+    public Course create(@RequestBody Course c) {
+        return service.createCourse(c);
     }
 
     @PutMapping("/{id}")
-    public Course updateCourse(
-            @PathVariable Long id,
-            @Valid @RequestBody Course course) {
-        return courseService.updateCourse(id, course);
+    public Course update(@PathVariable Long id, @RequestBody Course c) {
+        return service.updateCourse(id, c);
     }
 
     @GetMapping("/{id}")
-    public Course getCourse(@PathVariable Long id) {
-        return courseService.getCourseById(id);
+    public Course get(@PathVariable Long id) {
+        return service.getCourseById(id);
     }
 
-    @GetMapping("/university/{universityId}")
-    public List<Course> getCoursesByUniversityId(
-            @PathVariable Long universityId) {
-        return courseService.getCoursesByUniversityId(universityId);
+    @GetMapping("/university/{uid}")
+    public List<Course> byUniversity(@PathVariable Long uid) {
+        return service.getCoursesByUniversity(uid);
     }
 
-    @PutMapping("/{id}/deactivate")
-    public Course deactivateCourse(@PathVariable Long id) {
-        return courseService.deactivateCourse(id);
+    @DeleteMapping("/{id}")
+    public void deactivate(@PathVariable Long id) {
+        service.deactivateCourse(id);
     }
 }
