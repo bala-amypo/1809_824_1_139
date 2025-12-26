@@ -1,31 +1,36 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.University;
-import com.example.demo.exception.BadRequestException;
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.UniversityRepository;
-import com.example.demo.service.UniversityService;
-import org.springframework.stereotype.Service;
 
-@Service
-public class UniversityServiceImpl implements UniversityService {
+public class UniversityServiceImpl {
 
-    private final UniversityRepository universityRepository;
+    private UniversityRepository repository;
 
-    public UniversityServiceImpl(UniversityRepository universityRepository) {
-        this.universityRepository = universityRepository;
+    public University createUniversity(University u) {
+        if (u.getName() == null || u.getName().isBlank())
+            throw new IllegalArgumentException("Name required");
+        if (repository.findByName(u.getName()).isPresent())
+            throw new IllegalArgumentException("University exists");
+        return repository.save(u);
     }
 
-    @Override
-    public University createUniversity(University university) {
-        universityRepository.findByName(university.getName())
-                .ifPresent(u -> { throw new BadRequestException("University already exists"); });
-        return universityRepository.save(university);
+    public University updateUniversity(Long id, University u) {
+        University e = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("not found"));
+        e.setName(u.getName());
+        return repository.save(e);
     }
 
-    @Override
-    public University getById(Long id) {
-        return universityRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("University", id));
+    public University getUniversityById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("not found"));
+    }
+
+    public void deactivateUniversity(Long id) {
+        University u = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("not found"));
+        u.setActive(false);
+        repository.save(u);
     }
 }
