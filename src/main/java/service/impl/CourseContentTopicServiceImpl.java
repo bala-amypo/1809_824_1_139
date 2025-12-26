@@ -1,41 +1,46 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.*;
-import com.example.demo.repository.*;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
-public class CourseContentTopicServiceImpl {
+import org.springframework.stereotype.Service;
 
-    private CourseContentTopicRepository repo;
-    private CourseRepository courseRepo;
+import com.example.demo.entity.CourseContentTopic;
+import com.example.demo.repository.CourseContentTopicRepository;
+import com.example.demo.service.CourseContentTopicService;
 
+@Service
+public class CourseContentTopicServiceImpl implements CourseContentTopicService {
+
+    private final CourseContentTopicRepository repository;
+
+    public CourseContentTopicServiceImpl(CourseContentTopicRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
     public CourseContentTopic createTopic(CourseContentTopic t) {
-        if (t.getTopicName() == null || t.getTopicName().isBlank())
-            throw new IllegalArgumentException("Topic name");
-
-        if (t.getWeightPercentage() < 0 || t.getWeightPercentage() > 100)
-            throw new IllegalArgumentException("0-100");
-
-        courseRepo.findById(t.getCourse().getId())
-                .orElseThrow(() -> new RuntimeException("not found"));
-
-        return repo.save(t);
+        return repository.save(t);
     }
 
+    @Override
     public CourseContentTopic updateTopic(Long id, CourseContentTopic t) {
-        CourseContentTopic ex = repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
-        return repo.save(ex);
+        CourseContentTopic existing = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Topic not found with id " + id));
+        existing.setName(t.getName());
+        existing.setCourse(t.getCourse());
+        // update other fields as needed
+        return repository.save(existing);
     }
 
+    @Override
     public CourseContentTopic getTopicById(Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Topic not found with id " + id));
     }
 
+    @Override
     public List<CourseContentTopic> getTopicsForCourse(Long courseId) {
-        courseRepo.findById(courseId)
-                .orElseThrow(() -> new RuntimeException("not found"));
-        return repo.findByCourseId(courseId);
+        return repository.findByCourseId(courseId);
     }
 }
