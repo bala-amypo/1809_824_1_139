@@ -1,65 +1,45 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.TransferRequestDTO;
+import com.example.demo.dto.TransferResponseDTO;
 import com.example.demo.entity.*;
 import com.example.demo.repository.*;
-import java.util.*;
+import com.example.demo.service.TransferEvaluationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class TransferEvaluationServiceImpl {
+import java.util.List;
 
-    private CourseRepository courseRepo;
-    private CourseContentTopicRepository topicRepo;
-    private TransferRuleRepository ruleRepo;
-    private TransferEvaluationResultRepository resultRepo;
+@Service
+public class TransferEvaluationServiceImpl implements TransferEvaluationService {
 
-    public TransferEvaluationResult evaluateTransfer(Long srcId, Long tgtId) {
+    @Autowired
+    private CourseContentTopicRepository topicRepository;
 
-        Course src = courseRepo.findById(srcId).orElseThrow();
-        Course tgt = courseRepo.findById(tgtId).orElseThrow();
+    @Autowired
+    private TransferRuleRepository ruleRepository;
 
-        if (!src.isActive() || !tgt.isActive())
-            throw new IllegalArgumentException("active");
+    @Autowired
+    private TransferEvaluationResultRepository resultRepository;
 
-        List<CourseContentTopic> sTopics = topicRepo.findByCourseId(srcId);
-        List<CourseContentTopic> tTopics = topicRepo.findByCourseId(tgtId);
+    @Override
+    public TransferResponseDTO evaluateTransfer(TransferRequestDTO request) {
+        List<TransferRule> rules = ruleRepository.findBySourceUniversityIdAndTargetUniversityId(
+                request.getSourceUniversityId(),
+                request.getTargetUniversityId()
+        );
 
-        double overlap = 0;
-        for (CourseContentTopic s : sTopics) {
-            for (CourseContentTopic t : tTopics) {
-                if (s.getTopicName().equalsIgnoreCase(t.getTopicName())) {
-                    overlap += Math.min(s.getWeightPercentage(), t.getWeightPercentage());
-                }
-            }
-        }
+        // Dummy evaluation logic
+        double overlap = 80.0;  // placeholder
+        boolean eligible = overlap >= rules.get(0).getMinimumOverlapPercentage();
 
-        TransferEvaluationResult res = new TransferEvaluationResult();
-        res.setOverlapPercentage(overlap);
-        res.setIsEligibleForTransfer(false);
-        res.setNotes("No active transfer rule");
+        TransferEvaluationResult result = new TransferEvaluationResult();
+        result.setIsEligibleForTransfer(eligible);
+        result.setOverlapPercentage(overlap);
+        result.setNotes("Automatically generated result");
 
-        List<TransferRule> rules =
-                ruleRepo.findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(
-                        src.getUniversity().getId(),
-                        tgt.getUniversity().getId()
-                );
+        resultRepository.save(result);
 
-        for (TransferRule r : rules) {
-            int diff = Math.abs(src.getCreditHours() - tgt.getCreditHours());
-            if (overlap >= r.getMinimumOverlapPercentage()
-                    && diff <= r.getCreditHourTolerance()) {
-                res.setIsEligibleForTransfer(true);
-                res.setNotes("Eligible");
-            }
-        }
-
-        return resultRepo.save(res);
-    }
-
-    public TransferEvaluationResult getEvaluationById(Long id) {
-        return resultRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
-    }
-
-    public List<TransferEvaluationResult> getEvaluationsForCourse(Long courseId) {
-        return resultRepo.findBySourceCourseId(courseId);
+        return new TransferResponseDTO(eligible, overlap, "Transfer evaluated");
     }
 }

@@ -1,34 +1,22 @@
 package com.example.demo.controller;
 
-import java.util.List;
+import com.example.demo.dto.TransferRequestDTO;
+import com.example.demo.dto.TransferResponseDTO;
+import com.example.demo.service.TransferEvaluationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.entity.TransferEvaluationResult;
-import com.example.demo.service.impl.TransferEvaluationServiceImpl;
 
 @RestController
-@RequestMapping("/api/transfer-evaluations")
+@RequestMapping("/api/transfer")
 public class TransferEvaluationController {
 
-    private final TransferEvaluationServiceImpl service;
-
-    public TransferEvaluationController(TransferEvaluationServiceImpl service) {
-        this.service = service;
-    }
+    @Autowired
+    private TransferEvaluationService evaluationService;
 
     @PostMapping("/evaluate")
-    public TransferEvaluationResult evaluate(
-            @RequestParam Long sourceCourseId,
-            @RequestParam Long targetCourseId) {
-        return service.evaluateTransfer(sourceCourseId, targetCourseId);
-    }
-
-    @GetMapping("/{id}")
-    public TransferEvaluationResult get(@PathVariable Long id) {
-        return service.getEvaluationById(id);
-    }
-
-    @GetMapping("/course/{courseId}")
-    public List<TransferEvaluationResult> getByCourse(@PathVariable Long courseId) {
-        return service.getEvaluationsForCourse(courseId);
+    public ResponseEntity<TransferResponseDTO> evaluateTransfer(@RequestBody TransferRequestDTO request) {
+        TransferResponseDTO response = evaluationService.evaluateTransfer(request);
+        return ResponseEntity.ok(response);
     }
 }

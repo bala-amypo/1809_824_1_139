@@ -1,36 +1,35 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.*;
 import com.example.demo.entity.University;
-import com.example.demo.service.impl.UniversityServiceImpl;
+import com.example.demo.service.UniversityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/universities")
 public class UniversityController {
 
-    private final UniversityServiceImpl service;
-
-    public UniversityController(UniversityServiceImpl service) {
-        this.service = service;
-    }
+    @Autowired
+    private UniversityService universityService;
 
     @PostMapping
-    public University create(@RequestBody University u) {
-        return service.createUniversity(u);
+    public ResponseEntity<University> createUniversity(@RequestBody University university) {
+        University created = universityService.createUniversity(university);
+        return ResponseEntity.ok(created);
     }
 
-    @PutMapping("/{id}")
-    public University update(@PathVariable Long id, @RequestBody University u) {
-        return service.updateUniversity(id, u);
+    @GetMapping
+    public ResponseEntity<List<University>> getAllUniversities() {
+        List<University> universities = universityService.getAllUniversities();
+        return ResponseEntity.ok(universities);
     }
 
     @GetMapping("/{id}")
-    public University get(@PathVariable Long id) {
-        return service.getUniversityById(id);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deactivate(@PathVariable Long id) {
-        service.deactivateUniversity(id);
+    public ResponseEntity<University> getUniversityById(@PathVariable Long id) {
+        University university = universityService.getUniversityById(id);
+        return ResponseEntity.ok(university);
     }
 }

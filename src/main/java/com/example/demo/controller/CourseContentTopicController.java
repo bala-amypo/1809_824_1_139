@@ -1,38 +1,29 @@
 package com.example.demo.controller;
 
-import java.util.List;
+import com.example.demo.entity.CourseContentTopic;
+import com.example.demo.service.CourseContentTopicService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.entity.CourseContentTopic;
-import com.example.demo.service.impl.CourseContentTopicServiceImpl;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/topics")
 public class CourseContentTopicController {
 
-    private final CourseContentTopicServiceImpl service;
-
-    public CourseContentTopicController(CourseContentTopicServiceImpl service) {
-        this.service = service;
-    }
+    @Autowired
+    private CourseContentTopicService topicService;
 
     @PostMapping
-    public CourseContentTopic create(@RequestBody CourseContentTopic t) {
-        return service.createTopic(t);
-    }
-
-    @PutMapping("/{id}")
-    public CourseContentTopic update(@PathVariable Long id, @RequestBody CourseContentTopic t) {
-        return service.updateTopic(id, t);
-    }
-
-    @GetMapping("/{id}")
-    public CourseContentTopic get(@PathVariable Long id) {
-        return service.getTopicById(id);
+    public ResponseEntity<CourseContentTopic> createTopic(@RequestBody CourseContentTopic topic) {
+        CourseContentTopic created = topicService.createTopic(topic);
+        return ResponseEntity.ok(created);
     }
 
     @GetMapping("/course/{courseId}")
-    public List<CourseContentTopic> getByCourse(@PathVariable Long courseId) {
-        return service.getTopicsForCourse(courseId);
+    public ResponseEntity<List<CourseContentTopic>> getTopicsByCourse(@PathVariable Long courseId) {
+        List<CourseContentTopic> topics = topicService.getTopicsByCourseId(courseId);
+        return ResponseEntity.ok(topics);
     }
 }

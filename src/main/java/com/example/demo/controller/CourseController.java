@@ -1,42 +1,29 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import org.springframework.web.bind.annotation.*;
 import com.example.demo.entity.Course;
-import com.example.demo.service.impl.CourseServiceImpl;
+import com.example.demo.service.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/courses")
 public class CourseController {
 
-    private final CourseServiceImpl service;
-
-    public CourseController(CourseServiceImpl service) {
-        this.service = service;
-    }
+    @Autowired
+    private CourseService courseService;
 
     @PostMapping
-    public Course create(@RequestBody Course c) {
-        return service.createCourse(c);
+    public ResponseEntity<Course> createCourse(@RequestBody Course course) {
+        Course created = courseService.createCourse(course);
+        return ResponseEntity.ok(created);
     }
 
-    @PutMapping("/{id}")
-    public Course update(@PathVariable Long id, @RequestBody Course c) {
-        return service.updateCourse(id, c);
-    }
-
-    @GetMapping("/{id}")
-    public Course get(@PathVariable Long id) {
-        return service.getCourseById(id);
-    }
-
-    @GetMapping("/university/{uid}")
-    public List<Course> getByUniversity(@PathVariable Long uid) {
-        return service.getCoursesByUniversity(uid);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deactivate(@PathVariable Long id) {
-        service.deactivateCourse(id);
+    @GetMapping("/university/{universityId}")
+    public ResponseEntity<List<Course>> getCoursesByUniversity(@PathVariable Long universityId) {
+        List<Course> courses = courseService.getCoursesByUniversityId(universityId);
+        return ResponseEntity.ok(courses);
     }
 }
