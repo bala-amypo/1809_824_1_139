@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.TransferEvaluationResult;
+import com.example.demo.dto.TransferRequestDTO;
+import com.example.demo.dto.TransferResponseDTO;
 
 public interface TransferEvaluationService {
-    TransferEvaluationResult evaluate(Long sourceCourseId, Long targetCourseId);
+    TransferResponseDTO evaluateTransfer(TransferRequestDTO request);
 }
-

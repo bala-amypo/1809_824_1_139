@@ -1,47 +1,26 @@
 package com.example.demo.service.impl;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.example.demo.entity.CourseContentTopic;
 import com.example.demo.repository.CourseContentTopicRepository;
 import com.example.demo.service.CourseContentTopicService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CourseContentTopicServiceImpl implements CourseContentTopicService {
 
-    private final CourseContentTopicRepository repository;
+    @Autowired
+    private CourseContentTopicRepository topicRepository;
 
-    public CourseContentTopicServiceImpl(CourseContentTopicRepository repository) {
-        this.repository = repository;
+    @Override
+    public CourseContentTopic createTopic(CourseContentTopic topic) {
+        return topicRepository.save(topic);
     }
 
     @Override
-    public CourseContentTopic createTopic(CourseContentTopic t) {
-        return repository.save(t);
-    }
-
-    @Override
-    public CourseContentTopic updateTopic(Long id, CourseContentTopic t) {
-        CourseContentTopic existing = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Topic not found with id " + id));
-        
-        // Update fields safely based on entity
-        existing.setTitle(t.getTitle());
-        existing.setCourse(t.getCourse());
-
-        return repository.save(existing);
-    }
-
-    @Override
-    public CourseContentTopic getTopicById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Topic not found with id " + id));
-    }
-
-    @Override
-    public List<CourseContentTopic> getTopicsForCourse(Long courseId) {
-        return repository.findByCourseId(courseId);
+    public List<CourseContentTopic> getTopicsByCourseId(Long courseId) {
+        return topicRepository.findByCourseId(courseId);
     }
 }

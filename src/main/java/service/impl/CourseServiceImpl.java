@@ -1,46 +1,26 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.*;
-import com.example.demo.repository.*;
-import java.util.*;
+import com.example.demo.entity.Course;
+import com.example.demo.repository.CourseRepository;
+import com.example.demo.service.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class CourseServiceImpl {
+import java.util.List;
 
-    private CourseRepository repo;
-    private UniversityRepository univRepo;
+@Service
+public class CourseServiceImpl implements CourseService {
 
-    public Course createCourse(Course c) {
-        if (c.getCreditHours() <= 0)
-            throw new IllegalArgumentException("> 0");
+    @Autowired
+    private CourseRepository courseRepository;
 
-        University u = univRepo.findById(c.getUniversity().getId())
-                .orElseThrow(() -> new RuntimeException("not found"));
-
-        repo.findByUniversityIdAndCourseCode(u.getId(), c.getCourseCode())
-                .ifPresent(x -> { throw new IllegalArgumentException("duplicate"); });
-
-        return repo.save(c);
+    @Override
+    public Course createCourse(Course course) {
+        return courseRepository.save(course);
     }
 
-    public void deactivateCourse(Long id) {
-        Course c = repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
-        c.setActive(false);
-        repo.save(c);
-    }
-
-    public Course updateCourse(Long id, Course c) {
-        Course ex = repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
-        return repo.save(ex);
-    }
-
-    public Course getCourseById(Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
-    }
-
-    public List<Course> getCoursesByUniversity(Long uid) {
-        return repo.findByUniversityIdAndActiveTrue(uid);
+    @Override
+    public List<Course> getCoursesByUniversityId(Long universityId) {
+        return courseRepository.findByUniversityId(universityId);
     }
 }
