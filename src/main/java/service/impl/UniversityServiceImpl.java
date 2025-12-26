@@ -28,24 +28,25 @@ public class UniversityServiceImpl implements UniversityService {
     @Override
     public University updateUniversity(Long id, University u) {
         University ex = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
+                .orElseThrow(() -> new IllegalArgumentException("University not found"));
+
         ex.setName(u.getName());
         ex.setAccreditationLevel(u.getAccreditationLevel());
         ex.setCountry(u.getCountry());
-        ex.setActive(u.isActive());
+        ex.setActive(u.getActive());
         return repository.save(ex);
     }
 
     @Override
     public University getUniversityById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
+                .orElseThrow(() -> new IllegalArgumentException("University not found"));
     }
 
     @Override
     public void deactivateUniversity(Long id) {
         University u = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
+                .orElseThrow(() -> new IllegalArgumentException("University not found"));
         u.setActive(false);
         repository.save(u);
     }

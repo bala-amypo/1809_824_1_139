@@ -1,13 +1,13 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.Entity;
- import jakarta.persistence.Id;
- import jakarta.persistence.GeneratedValue;
- import jakarta.persistence.GenerationType;
- import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
 
- @Entity
- public class University {
+@Entity
+public class University {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,11 +20,12 @@ import jakarta.persistence.Entity;
     private String country;
     private Boolean active;
 
-    
+    public University() {
+    }
 
-    public University(Long id,String name, String accreditationLevel, String country, Boolean active) {
+    public University(Long id, String name, String accreditationLevel, String country, Boolean active) {
+        this.id = id;
         this.name = name;
-        this.id=id;
         this.accreditationLevel = accreditationLevel;
         this.country = country;
         this.active = active;
@@ -62,15 +63,17 @@ import jakarta.persistence.Entity;
         this.country = country;
     }
 
-    public Boolean isActive() {
+    // Fix for test case compatibility
+    public Boolean getActive() {
         return active;
     }
 
     public void setActive(Boolean active) {
         this.active = active;
     }
-    public University() {
-    }
 
-    
- }
+    // Optional: keep isActive() for readability
+    public Boolean isActive() {
+        return active;
+    }
+}
