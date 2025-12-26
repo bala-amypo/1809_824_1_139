@@ -4,24 +4,25 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "courses", uniqueConstraints = @UniqueConstraint(columnNames = "code"))
+@Table(name = "programs", uniqueConstraints = @UniqueConstraint(columnNames = {"university_id", "name"}))
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Course {
+public class Program {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String code;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "university_id")
+    private University university;
 
     @Column(nullable = false)
-    private String title;
+    private String name;
 
     @Column(nullable = false)
-    private Double credits;
+    private String level; // UG, PG, etc.
 }
