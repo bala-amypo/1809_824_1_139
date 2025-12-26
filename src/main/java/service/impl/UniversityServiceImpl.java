@@ -1,57 +1,20 @@
-// package com.example.demo.service.impl;
-
-// import org.springframework.stereotype.Service;
-// import com.example.demo.service.UniversityService;
-// import com.example.demo.entity.University;
-// import com.example.demo.repository.UniversityRepository;
-
-// import java.util.List;
-
-// @Service
-// public class UniversityServiceImpl implements UniversityService {
-
-//     private final UniversityRepository repo;
-
-//     public UniversityServiceImpl(UniversityRepository repo) {
-//         this.repo = repo;
-//     }
-
-//     @Override
-//     public University createUniversity(University university) {
-//         return repo.save(university);
-//     }
-
-//     @Override
-//     public University updateUniversity(Long id, University university) {
-//         university.setId(id);
-//         return repo.save(university);
-//     }
-
-//     @Override
-//     public University getUniversityById(Long id) {
-//         return repo.findById(id).orElse(null);
-//     }
-
-//     @Override
-//     public List<University> getAllUniversities() {
-//         return repo.findAll();
-//     }
-
-//     @Override
-//     public void deactivateUniversity(Long id) {
-//         repo.deleteById(id);   
-//     }
-// }
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.*;
-import com.example.demo.repository.*;
-import java.util.*;
+import com.example.demo.entity.University;
+import com.example.demo.repository.UniversityRepository;
+import com.example.demo.service.UniversityService;
+import org.springframework.stereotype.Service;
 
-public class UniversityServiceImpl {
+@Service
+public class UniversityServiceImpl implements UniversityService {
 
-    UniversityRepository repository;
+    private final UniversityRepository repository;
 
+    public UniversityServiceImpl(UniversityRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
     public University createUniversity(University u) {
         if (u.getName() == null || u.getName().isBlank())
             throw new IllegalArgumentException("Name required");
@@ -62,18 +25,24 @@ public class UniversityServiceImpl {
         return repository.save(u);
     }
 
+    @Override
     public University updateUniversity(Long id, University u) {
         University ex = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("not found"));
         ex.setName(u.getName());
+        ex.setAccreditationLevel(u.getAccreditationLevel());
+        ex.setCountry(u.getCountry());
+        ex.setActive(u.isActive());
         return repository.save(ex);
     }
 
+    @Override
     public University getUniversityById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("not found"));
     }
 
+    @Override
     public void deactivateUniversity(Long id) {
         University u = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("not found"));
