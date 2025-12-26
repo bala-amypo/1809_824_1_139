@@ -1,51 +1,29 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class TransferEvaluationResult {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "source_course_id", nullable = false)
-    private Course sourceCourse;
-
-    @ManyToOne
-    @JoinColumn(name = "target_course_id", nullable = false)
-    private Course targetCourse;
-
+    private Long sourceCourseId;
+    private Long targetCourseId;
     private Double overlapPercentage;
-    private Integer creditHourDifference;
     private Boolean isEligibleForTransfer;
     private String notes;
 
-    private LocalDateTime evaluatedAt;
-
-    public TransferEvaluationResult() {}
-
-    @PrePersist
-    public void onCreate() {
-        this.evaluatedAt = LocalDateTime.now();
-    }
-
-    // Getters and setters
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-    public Course getSourceCourse() { return sourceCourse; }
-    public void setSourceCourse(Course sourceCourse) { this.sourceCourse = sourceCourse; }
-    public Course getTargetCourse() { return targetCourse; }
-    public void setTargetCourse(Course targetCourse) { this.targetCourse = targetCourse; }
+    public Long getSourceCourseId() { return sourceCourseId; }
+    public void setSourceCourseId(Long id) { this.sourceCourseId = id; }
+    public Long getTargetCourseId() { return targetCourseId; }
+    public void setTargetCourseId(Long id) { this.targetCourseId = id; }
     public Double getOverlapPercentage() { return overlapPercentage; }
-    public void setOverlapPercentage(Double overlapPercentage) { this.overlapPercentage = overlapPercentage; }
-    public Integer getCreditHourDifference() { return creditHourDifference; }
-    public void setCreditHourDifference(Integer creditHourDifference) { this.creditHourDifference = creditHourDifference; }
+    public void setOverlapPercentage(Double op) { this.overlapPercentage = op; }
     public Boolean getIsEligibleForTransfer() { return isEligibleForTransfer; }
-    public void setIsEligibleForTransfer(Boolean isEligibleForTransfer) { this.isEligibleForTransfer = isEligibleForTransfer; }
+    public void setIsEligibleForTransfer(Boolean eligible) { this.isEligibleForTransfer = eligible; }
     public String getNotes() { return notes; }
     public void setNotes(String notes) { this.notes = notes; }
-    public LocalDateTime getEvaluatedAt() { return evaluatedAt; }
 }
