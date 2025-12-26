@@ -1,4 +1,5 @@
 package com.example.demo.dto;
+
 import java.util.Set;
 
 public class AuthResponse {
@@ -12,7 +13,6 @@ public class AuthResponse {
         this.roles = roles;
     }
 
-    // Getters
     public String getToken() { return token; }
     public String getEmail() { return email; }
     public Set<String> getRoles() { return roles; }
