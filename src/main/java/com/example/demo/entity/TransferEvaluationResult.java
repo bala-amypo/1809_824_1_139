@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.*;
 
 @Entity
 @Table(name = "transfer_evaluation_results")
@@ -9,14 +10,26 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class TransferEvaluationResult {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Boolean isEligibleForTransfer;
+    @OneToOne(optional = false)
+    @JoinColumn(name = "transfer_request_id")
+    private TransferRequest transferRequest;
 
-    private Double overlapPercentage;
+    private Double totalTransferableCredits;
 
-    private String notes;
+    @ElementCollection
+    @CollectionTable(name = "accepted_courses", joinColumns = @JoinColumn(name = "evaluation_result_id"))
+    private List<String> acceptedCourses = new ArrayList<>();
+
+    @ElementCollection
+    @CollectionTable(name = "missing_core_requirements", joinColumns = @JoinColumn(name = "evaluation_result_id"))
+    private List<String> missingCoreRequirements = new ArrayList<>();
+
+    private String remarks;
 }
