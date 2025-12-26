@@ -1,43 +1,44 @@
 package com.example.demo.security;
 
-import java.util.Date;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import java.util.*;
 
 public class JwtTokenProvider {
 
-    private static final String SECRET = "secretkey";
-    private static final long VALIDITY = 1000 * 60 * 60; // 1 hour
+    private final String SECRET = "secretkey";
 
-    // test13, test29
-    public String createToken(String email, String role) {
+    public String createToken(Long userId, String email, Set<String> roles) {
         return Jwts.builder()
-                .setSubject(email)
-                .claim("role", role)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + VALIDITY))
+                .claim("userId", userId)
+                .claim("email", email)
+                .claim("roles", roles)
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
     }
 
-    // test13, test42
     public boolean validateToken(String token) {
         try {
-            Jwts.parser()
-                .setSigningKey(SECRET)
-                .parseClaimsJws(token);
+            Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-    // test29
-    public Claims getClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET)
+    public String getEmail(String token) {
+        return getClaims(token).get("email", String.class);
+    }
+
+    public Long getUserId(String token) {
+        return getClaims(token).get("userId", Long.class);
+    }
+
+    public Set<String> getRoles(String token) {
+        return new HashSet<>(getClaims(token).get("roles", List.class));
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts.parser().setSigningKey(SECRET)
                 .parseClaimsJws(token)
                 .getBody();
     }
