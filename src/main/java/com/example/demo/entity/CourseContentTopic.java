@@ -1,11 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 
 @Entity
 public class CourseContentTopic {
@@ -18,48 +13,28 @@ public class CourseContentTopic {
     private Double weightPercentage;
 
     @ManyToOne
-    @JoinColumn(name = "course_id")
+    @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    public CourseContentTopic() {
-    }
+    public CourseContentTopic() {}
 
-    public CourseContentTopic(Long id,String topicName, Double weightPercentage, Course course) {
-        this.id=id;
-        this.topicName = topicName;
-        this.weightPercentage = weightPercentage;
-        this.course = course;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public CourseContentTopic(Long id, String topicName, Double weightPercentage, Course course) {
         this.id = id;
-    }
-
-    public String getTopicName() {
-        return topicName;
-    }
-
-    public void setTopicName(String topicName) {
         this.topicName = topicName;
-    }
-
-    public Double getWeightPercentage() {
-        return weightPercentage;
-    }
-
-    public void setWeightPercentage(Double weightPercentage) {
         this.weightPercentage = weightPercentage;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
         this.course = course;
     }
+
+    // Getters & Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getTopicName() { return topicName; }
+    public void setTopicName(String topicName) { this.topicName = topicName; }
+
+    public Double getWeightPercentage() { return weightPercentage; }
+    public void setWeightPercentage(Double weightPercentage) { this.weightPercentage = weightPercentage; }
+
+    public Course getCourse() { return course; }
+    public void setCourse(Course course) { this.course = course; }
 }
