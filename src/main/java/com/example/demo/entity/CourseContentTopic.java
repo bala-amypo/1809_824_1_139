@@ -1,33 +1,29 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 @Entity
-@Table(name = "course_mappings",
-       uniqueConstraints = @UniqueConstraint(columnNames = {"source_course_id", "target_course_id"}))
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class CourseMapping {
+public class CourseContentTopic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "source_course_id")
-    private Course sourceCourse;
+    private String topicName;
+    private Double weightPercentage;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "target_course_id")
-    private Course targetCourse;
+    @ManyToOne
+    private Course course;
 
-    @Column(nullable = false)
-    private String equivalencyType; // FULL, PARTIAL, ELECTIVE
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    @Column
-    private String minGradeRequired;
+    public String getTopicName() { return topicName; }
+    public void setTopicName(String topicName) { this.topicName = topicName; }
+
+    public Double getWeightPercentage() { return weightPercentage; }
+    public void setWeightPercentage(Double weightPercentage) { this.weightPercentage = weightPercentage; }
+
+    public Course getCourse() { return course; }
+    public void setCourse(Course course) { this.course = course; }
 }

@@ -1,35 +1,32 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import java.util.*;
 
 @Entity
-@Table(name = "transfer_evaluation_results")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class TransferEvaluationResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "transfer_request_id")
-    private TransferRequest transferRequest;
+    private Boolean isEligibleForTransfer;
+    private Double overlapPercentage;
+    private String notes;
 
-    private Double totalTransferableCredits;
+    private Long sourceCourseId;
 
-    @ElementCollection
-    @CollectionTable(name = "accepted_courses", joinColumns = @JoinColumn(name = "evaluation_result_id"))
-    private List<String> acceptedCourses = new ArrayList<>();
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    @ElementCollection
-    @CollectionTable(name = "missing_core_requirements", joinColumns = @JoinColumn(name = "evaluation_result_id"))
-    private List<String> missingCoreRequirements = new ArrayList<>();
+    public Boolean getIsEligibleForTransfer() { return isEligibleForTransfer; }
+    public void setIsEligibleForTransfer(Boolean eligible) { this.isEligibleForTransfer = eligible; }
 
-    private String remarks;
+    public Double getOverlapPercentage() { return overlapPercentage; }
+    public void setOverlapPercentage(Double overlapPercentage) { this.overlapPercentage = overlapPercentage; }
+
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
+
+    public Long getSourceCourseId() { return sourceCourseId; }
+    public void setSourceCourseId(Long sourceCourseId) { this.sourceCourseId = sourceCourseId; }
 }
