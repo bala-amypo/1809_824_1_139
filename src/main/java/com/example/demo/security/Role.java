@@ -1,6 +1,6 @@
-package com.example.demo.entity;
+package com.example.demo.security;
 
 public enum Role {
-    USER,
-    ADMIN
+    ROLE_USER,
+    ROLE_ADMIN
 }
