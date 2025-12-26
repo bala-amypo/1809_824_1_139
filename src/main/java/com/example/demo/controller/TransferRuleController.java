@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.TransferRule;
 import com.example.demo.service.TransferRuleService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -16,13 +17,13 @@ public class TransferRuleController {
     }
 
     @PostMapping
-    public TransferRule create(@RequestBody TransferRule r) {
-        return service.createRule(r);
+    public TransferRule create(@RequestBody TransferRule rule) {
+        return service.createRule(rule);
     }
 
     @PutMapping("/{id}")
-    public TransferRule update(@PathVariable Long id, @RequestBody TransferRule r) {
-        return service.updateRule(id, r);
+    public TransferRule update(@PathVariable Long id, @RequestBody TransferRule rule) {
+        return service.updateRule(id, rule);
     }
 
     @GetMapping("/{id}")
@@ -30,13 +31,13 @@ public class TransferRuleController {
         return service.getRuleById(id);
     }
 
-    @GetMapping("/universities")
-    public List<TransferRule> byUniversities(@RequestParam Long sourceId, @RequestParam Long targetId) {
-        return service.getRulesForUniversities(sourceId, targetId);
+    @GetMapping("/universities/{src}/{tgt}")
+    public List<TransferRule> getRules(@PathVariable Long src, @PathVariable Long tgt) {
+        return service.getRulesForUniversities(src, tgt);
     }
 
-    @DeleteMapping("/{id}")
-    public TransferRule deactivate(@PathVariable Long id) {
-        return service.deactivateRule(id);
+    @PatchMapping("/deactivate/{id}")
+    public void deactivate(@PathVariable Long id) {
+        service.deactivateRule(id);
     }
 }
