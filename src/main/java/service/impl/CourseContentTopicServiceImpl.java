@@ -1,7 +1,6 @@
 package com.example.demo.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -27,9 +26,11 @@ public class CourseContentTopicServiceImpl implements CourseContentTopicService 
     public CourseContentTopic updateTopic(Long id, CourseContentTopic t) {
         CourseContentTopic existing = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Topic not found with id " + id));
-        existing.setName(t.getName());
+        
+        // Update fields safely based on entity
+        existing.setTitle(t.getTitle());
         existing.setCourse(t.getCourse());
-        // update other fields as needed
+
         return repository.save(existing);
     }
 

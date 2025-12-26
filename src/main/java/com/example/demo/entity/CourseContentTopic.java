@@ -9,20 +9,18 @@ public class CourseContentTopic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String topicName;
-    private Double weightPercentage;
+    private String title; // use 'title' instead of 'name'
 
     @ManyToOne
+    @JoinColumn(name = "course_id")
     private Course course;
 
+    // --- Getters & Setters ---
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getTopicName() { return topicName; }
-    public void setTopicName(String topicName) { this.topicName = topicName; }
-
-    public Double getWeightPercentage() { return weightPercentage; }
-    public void setWeightPercentage(Double weightPercentage) { this.weightPercentage = weightPercentage; }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
     public Course getCourse() { return course; }
     public void setCourse(Course course) { this.course = course; }
