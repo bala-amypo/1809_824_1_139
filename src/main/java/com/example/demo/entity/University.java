@@ -1,22 +1,27 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.Set;
 
 @Entity
-@Table(name = "universities")
-public class University {
+@Table(name = "users")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String name;
+    private String email;
 
-    public University() {}
-    public University(String name) { this.name = name; }
+    @Column(nullable = false)
+    private String password;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> roles;
 }
