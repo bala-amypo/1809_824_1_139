@@ -1,11 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 
 @Entity
 public class TransferRule {
@@ -22,67 +17,28 @@ public class TransferRule {
     @JoinColumn(name = "target_university_id", nullable = false)
     private University targetUniversity;
 
-    private String courseCode;
-    private Double creditTransferPercentage;
+    private Double minimumOverlapPercentage; // must match service
+    private Integer creditHourTolerance;      // must match service
     private Boolean active;
 
     public TransferRule() {}
 
-    public TransferRule(Long id, University sourceUniversity, University targetUniversity,
-                        String courseCode, Double creditTransferPercentage, Boolean active) {
-        this.id = id;
-        this.sourceUniversity = sourceUniversity;
-        this.targetUniversity = targetUniversity;
-        this.courseCode = courseCode;
-        this.creditTransferPercentage = creditTransferPercentage;
-        this.active = active;
-    }
+    // Getters and setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public University getSourceUniversity() { return sourceUniversity; }
+    public void setSourceUniversity(University sourceUniversity) { this.sourceUniversity = sourceUniversity; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public University getTargetUniversity() { return targetUniversity; }
+    public void setTargetUniversity(University targetUniversity) { this.targetUniversity = targetUniversity; }
 
-    public University getSourceUniversity() {
-        return sourceUniversity;
-    }
+    public Double getMinimumOverlapPercentage() { return minimumOverlapPercentage; }
+    public void setMinimumOverlapPercentage(Double minimumOverlapPercentage) { this.minimumOverlapPercentage = minimumOverlapPercentage; }
 
-    public void setSourceUniversity(University sourceUniversity) {
-        this.sourceUniversity = sourceUniversity;
-    }
+    public Integer getCreditHourTolerance() { return creditHourTolerance; }
+    public void setCreditHourTolerance(Integer creditHourTolerance) { this.creditHourTolerance = creditHourTolerance; }
 
-    public University getTargetUniversity() {
-        return targetUniversity;
-    }
-
-    public void setTargetUniversity(University targetUniversity) {
-        this.targetUniversity = targetUniversity;
-    }
-
-    public String getCourseCode() {
-        return courseCode;
-    }
-
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-    }
-
-    public Double getCreditTransferPercentage() {
-        return creditTransferPercentage;
-    }
-
-    public void setCreditTransferPercentage(Double creditTransferPercentage) {
-        this.creditTransferPercentage = creditTransferPercentage;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 }
