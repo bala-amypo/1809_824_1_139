@@ -1,3 +1,5 @@
+
+
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
@@ -17,9 +19,9 @@ public class TransferRule {
     @JoinColumn(name = "target_university_id", nullable = false)
     private University targetUniversity;
 
-    private Double minimumOverlapPercentage; // must match service
-    private Integer creditHourTolerance;      // must match service
-    private Boolean active;
+    private Double minimumOverlapPercentage; // minimum overlap to be eligible
+    private Integer creditHourTolerance; // allowed credit hour difference
+    private Boolean active = true; // rule active or not
 
     public TransferRule() {}
 

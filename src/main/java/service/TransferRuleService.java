@@ -4,14 +4,9 @@ import com.example.demo.entity.TransferRule;
 import java.util.List;
 
 public interface TransferRuleService {
-
-    TransferRule createRule(TransferRule r);
-
-    TransferRule updateRule(Long id, TransferRule r);
-
+    TransferRule createRule(TransferRule rule);
+    TransferRule updateRule(Long id, TransferRule rule);
     TransferRule getRuleById(Long id);
-
     List<TransferRule> getRulesForUniversities(Long sourceUniversityId, Long targetUniversityId);
-
-    TransferRule deactivateRule(Long id);
+    void deactivateRule(Long id);
 }

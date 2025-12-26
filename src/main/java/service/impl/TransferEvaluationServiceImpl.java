@@ -15,10 +15,11 @@ public class TransferEvaluationServiceImpl implements TransferEvaluationService 
     private final TransferRuleRepository ruleRepo;
     private final TransferEvaluationResultRepository resultRepo;
 
-    public TransferEvaluationServiceImpl(CourseRepository courseRepo,
-                                         CourseContentTopicRepository topicRepo,
-                                         TransferRuleRepository ruleRepo,
-                                         TransferEvaluationResultRepository resultRepo) {
+    public TransferEvaluationServiceImpl(
+            CourseRepository courseRepo,
+            CourseContentTopicRepository topicRepo,
+            TransferRuleRepository ruleRepo,
+            TransferEvaluationResultRepository resultRepo) {
         this.courseRepo = courseRepo;
         this.topicRepo = topicRepo;
         this.ruleRepo = ruleRepo;
@@ -27,14 +28,11 @@ public class TransferEvaluationServiceImpl implements TransferEvaluationService 
 
     @Override
     public TransferEvaluationResult evaluateTransfer(Long srcId, Long tgtId) {
-        Course src = courseRepo.findById(srcId)
-                .orElseThrow(() -> new RuntimeException("Source course not found"));
-        Course tgt = courseRepo.findById(tgtId)
-                .orElseThrow(() -> new RuntimeException("Target course not found"));
+        Course src = courseRepo.findById(srcId).orElseThrow(() -> new RuntimeException("Source course not found"));
+        Course tgt = courseRepo.findById(tgtId).orElseThrow(() -> new RuntimeException("Target course not found"));
 
-        if (!src.getActive() || !tgt.getActive()) {
-            throw new IllegalArgumentException("Both courses must be active");
-        }
+        if (!src.isActive() || !tgt.isActive())
+            throw new IllegalArgumentException("One of the courses is not active");
 
         List<CourseContentTopic> srcTopics = topicRepo.findByCourseId(srcId);
         List<CourseContentTopic> tgtTopics = topicRepo.findByCourseId(tgtId);
@@ -51,31 +49,23 @@ public class TransferEvaluationServiceImpl implements TransferEvaluationService 
             }
         }
 
-        int creditDiff = Math.abs(src.getCreditHours() - tgt.getCreditHours());
+        List<TransferRule> rules = ruleRepo.findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(
+                src.getUniversity().getId(),
+                tgt.getUniversity().getId()
+        );
 
-        List<TransferRule> rules = ruleRepo
-                .findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(
-                        src.getUniversity().getId(),
-                        tgt.getUniversity().getId()
-                );
-
-        boolean eligible = false;
-        for (TransferRule r : rules) {
-            double minOverlap = Optional.ofNullable(r.getMinimumOverlapPercentage()).orElse(0.0);
-            int tolerance = Optional.ofNullable(r.getCreditHourTolerance()).orElse(0);
-            if (overlap >= minOverlap && creditDiff <= tolerance) {
-                eligible = true;
-                break;
-            }
-        }
+        boolean eligible = rules.stream().anyMatch(r ->
+                overlap >= Optional.ofNullable(r.getMinimumOverlapPercentage()).orElse(0.0) &&
+                        Math.abs(src.getCreditHours() - tgt.getCreditHours()) <= Optional.ofNullable(r.getCreditHourTolerance()).orElse(0)
+        );
 
         TransferEvaluationResult result = new TransferEvaluationResult();
         result.setSourceCourse(src);
         result.setTargetCourse(tgt);
         result.setOverlapPercentage(overlap);
-        result.setCreditHourDifference(creditDiff);
+        result.setCreditHourDifference(Math.abs(src.getCreditHours() - tgt.getCreditHours()));
         result.setIsEligibleForTransfer(eligible);
-        result.setNotes(eligible ? "Eligible for transfer" :
+        result.setNotes(eligible ? "Eligible" :
                 rules.isEmpty() ? "No active transfer rule" : "No active rule satisfied");
 
         return resultRepo.save(result);
@@ -83,8 +73,7 @@ public class TransferEvaluationServiceImpl implements TransferEvaluationService 
 
     @Override
     public TransferEvaluationResult getEvaluationById(Long id) {
-        return resultRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Transfer evaluation not found"));
+        return resultRepo.findById(id).orElseThrow(() -> new RuntimeException("Evaluation not found"));
     }
 
     @Override
