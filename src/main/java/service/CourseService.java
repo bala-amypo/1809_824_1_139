@@ -1,12 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Course;
 import java.util.List;
+import com.example.demo.entity.Course;
 
 public interface CourseService {
-    Course createCourse(Course c);
-    Course updateCourse(Long id, Course c);
-    Course getCourseById(Long id);
-    void deactivateCourse(Long id);
-    List<Course> getCoursesByUniversity(Long universityId);
+    Course save(Course course, Long universityId);
+    List<Course> getByUniversity(Long universityId);
 }

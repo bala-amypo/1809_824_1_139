@@ -1,42 +1,42 @@
-package com.example.demo.controller;
+// package com.example.demo.controller;
 
-import com.example.demo.entity.Course;
-import com.example.demo.service.CourseService;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
+// import com.example.demo.entity.Course;
+// import com.example.demo.service.CourseService;
+// import org.springframework.web.bind.annotation.*;
+// import java.util.List;
 
-@RestController
-@RequestMapping("/courses")
-public class CourseController {
+// @RestController
+// @RequestMapping("/courses")
+// public class CourseController {
 
-    private final CourseService service;
+//     private final CourseService service;
 
-    public CourseController(CourseService service) {
-        this.service = service;
-    }
+//     public CourseController(CourseService service) {
+//         this.service = service;
+//     }
 
-    @PostMapping
-    public Course create(@RequestBody Course c) {
-        return service.createCourse(c);
-    }
+//     @PostMapping
+//     public Course create(@RequestBody Course c) {
+//         return service.createCourse(c);
+//     }
 
-    @PutMapping("/{id}")
-    public Course update(@PathVariable Long id, @RequestBody Course c) {
-        return service.updateCourse(id, c);
-    }
+//     @PutMapping("/{id}")
+//     public Course update(@PathVariable Long id, @RequestBody Course c) {
+//         return service.updateCourse(id, c);
+//     }
 
-    @GetMapping("/{id}")
-    public Course get(@PathVariable Long id) {
-        return service.getCourseById(id);
-    }
+//     @GetMapping("/{id}")
+//     public Course get(@PathVariable Long id) {
+//         return service.getCourseById(id);
+//     }
 
-    @GetMapping("/university/{uid}")
-    public List<Course> byUniversity(@PathVariable Long uid) {
-        return service.getCoursesByUniversity(uid);
-    }
+//     @GetMapping("/university/{uid}")
+//     public List<Course> byUniversity(@PathVariable Long uid) {
+//         return service.getCoursesByUniversity(uid);
+//     }
 
-    @DeleteMapping("/{id}")
-    public void deactivate(@PathVariable Long id) {
-        service.deactivateCourse(id);
-    }
-}
+//     @DeleteMapping("/{id}")
+//     public void deactivate(@PathVariable Long id) {
+//         service.deactivateCourse(id);
+//     }
+// }

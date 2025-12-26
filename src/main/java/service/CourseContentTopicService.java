@@ -1,11 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.CourseContentTopic;
 import java.util.List;
+import com.example.demo.entity.CourseContentTopic;
 
 public interface CourseContentTopicService {
-    CourseContentTopic createTopic(CourseContentTopic t);
-    CourseContentTopic updateTopic(Long id, CourseContentTopic t);
-    CourseContentTopic getTopicById(Long id);
-    List<CourseContentTopic> getTopicsForCourse(Long courseId);
+    CourseContentTopic save(CourseContentTopic topic, Long courseId);
+    List<CourseContentTopic> getByCourse(Long courseId);
 }
