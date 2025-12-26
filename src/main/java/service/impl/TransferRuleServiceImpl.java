@@ -1,65 +1,48 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.TransferRule;
-import com.example.demo.entity.University;
-import com.example.demo.repository.TransferRuleRepository;
-import com.example.demo.repository.UniversityRepository;
-import com.example.demo.service.TransferRuleService;
-import org.springframework.stereotype.Service;
+import com.example.demo.entity.*;
+import com.example.demo.repository.*;
+import java.util.*;
 
-import java.util.List;
+public class TransferRuleServiceImpl {
 
-@Service
-public class TransferRuleServiceImpl implements TransferRuleService {
+    private TransferRuleRepository repo;
+    private UniversityRepository univRepo;
 
-    private final TransferRuleRepository ruleRepo;
-    private final UniversityRepository universityRepo;
+    public TransferRule createRule(TransferRule r) {
+        if (r.getMinimumOverlapPercentage() < 0 || r.getMinimumOverlapPercentage() > 100)
+            throw new IllegalArgumentException("0-100");
 
-    public TransferRuleServiceImpl(TransferRuleRepository ruleRepo, UniversityRepository universityRepo) {
-        this.ruleRepo = ruleRepo;
-        this.universityRepo = universityRepo;
+        if (r.getCreditHourTolerance() != null && r.getCreditHourTolerance() < 0)
+            throw new IllegalArgumentException(">= 0");
+
+        if (r.getSourceUniversity() != null)
+            univRepo.findById(r.getSourceUniversity().getId()).orElseThrow();
+
+        if (r.getTargetUniversity() != null)
+            univRepo.findById(r.getTargetUniversity().getId()).orElseThrow();
+
+        return repo.save(r);
     }
 
-    @Override
-    public TransferRule createRule(TransferRule rule) {
-        // Validate universities exist
-        University src = universityRepo.findById(rule.getSourceUniversity().getId())
-                .orElseThrow(() -> new RuntimeException("Source university not found"));
-        University tgt = universityRepo.findById(rule.getTargetUniversity().getId())
-                .orElseThrow(() -> new RuntimeException("Target university not found"));
-
-        rule.setSourceUniversity(src);
-        rule.setTargetUniversity(tgt);
-        rule.setActive(true);
-        return ruleRepo.save(rule);
+    public List<TransferRule> getRulesForUniversities(Long s, Long t) {
+        return repo.findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(s, t);
     }
 
-    @Override
-    public TransferRule updateRule(Long id, TransferRule rule) {
-        TransferRule existing = ruleRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Transfer rule not found"));
-        existing.setMinimumOverlapPercentage(rule.getMinimumOverlapPercentage());
-        existing.setCreditHourTolerance(rule.getCreditHourTolerance());
-        existing.setActive(rule.getActive());
-        return ruleRepo.save(existing);
-    }
-
-    @Override
-    public TransferRule getRuleById(Long id) {
-        return ruleRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Transfer rule not found"));
-    }
-
-    @Override
-    public List<TransferRule> getRulesForUniversities(Long sourceUniversityId, Long targetUniversityId) {
-        return ruleRepo.findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(sourceUniversityId, targetUniversityId);
-    }
-
-    @Override
     public void deactivateRule(Long id) {
-        TransferRule existing = ruleRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Transfer rule not found"));
-        existing.setActive(false);
-        ruleRepo.save(existing);
+        TransferRule r = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("not found"));
+        r.setActive(false);
+        repo.save(r);
+    }
+
+    public TransferRule getRuleById(Long id) {
+        return repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("not found"));
+    }
+
+    public TransferRule updateRule(Long id, TransferRule r) {
+        repo.findById(id).orElseThrow(() -> new RuntimeException("not found"));
+        return repo.save(r);
     }
 }
