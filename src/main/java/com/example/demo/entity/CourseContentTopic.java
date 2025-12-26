@@ -13,19 +13,8 @@ public class CourseContentTopic {
     private Double weightPercentage;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    public CourseContentTopic() {}
-
-    public CourseContentTopic(Long id, String topicName, Double weightPercentage, Course course) {
-        this.id = id;
-        this.topicName = topicName;
-        this.weightPercentage = weightPercentage;
-        this.course = course;
-    }
-
-    // Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

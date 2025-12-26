@@ -1,5 +1,3 @@
-
-
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
@@ -11,29 +9,18 @@ public class TransferRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Double minimumOverlapPercentage;
+    private Integer creditHourTolerance = 0;
+    private boolean active = true;
+
     @ManyToOne
-    @JoinColumn(name = "source_university_id", nullable = false)
     private University sourceUniversity;
 
     @ManyToOne
-    @JoinColumn(name = "target_university_id", nullable = false)
     private University targetUniversity;
 
-    private Double minimumOverlapPercentage; // minimum overlap to be eligible
-    private Integer creditHourTolerance; // allowed credit hour difference
-    private Boolean active = true; // rule active or not
-
-    public TransferRule() {}
-
-    // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public University getSourceUniversity() { return sourceUniversity; }
-    public void setSourceUniversity(University sourceUniversity) { this.sourceUniversity = sourceUniversity; }
-
-    public University getTargetUniversity() { return targetUniversity; }
-    public void setTargetUniversity(University targetUniversity) { this.targetUniversity = targetUniversity; }
 
     public Double getMinimumOverlapPercentage() { return minimumOverlapPercentage; }
     public void setMinimumOverlapPercentage(Double minimumOverlapPercentage) { this.minimumOverlapPercentage = minimumOverlapPercentage; }
@@ -41,6 +28,12 @@ public class TransferRule {
     public Integer getCreditHourTolerance() { return creditHourTolerance; }
     public void setCreditHourTolerance(Integer creditHourTolerance) { this.creditHourTolerance = creditHourTolerance; }
 
-    public Boolean getActive() { return active; }
-    public void setActive(Boolean active) { this.active = active; }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
+
+    public University getSourceUniversity() { return sourceUniversity; }
+    public void setSourceUniversity(University sourceUniversity) { this.sourceUniversity = sourceUniversity; }
+
+    public University getTargetUniversity() { return targetUniversity; }
+    public void setTargetUniversity(University targetUniversity) { this.targetUniversity = targetUniversity; }
 }
