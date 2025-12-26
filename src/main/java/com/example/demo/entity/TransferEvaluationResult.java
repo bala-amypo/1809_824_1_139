@@ -1,32 +1,65 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
-
-@Entity
 public class TransferEvaluationResult {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Boolean isEligibleForTransfer;
+    private Course sourceCourse;
+    private Course targetCourse;
+
     private Double overlapPercentage;
+
+    private Boolean isEligibleForTransfer;
+
     private String notes;
 
-    private Long sourceCourseId;
+    // -------- getters & setters --------
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public Boolean getIsEligibleForTransfer() { return isEligibleForTransfer; }
-    public void setIsEligibleForTransfer(Boolean eligible) { this.isEligibleForTransfer = eligible; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Double getOverlapPercentage() { return overlapPercentage; }
-    public void setOverlapPercentage(Double overlapPercentage) { this.overlapPercentage = overlapPercentage; }
+    public Course getSourceCourse() {
+        return sourceCourse;
+    }
 
-    public String getNotes() { return notes; }
-    public void setNotes(String notes) { this.notes = notes; }
+    public void setSourceCourse(Course sourceCourse) {
+        this.sourceCourse = sourceCourse;
+    }
 
-    public Long getSourceCourseId() { return sourceCourseId; }
-    public void setSourceCourseId(Long sourceCourseId) { this.sourceCourseId = sourceCourseId; }
+    public Course getTargetCourse() {
+        return targetCourse;
+    }
+
+    public void setTargetCourse(Course targetCourse) {
+        this.targetCourse = targetCourse;
+    }
+
+    public Double getOverlapPercentage() {
+        return overlapPercentage;
+    }
+
+    public void setOverlapPercentage(Double overlapPercentage) {
+        this.overlapPercentage = overlapPercentage;
+    }
+
+    public Boolean getIsEligibleForTransfer() {
+        return isEligibleForTransfer;
+    }
+
+    public void setIsEligibleForTransfer(Boolean isEligibleForTransfer) {
+        this.isEligibleForTransfer = isEligibleForTransfer;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 }
