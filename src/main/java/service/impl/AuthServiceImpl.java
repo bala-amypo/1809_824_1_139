@@ -7,48 +7,43 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
-    private UserRepository userRepo;
-
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    @Override
-    public AuthResponse register(AuthRequest request) {
-        if (userRepo.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already exists");
-        }
+    @Autowired
+    private UserRepository userRepository;
 
-        User user = new User(
-            request.getEmail(),
-            passwordEncoder.encode(request.getPassword()),
-            request.getRoles()
-        );
-        
-        User savedUser = userRepo.save(user);
-        String token = jwtTokenProvider.createToken(savedUser.getId(), savedUser.getEmail(), savedUser.getRoles());
-        return new AuthResponse(token, savedUser.getEmail(), savedUser.getRoles());
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public AuthResponse login(AuthRequest request) {
-        User user = userRepo.findByEmail(request.getEmail())
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+        );
+
+        User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
-        }
+        String token = jwtTokenProvider.createToken(
+                user.getId(),
+                user.getUsername(),
+                Set.of(user.getRole().name())
+        );
 
-        String token = jwtTokenProvider.createToken(user.getId(), user.getEmail(), user.getRoles());
-        return new AuthResponse(token, user.getEmail(), user.getRoles());
+        return new AuthResponse(token);
     }
 }
