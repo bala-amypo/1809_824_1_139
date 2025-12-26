@@ -415,7 +415,7 @@
 //         Course c = new Course(); c.setId(77L);
 //         when(courseRepo.findById(77L)).thenReturn(Optional.of(c));
 //         Course res = courseService.getCourseById(77L);
-//         Assert.assertEquals(res.getId().longValue(), 77L);
+ //         Assert.assertEquals(res.getId().longValue(), 77L);
 //     }
 
 //     @Test(priority=25, groups={"topics"}, description="Get topics for course")
@@ -429,14 +429,14 @@
 //     }
 
 //     @Test(priority=26, groups={"rules"}, description="Get rules between universities")
-//     public void test26GetRulesPair() {
+ //     public void test26GetRulesPair() {
 //         when(ruleRepo.findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(1L, 2L)).thenReturn(List.of(new TransferRule()));
 //         List<TransferRule> rules = ruleService.getRulesForUniversities(1L, 2L);
 //         Assert.assertFalse(rules.isEmpty());
 //     }
 
 //     @Test(priority=27, groups={"rules"}, description="Deactivate rule")
-//     public void test27DeactivateRule() {
+ //     public void test27DeactivateRule() {
 //         TransferRule r = new TransferRule(); r.setId(100L); r.setActive(true);
 //         when(ruleRepo.findById(100L)).thenReturn(Optional.of(r));
 //         when(ruleRepo.save(any())).thenAnswer(inv -> inv.getArgument(0));
@@ -444,7 +444,7 @@
 //         Assert.assertFalse(r.isActive());
 //     }
 
-//     @Test(priority=28, groups={"auth"}, description="Register and login flow (mock repository)")
+ //     @Test(priority=28, groups={"auth"}, description="Register and login flow (mock repository)")
 //     public void test28RegisterAndLogin() {
 //         User u = new User("x@y.com", new BCryptPasswordEncoder().encode("pwd"), Set.of("ROLE_ADVISOR"));
 
@@ -455,7 +455,7 @@
 //             if (uu == null) uu = new User();
 //             uu.setId(20L);
 //             return uu;
-//         });
+ //         });
 
 //         // Simulate register + lookup
 //         userRepo.save(u);
@@ -465,14 +465,14 @@
 
 //     @Test(priority=29, groups={"security"}, description="Jwt token contains roles and userId")
 //     public void test29JwtContainsClaims() {
-//         JwtTokenProvider provider = new JwtTokenProvider();
+ //         JwtTokenProvider provider = new JwtTokenProvider();
 //         String token = provider.createToken(99L, "z@z.com", Set.of("ROLE_ADMIN"));
 //         Assert.assertTrue(provider.getRoles(token).contains("ROLE_ADMIN"));
 //         Assert.assertEquals(provider.getUserId(token).longValue(), 99L);
 //     }
 
 //     // HQL advanced queries placeholders and negative cases
-//     @Test(priority=30, groups={"hql"}, description="Repository negative find")
+ //     @Test(priority=30, groups={"hql"}, description="Repository negative find")
 //     public void test30RepoNegativeFind() {
 //         when(courseRepo.findByUniversityIdAndCourseCode(1L, "NONE")).thenReturn(Optional.empty());
 //         Optional<Course> oc = courseRepo.findByUniversityIdAndCourseCode(1L, "NONE");
@@ -482,7 +482,7 @@
 //     // Additional tests to reach 60 tests. We'll include many small focused tests covering edge cases
 
 //     @Test(priority=31, groups={"edge"}, description="Create university invalid name")
-//     public void test31CreateUniversityInvalidName() {
+ //     public void test31CreateUniversityInvalidName() {
 //         try {
 //             universityService.createUniversity(new University());
 //             Assert.fail("Expected IllegalArgumentException");
@@ -493,7 +493,7 @@
 //     public void test32DeactivateUniversity() {
 //         University u = new University(); u.setId(200L); u.setActive(true);
 //         when(universityRepo.findById(200L)).thenReturn(Optional.of(u));
-//         when(universityRepo.save(any())).thenAnswer(inv -> inv.getArgument(0));
+ //         when(universityRepo.save(any())).thenAnswer(inv -> inv.getArgument(0));
 //         universityService.deactivateUniversity(200L);
 //         Assert.assertFalse(u.isActive());
 //     }
@@ -502,7 +502,7 @@
 //     public void test33TopicWeightBounds() {
 //         Course c = new Course(); c.setId(5L);
 //         CourseContentTopic t = new CourseContentTopic(); t.setCourse(c); t.setTopicName("T"); t.setWeightPercentage(150.0);
-//         when(courseRepo.findById(5L)).thenReturn(Optional.of(c));
+ //         when(courseRepo.findById(5L)).thenReturn(Optional.of(c));
 //         try { topicService.createTopic(t); Assert.fail("Expected error for weight"); } catch (IllegalArgumentException ex) { Assert.assertTrue(ex.getMessage().contains("0-100")); }
 //     }
 
@@ -512,7 +512,7 @@
 //         try { ruleService.createRule(r); Assert.fail("Expected illegal argument"); } catch (IllegalArgumentException ex) { Assert.assertTrue(ex.getMessage().contains(">= 0")); }
 //     }
 
-//     @Test(priority=35, groups={"edge"}, description="Evaluation uses default total source weight if zero")
+ //     @Test(priority=35, groups={"edge"}, description="Evaluation uses default total source weight if zero")
 //     public void test35EvaluationDefaultSourceWeight() {
 //         University su = new University(); su.setId(300L);
 //         University tu = new University(); tu.setId(301L);
@@ -522,7 +522,7 @@
 //         when(courseRepo.findById(301L)).thenReturn(Optional.of(tgt));
 //         when(topicRepo.findByCourseId(300L)).thenReturn(Collections.emptyList());
 //         when(topicRepo.findByCourseId(301L)).thenReturn(Collections.emptyList());
-//         when(ruleRepo.findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(300L, 301L)).thenReturn(Collections.emptyList());
+ //         when(ruleRepo.findBySourceUniversityIdAndTargetUniversityIdAndActiveTrue(300L, 301L)).thenReturn(Collections.emptyList());
 //         when(evalRepo.save(any(TransferEvaluationResult.class))).thenAnswer(inv -> {
 //             TransferEvaluationResult r = inv.getArgument(0);
 //             if (r == null) r = new TransferEvaluationResult();
@@ -533,7 +533,7 @@
 //         Assert.assertNotNull(res.getOverlapPercentage());
 //     }
 
-//     @Test(priority=36, groups={"auth"}, description="Register existing email fails")
+ //     @Test(priority=36, groups={"auth"}, description="Register existing email fails")
 //     public void test36RegisterExistingEmailFails() {
 //         when(userRepo.findByEmail("exist@x.com")).thenReturn(Optional.of(new User()));
 //         // simulate controller behavior (would throw or return bad request)
@@ -543,14 +543,14 @@
 //     @Test(priority=37, groups={"crud"}, description="Course repository list by university")
 //     public void test37CoursesByUniversity() {
 //         Course c1 = new Course(); c1.setId(1L); Course c2 = new Course(); c2.setId(2L);
-//         when(courseRepo.findByUniversityIdAndActiveTrue(1L)).thenReturn(List.of(c1, c2));
+ //         when(courseRepo.findByUniversityIdAndActiveTrue(1L)).thenReturn(List.of(c1, c2));
 //         List<Course> list = courseService.getCoursesByUniversity(1L);
 //         Assert.assertEquals(list.size(), 2);
 //     }
 
 //     @Test(priority=38, groups={"crud"}, description="Topic update success")
 //     public void test38TopicUpdate() {
-//         CourseContentTopic t = new CourseContentTopic(); t.setId(123L); t.setTopicName("Old"); t.setWeightPercentage(10.0);
+ //         CourseContentTopic t = new CourseContentTopic(); t.setId(123L); t.setTopicName("Old"); t.setWeightPercentage(10.0);
 //         when(topicRepo.findById(123L)).thenReturn(Optional.of(t));
 //         when(topicRepo.save(any())).thenAnswer(inv -> inv.getArgument(0));
 //         CourseContentTopic updated = topicService.updateTopic(123L, t);
@@ -559,7 +559,7 @@
 
 //     @Test(priority=39, groups={"rules"}, description="Get rule by id not found")
 //     public void test39GetRuleByIdNotFound() {
-//         when(ruleRepo.findById(999L)).thenReturn(Optional.empty());
+ //         when(ruleRepo.findById(999L)).thenReturn(Optional.empty());
 //         try {
 //             ruleService.getRuleById(999L);
 //             Assert.fail("Expected resource not found");
@@ -573,7 +573,7 @@
 //             evalService.getEvaluationById(12345L);
 //             Assert.fail("Expected resource not found");
 //         } catch (RuntimeException ex) { Assert.assertTrue(ex.getMessage().contains("not found")); }
-//     }
+ //     }
 
 //     @Test(priority=41, groups={"evaluation"}, description="List evaluations for course returns list")
 //     public void test41ListEvaluationsForCourse() {
@@ -583,7 +583,7 @@
 //         Assert.assertEquals(list.size(), 1);
 //     }
 
-//     @Test(priority=42, groups={"security"}, description="Jwt invalid token")
+ //     @Test(priority=42, groups={"security"}, description="Jwt invalid token")
 //     public void test42JwtInvalid() {
 //         JwtTokenProvider provider = new JwtTokenProvider();
 //         Assert.assertFalse(provider.validateToken("invalid.token.here"));
@@ -626,7 +626,7 @@
 //     public void test46DeactivateUniversityNotFound() {
 //         when(universityRepo.findById(9999L)).thenReturn(Optional.empty());
 //         try { universityService.deactivateUniversity(9999L); Assert.fail("Expected not found"); } catch (RuntimeException ex) { Assert.assertTrue(ex.getMessage().contains("not found")); }
-//     }
+ //     }
 
 //     @Test(priority=47, groups={"security"}, description="Password encoder consistent")
 //     public void test47PasswordEncoderConsistent() {
@@ -635,7 +635,7 @@
 //         String b = encoder.encode("abc");
 //         // not equal because of random salt, but both should match raw
 //         Assert.assertTrue(encoder.matches("abc", a));
-//         Assert.assertTrue(encoder.matches("abc", b));
+ //         Assert.assertTrue(encoder.matches("abc", b));
 //     }
 
 //     @Test(priority=48, groups={"hql"}, description="Query placeholder 2")
@@ -659,7 +659,7 @@
 //     public void test50UpdateTopicNotFound() {
 //         when(topicRepo.findById(999L)).thenReturn(Optional.empty());
 //         try { topicService.updateTopic(999L, new CourseContentTopic()); Assert.fail("Expected not found"); } catch (RuntimeException ex) { Assert.assertTrue(ex.getMessage().contains("not found")); }
-//     }
+ //     }
 
 //     @Test(priority=51, groups={"auth"}, description="User repository mock exists")
 //     public void test51UserRepoExists() {
@@ -669,7 +669,7 @@
 //     @Test(priority=52, groups={"rules"}, description="Update rule not found")
 //     public void test52UpdateRuleNotFound() {
 //         when(ruleRepo.findById(999L)).thenReturn(Optional.empty());
-//         try { ruleService.updateRule(999L, new TransferRule()); Assert.fail("Expected not found"); } catch (RuntimeException ex) { Assert.assertTrue(ex.getMessage().contains("not found")); }
+ //         try { ruleService.updateRule(999L, new TransferRule()); Assert.fail("Expected not found"); } catch (RuntimeException ex) { Assert.assertTrue(ex.getMessage().contains("not found")); }
 //     }
 
 //     @Test(priority=53, groups={"evaluation"}, description="Evaluate transfer numeric stability")
@@ -679,7 +679,7 @@
 //         Course src = new Course(); src.setId(500L); src.setCreditHours(3); src.setUniversity(su); src.setActive(true);
 //         Course tgt = new Course(); tgt.setId(501L); tgt.setCreditHours(3); tgt.setUniversity(tu); tgt.setActive(true);
 //         CourseContentTopic t1 = new CourseContentTopic(); t1.setTopicName("A"); t1.setWeightPercentage(33.3); t1.setCourse(src);
-//         CourseContentTopic t2 = new CourseContentTopic(); t2.setTopicName("A"); t2.setWeightPercentage(33.3); t2.setCourse(tgt);
+ //         CourseContentTopic t2 = new CourseContentTopic(); t2.setTopicName("A"); t2.setWeightPercentage(33.3); t2.setCourse(tgt);
 //         when(courseRepo.findById(500L)).thenReturn(Optional.of(src));
 //         when(courseRepo.findById(501L)).thenReturn(Optional.of(tgt));
 //         when(topicRepo.findByCourseId(500L)).thenReturn(List.of(t1));
@@ -690,16 +690,16 @@
 //             if (rr == null) rr = new TransferEvaluationResult();
 //             rr.setId(1001L);
 //             return rr;
-//         });
+ //         });
 //         TransferEvaluationResult res = evalService.evaluateTransfer(500L, 501L);
 //         Assert.assertNotNull(res.getOverlapPercentage());
 //     }
 
 //     @Test(priority=54, groups={"edge"}, description="Course repo find by code null university")
 //     public void test54CourseRepoFindByCodeNullUniversity() {
-//         when(courseRepo.findByUniversityIdAndCourseCode(0L, "X")).thenReturn(Optional.empty());
+ //         when(courseRepo.findByUniversityIdAndCourseCode(0L, "X")).thenReturn(Optional.empty());
 //         Optional<Course> oc = courseRepo.findByUniversityIdAndCourseCode(0L, "X");
-//         Assert.assertTrue(oc.isEmpty());
+ //         Assert.assertTrue(oc.isEmpty());
 //     }
 
 //     @Test(priority=55, groups={"crud"}, description="Create and get course flow")
@@ -738,7 +738,7 @@
 //         Assert.assertNotNull(r2.getId());
 //     }
 
-//     @Test(priority=57, groups={"rules"}, description="Create rule with null tolerance")
+ //     @Test(priority=57, groups={"rules"}, description="Create rule with null tolerance")
 //     public void test57CreateRuleNullTolerance() {
 //         University s = new University(); s.setId(30L);
 //         University t = new University(); t.setId(31L);
@@ -749,12 +749,12 @@
 //         when(ruleRepo.save(any(TransferRule.class))).thenAnswer(inv -> {
 //             TransferRule rr = inv.getArgument(0);
 //             if (rr == null) rr = new TransferRule();
-//             rr.setId(300L);
+ //             rr.setId(300L);
 //             return rr;
 //         });
 //         TransferRule created = ruleService.createRule(r);
 //         Assert.assertEquals(created.getId().longValue(), 300L);
-//     }
+ //     }
 
 //     @Test(priority=58, groups={"evaluation"}, description="Evaluate transfer multiple topics matching partially")
 //     public void test58EvaluatePartialMatch() {
