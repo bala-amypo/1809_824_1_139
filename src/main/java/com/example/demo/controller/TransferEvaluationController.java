@@ -1,32 +1,42 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.TransferEvaluationResult;
-import com.example.demo.service.TransferEvaluationService;
+import com.example.demo.service.impl.TransferEvaluationServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/evaluations")
+@RequestMapping("/api/evaluations")
 public class TransferEvaluationController {
 
-    private final TransferEvaluationService service;
+    @Autowired
+    private TransferEvaluationServiceImpl evaluationService;
 
-    public TransferEvaluationController(TransferEvaluationService service) {
-        this.service = service;
+    /**
+     * Triggers the automated evaluation between two courses based on topic overlap and rules.
+     */
+    @PostMapping("/evaluate")
+    public ResponseEntity<TransferEvaluationResult> evaluate(@RequestParam Long sourceCourseId, 
+                                                            @RequestParam Long targetCourseId) {
+        return ResponseEntity.ok(evaluationService.evaluateTransfer(sourceCourseId, targetCourseId));
     }
 
-    @PostMapping("/{src}/{tgt}")
-    public TransferEvaluationResult evaluate(@PathVariable Long src, @PathVariable Long tgt) {
-        return service.evaluateTransfer(src, tgt);
-    }
-
+    /**
+     * Get a specific evaluation result by ID.
+     */
     @GetMapping("/{id}")
-    public TransferEvaluationResult get(@PathVariable Long id) {
-        return service.getEvaluationById(id);
+    public ResponseEntity<TransferEvaluationResult> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(evaluationService.getEvaluationById(id));
     }
 
-    @GetMapping("/course/{cid}")
-    public List<TransferEvaluationResult> byCourse(@PathVariable Long cid) {
-        return service.getEvaluationsForCourse(cid);
+    /**
+     * Get all evaluation history for a specific source course.
+     */
+    @GetMapping("/course/{courseId}")
+    public ResponseEntity<List<TransferEvaluationResult>> getByCourse(@PathVariable Long courseId) {
+        return ResponseEntity.ok(evaluationService.getEvaluationsForCourse(courseId));
     }
 }
