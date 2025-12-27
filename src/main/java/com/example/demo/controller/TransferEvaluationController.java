@@ -1,31 +1,77 @@
+// package com.example.demo.controller;
+
+// import com.example.demo.entity.TransferEvaluationResult;
+// import com.example.demo.service.impl.TransferEvaluationServiceImpl;
+// import org.springframework.web.bind.annotation.*;
+// import java.util.List;
+
+// @RestController
+// @RequestMapping("/api/evaluations")
+// public class TransferEvaluationController {
+
+//     private final TransferEvaluationServiceImpl service =
+//             new TransferEvaluationServiceImpl();
+
+//     @PostMapping("/{src}/{tgt}")
+//     public TransferEvaluationResult evaluate(
+//             @PathVariable Long src,
+//             @PathVariable Long tgt) {
+//         return service.evaluateTransfer(src, tgt);
+//     }
+
+//     @GetMapping("/{id}")
+//     public TransferEvaluationResult get(@PathVariable Long id) {
+//         return service.getEvaluationById(id);
+//     }
+
+//     @GetMapping("/course/{cid}")
+//     public List<TransferEvaluationResult> byCourse(@PathVariable Long cid) {
+//         return service.getEvaluationsForCourse(cid);
+//     }
+// }
+
 package com.example.demo.controller;
 
+import com.example.demo.dto.TransferEvaluationRequest;
+import com.example.demo.dto.TransferEvaluationResponse;
 import com.example.demo.entity.TransferEvaluationResult;
-import com.example.demo.service.impl.TransferEvaluationServiceImpl;
+import com.example.demo.service.TransferEvaluationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
-@RequestMapping("/api/evaluations")
+@RequestMapping("/api/transfer-evaluations")
+@Tag(name = "Transfer Evaluation")
 public class TransferEvaluationController {
 
-    private final TransferEvaluationServiceImpl service =
-            new TransferEvaluationServiceImpl();
+    private final TransferEvaluationService service;
 
-    @PostMapping("/{src}/{tgt}")
-    public TransferEvaluationResult evaluate(
-            @PathVariable Long src,
-            @PathVariable Long tgt) {
-        return service.evaluateTransfer(src, tgt);
+    public TransferEvaluationController(TransferEvaluationService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public TransferEvaluationResponse evaluate(@RequestBody TransferEvaluationRequest req) {
+
+        TransferEvaluationResult res =
+                service.evaluateTransfer(
+                        req.getSourceProgramId(),
+                        req.getTargetProgramId()
+                );
+
+        TransferEvaluationResponse dto = new TransferEvaluationResponse();
+        dto.setTotalTransferableCredits(
+                res.getCreditHourDifference() == null ? 0.0 :
+                        (double) res.getCreditHourDifference()
+        );
+        dto.setStatus(res.getIsEligibleForTransfer() ? "APPROVED" : "REJECTED");
+        dto.setRemarks(res.getNotes());
+
+        return dto;
     }
 
     @GetMapping("/{id}")
-    public TransferEvaluationResult get(@PathVariable Long id) {
+    public TransferEvaluationResult getById(@PathVariable Long id) {
         return service.getEvaluationById(id);
-    }
-
-    @GetMapping("/course/{cid}")
-    public List<TransferEvaluationResult> byCourse(@PathVariable Long cid) {
-        return service.getEvaluationsForCourse(cid);
     }
 }
