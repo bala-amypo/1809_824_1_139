@@ -1,29 +1,91 @@
+// package com.example.demo.entity;
+
+// import jakarta.persistence.*;
+
+// @Entity
+// public class CourseContentTopic {
+
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
+
+//     private String topicName;
+//     private Double weightPercentage;
+
+//     @ManyToOne
+//     private Course course;
+
+//     public Long getId() { return id; }
+//     public void setId(Long id) { this.id = id; }
+
+//     public String getTopicName() { return topicName; }
+//     public void setTopicName(String topicName) { this.topicName = topicName; }
+
+//     public Double getWeightPercentage() { return weightPercentage; }
+//     public void setWeightPercentage(Double weightPercentage) { this.weightPercentage = weightPercentage; }
+
+//     public Course getCourse() { return course; }
+//     public void setCourse(Course course) { this.course = course; }
+// }
+
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "course_content_topics")
 public class CourseContentTopic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String topicName;
-    private Double weightPercentage;
-
     @ManyToOne
+    @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    @Column(nullable = false)
+    private String topicName;
 
-    public String getTopicName() { return topicName; }
-    public void setTopicName(String topicName) { this.topicName = topicName; }
+    private Double weightPercentage;
 
-    public Double getWeightPercentage() { return weightPercentage; }
-    public void setWeightPercentage(Double weightPercentage) { this.weightPercentage = weightPercentage; }
+    public CourseContentTopic() {}
 
-    public Course getCourse() { return course; }
-    public void setCourse(Course course) { this.course = course; }
+    public CourseContentTopic(Course course, String topicName, Double weightPercentage) {
+        this.course = course;
+        this.topicName = topicName;
+        this.weightPercentage = weightPercentage;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public String getTopicName() {
+        return topicName;
+    }
+
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
+    }
+
+    public Double getWeightPercentage() {
+        return weightPercentage;
+    }
+
+    public void setWeightPercentage(Double weightPercentage) {
+        this.weightPercentage = weightPercentage;
+    }
 }
