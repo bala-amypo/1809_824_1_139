@@ -1,59 +1,93 @@
+// package com.example.demo.controller;
+
+// import com.example.demo.entity.User;
+// import com.example.demo.repository.UserRepository;
+// import com.example.demo.security.JwtTokenProvider;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.security.authentication.*;
+// import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.web.bind.annotation.*;
+
+// import java.util.*;
+
+// @RestController
+// @RequestMapping("/auth")
+// public class AuthController {
+
+//     @Autowired
+//     private AuthenticationManager authenticationManager;
+
+//     @Autowired
+//     private JwtTokenProvider jwtTokenProvider;
+
+//     @Autowired
+//     private UserRepository userRepository;
+
+//     @Autowired
+//     private PasswordEncoder passwordEncoder;
+
+//     @PostMapping("/login")
+//     public Map<String, String> login(
+//             @RequestParam String email,
+//             @RequestParam String password) {
+
+//         authenticationManager.authenticate(
+//                 new UsernamePasswordAuthenticationToken(email, password)
+//         );
+
+//         User user = userRepository.findByEmail(email).orElseThrow();
+
+//         String token = jwtTokenProvider.createToken(
+//                 user.getId(), user.getEmail(), user.getRoles()
+//         );
+
+//         return Map.of("token", token);
+//     }
+
+//     @PostMapping("/register")
+//     public User register(@RequestParam String email,
+//                          @RequestParam String password) {
+
+//         User user = new User(
+//                 email,
+//                 passwordEncoder.encode(password),
+//                 Set.of("ROLE_USER")
+//         );
+
+//         return userRepository.save(user);
+//     }
+// }
 package com.example.demo.controller;
 
-import com.example.demo.entity.User;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JwtTokenProvider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @PostMapping("/login")
-    public Map<String, String> login(
-            @RequestParam String email,
-            @RequestParam String password) {
-
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(email, password)
-        );
-
-        User user = userRepository.findByEmail(email).orElseThrow();
-
-        String token = jwtTokenProvider.createToken(
-                user.getId(), user.getEmail(), user.getRoles()
-        );
-
-        return Map.of("token", token);
+    public AuthController(AuthenticationManager authenticationManager,
+                          JwtTokenProvider jwtTokenProvider) {
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    @PostMapping("/register")
-    public User register(@RequestParam String email,
-                         @RequestParam String password) {
+    @PostMapping("/login")
+    public String login(@RequestParam String username,
+                        @RequestParam String password) {
 
-        User user = new User(
-                email,
-                passwordEncoder.encode(password),
-                Set.of("ROLE_USER")
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(username, password)
         );
 
-        return userRepository.save(user);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        return jwtTokenProvider.generateToken(userDetails);
     }
 }
