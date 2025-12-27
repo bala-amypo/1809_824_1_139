@@ -1,11 +1,25 @@
+// package com.example.demo.repository;
+
+// import org.springframework.data.jpa.repository.JpaRepository;
+// import java.util.*;
+// import com.example.demo.entity.*;
+
+// public interface CourseRepository extends JpaRepository<Course, Long> {
+//     Optional<Course> findByUniversityIdAndCourseCode(Long universityId, String courseCode);
+//     List<Course> findByUniversityIdAndActiveTrue(Long universityId);
+// }
+
 package com.example.demo.repository;
 
+import com.example.demo.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.*;
-import com.example.demo.entity.*;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface CourseRepository extends JpaRepository<Course, Long> {
+
     Optional<Course> findByUniversityIdAndCourseCode(Long universityId, String courseCode);
+
     List<Course> findByUniversityIdAndActiveTrue(Long universityId);
 }
-
