@@ -68,12 +68,10 @@ import com.example.demo.entity.University;
 import com.example.demo.repository.UniversityRepository;
 import com.example.demo.service.UniversityService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
 public class UniversityServiceImpl implements UniversityService {
 
     private final UniversityRepository repository;
@@ -88,6 +86,26 @@ public class UniversityServiceImpl implements UniversityService {
             throw new RuntimeException("University with this name already exists");
         }
         return repository.save(university);
+    }
+
+    @Override
+    public University getUniversityById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("University not found"));
+    }
+
+    @Override
+    public University updateUniversity(Long id, University university) {
+        University existing = getUniversityById(id);
+        existing.setName(university.getName());
+        return repository.save(existing);
+    }
+
+    @Override
+    public void deactivateUniversity(Long id) {
+        University university = getUniversityById(id);
+        university.setActive(false);
+        repository.save(university);
     }
 
     @Override

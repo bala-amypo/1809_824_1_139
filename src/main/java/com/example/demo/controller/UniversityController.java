@@ -2,20 +2,23 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.University;
 import com.example.demo.service.UniversityService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/universities")
+@RequestMapping("/universities")
 public class UniversityController {
 
-    @Autowired
-    private UniversityService service;
+    private final UniversityService service;
+
+    public UniversityController(UniversityService service) {
+        this.service = service;
+    }
 
     @PostMapping
-    public University create(@RequestBody University university) {
+    public University create(@Valid @RequestBody University university) {
         return service.createUniversity(university);
     }
 
@@ -25,7 +28,8 @@ public class UniversityController {
     }
 
     @PutMapping("/{id}")
-    public University update(@PathVariable Long id, @RequestBody University university) {
+    public University update(@PathVariable Long id,
+                             @Valid @RequestBody University university) {
         return service.updateUniversity(id, university);
     }
 
