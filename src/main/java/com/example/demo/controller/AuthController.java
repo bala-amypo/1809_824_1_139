@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.*;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JwtTokenProvider;
@@ -8,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -17,47 +18,42 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtTokenProvider jwtProvider;
+    private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    private UserRepository userRepo;
+    private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder encoder;
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) {
+    public Map<String, String> login(
+            @RequestParam String email,
+            @RequestParam String password) {
 
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(), request.getPassword()
-                )
+                new UsernamePasswordAuthenticationToken(email, password)
         );
 
-        User user = userRepo.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findByEmail(email).orElseThrow();
 
-        String token = jwtProvider.createToken(
-                user.getId(),
-                user.getEmail(),
-                user.getRoles()
+        String token = jwtTokenProvider.createToken(
+                user.getId(), user.getEmail(), user.getRoles()
         );
 
-        return new AuthResponse(token);
+        return Map.of("token", token);
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody RegisterRequest request) {
-
-        if (userRepo.findByEmail(request.getEmail()).isPresent())
-            throw new IllegalArgumentException("Email already exists");
+    public User register(@RequestParam String email,
+                         @RequestParam String password) {
 
         User user = new User(
-                request.getEmail(),
-                encoder.encode(request.getPassword()),
-                request.getRoles()
+                email,
+                passwordEncoder.encode(password),
+                Set.of("ROLE_USER")
         );
 
-        return userRepo.save(user);
+        return userRepository.save(user);
     }
 }

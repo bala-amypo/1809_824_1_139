@@ -1,9 +1,12 @@
 package com.example.demo.security;
 
 import io.jsonwebtoken.*;
+import org.springframework.stereotype.Component;
+
 import java.util.*;
 
- public class JwtTokenProvider {
+@Component
+public class JwtTokenProvider {
 
     private final String secret = "secretkey";
 
@@ -12,6 +15,7 @@ import java.util.*;
                 .setSubject(email)
                 .claim("uid", userId)
                 .claim("roles", roles)
+                .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }
@@ -34,11 +38,12 @@ import java.util.*;
     }
 
     public Set<String> getRoles(String token) {
-         return new HashSet<>(getClaims(token).get("roles", List.class));
+        return new HashSet<>(getClaims(token).get("roles", List.class));
     }
 
     private Claims getClaims(String token) {
         return Jwts.parser().setSigningKey(secret)
-                .parseClaimsJws(token).getBody();
+                .parseClaimsJws(token)
+                .getBody();
     }
 }
