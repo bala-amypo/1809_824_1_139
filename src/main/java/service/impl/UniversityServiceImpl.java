@@ -15,26 +15,28 @@ public class UniversityServiceImpl implements UniversityService {
     private UniversityRepository repository;
 
     @Override
-    public University createUniversity(University u) {
+    public University createUniversity(University university) {
+        if (university == null || university.getName() == null || university.getName().isBlank()) {
+            throw new RuntimeException("University name required");
+        }
 
-        if (u == null || u.getName() == null || u.getName().isBlank())
-            throw new IllegalArgumentException("Name required");
+        repository.findByName(university.getName())
+                .ifPresent(u -> {
+                    throw new RuntimeException("University already exists");
+                });
 
-        if (repository.findByName(u.getName()).isPresent())
-            throw new IllegalArgumentException("University already exists");
-
-        u.setActive(true);
-        return repository.save(u);
+        university.setActive(true);
+        return repository.save(university);
     }
 
     @Override
-    public University updateUniversity(Long id, University u) {
-
+    public University updateUniversity(Long id, University university) {
         University existing = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("University not found"));
 
-        if (u.getName() != null && !u.getName().isBlank())
-            existing.setName(u.getName());
+        if (university.getName() != null && !university.getName().isBlank()) {
+            existing.setName(university.getName());
+        }
 
         return repository.save(existing);
     }
@@ -52,11 +54,10 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Override
     public void deactivateUniversity(Long id) {
-
-        University u = repository.findById(id)
+        University university = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("University not found"));
 
-        u.setActive(false);
-        repository.save(u);
+        university.setActive(false);
+        repository.save(university);
     }
 }

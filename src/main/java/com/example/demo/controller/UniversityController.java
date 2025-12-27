@@ -15,8 +15,8 @@ public class UniversityController {
     private UniversityService service;
 
     @PostMapping
-    public University create(@RequestBody University u) {
-        return service.createUniversity(u);
+    public University create(@RequestBody University university) {
+        return service.createUniversity(university);
     }
 
     @GetMapping("/{id}")
@@ -25,8 +25,8 @@ public class UniversityController {
     }
 
     @PutMapping("/{id}")
-    public University update(@PathVariable Long id, @RequestBody University u) {
-        return service.updateUniversity(id, u);
+    public University update(@PathVariable Long id, @RequestBody University university) {
+        return service.updateUniversity(id, university);
     }
 
     @DeleteMapping("/{id}")
