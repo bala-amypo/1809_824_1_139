@@ -5,7 +5,7 @@
 
 // import java.util.*;
 
-// public class TransferEvaluationServiceImpl {
+ // public class TransferEvaluationServiceImpl {
 
 //     private CourseRepository courseRepo;
 //     private CourseContentTopicRepository topicRepo;
@@ -24,10 +24,10 @@
 //         List<CourseContentTopic> tTopics = topicRepo.findByCourseId(tgtId);
 
 //         double overlap = 0;
-//         for (CourseContentTopic s : sTopics)
+ //         for (CourseContentTopic s : sTopics)
 //             for (CourseContentTopic t : tTopics)
 //                 if (s.getTopicName().equalsIgnoreCase(t.getTopicName()))
-//                     overlap += Math.min(s.getWeightPercentage(), t.getWeightPercentage());
+ //                     overlap += Math.min(s.getWeightPercentage(), t.getWeightPercentage());
 
 //         TransferEvaluationResult r = new TransferEvaluationResult();
 //         r.setOverlapPercentage(overlap == 0 ? 0.0 : overlap);
